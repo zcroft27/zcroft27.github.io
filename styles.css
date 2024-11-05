@@ -28,6 +28,10 @@ body {
     margin: auto;
 }
 
+.emoji {
+    font-size: 0.85em; /* Adjust this value to change the size */
+}
+
 .content {
     color: antiquewhite;
     font-size: 15.5px;
