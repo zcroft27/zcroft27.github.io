@@ -7,15 +7,42 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">  
+    <!-- jetbrains font -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> 
     <title>zcroft27</title>
-    <link rel="stylesheet" href="styles.css">  
+
+    <script>
+        function copyEmail() {
+            const email = "croft.z@northeastern.edu";
+            navigator.clipboard.writeText(email)
+                .then(() => {
+                    const messageBubble = document.getElementById('copied-message');
+                    messageBubble.style.display = 'block'; 
+                    setTimeout(() => {
+                        messageBubble.style.display = 'none'; 
+                    }, 800);
+                })
+                .catch(err => {
+                    console.error("Could not copy email: ", err);
+                });
+        }
+    </script>
 </head>
 <body>
     <div class="content">
-        <h1>Contact Information</h1>
-        <h2>Email: <a>croft dot z at northeastern dot edu</a></h2>
-        <h2><a href="https://www.linkedin.com/in/zachary-croft-67316b298/" target="_blank">LinkedIn</a></h2>
-        <h2><a href="https://github.com/zcroft27" target="_blank">GitHub</a></h2>
+        <h1>Zachary Croft</h1>
+        <div class="email-container"> <!-- Flex container -->
+            <a href="#" onclick="copyEmail(); return false;" class="email">croft.z@northeastern.edu</a>
+            <div id="copied-message" class="message-bubble">Copied!</div> <!-- Message bubble -->
+        </div>
+        <h2><a href="https://www.linkedin.com/in/zachary-croft-67316b298/" class="linkedin" target="_blank">
+            <i class="fab fa-linkedin"></i> LinkedIn    
+        </a></h2>
+        <h2><a href="https://github.com/zcroft27" class="github" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+        </a></h2>
     </div>
 </body>
 </html>
