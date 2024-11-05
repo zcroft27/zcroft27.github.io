@@ -1,28 +1,37 @@
+/* Styling the page */
 body {
     background-color: #1e1e1e;
     color: #ffffff;
     font-family: "Courier New", Courier, monospace;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* left align */
-    justify-content: center;
+    align-items: center; 
+    justify-content: center; 
     height: 100vh;
     margin: 0;
-    padding-left: 20px;
 }
+
+.content {
+    text-align: left;
+    width: 80%;
+}
+
 
 h1, h2, a {
     margin: 10px 0;
 }
 
-/* Prevent links from turning purple after clicking */
 a {
-    color: #ffffff;
-    text-decoration: none;
+    color: #8793CC; /* Link color */
+    text-decoration: underline;
+}
+
+a:focus {
+    color: #F9C2CA;
 }
 
 a:visited {
-    color: #ffffff;
+    color: #8793CC;
 }
 
 .blog-button {
