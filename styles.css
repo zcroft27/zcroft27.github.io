@@ -60,9 +60,23 @@ a {
     text-decoration: none;
 }
 
+.mail-icon:hover {
+    cursor: pointer;
+}
+
+.mail-icon {
+    color: antiquewhite;
+    font-size: 20px;
+}
+
 .email {
     text-decoration: none;
     color: antiquewhite;
+    font-size: 13px;
+}
+
+.email:visited {
+    color:antiquewhite;
 }
 
 .server {
@@ -86,7 +100,7 @@ a {
 }
 
 .github:visited {
-    color: #6cc644; 
+    color: #c9510c; 
 }
 
 .email-container {
@@ -104,5 +118,5 @@ a {
     border-radius: 5px;
     display: none; /* Initially hidden */
     font-size: 14px; 
-    margin-left: 10px; 
+    margin-left: 0px; 
 }
