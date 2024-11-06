@@ -7,23 +7,12 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">  
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <!-- jetbrains font -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="stylesheet" href="styles.css"> 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-        // Function to fetch markdown file and render it as HTML
-        async function loadMarkdown() {
-            const response = await fetch('/web-server.md');
-            const markdownText = await response.text();
-            const htmlContent = marked(markdownText);  // Convert markdown to HTML
-            document.getElementById('markdown-container').innerHTML = htmlContent; // Inject HTML into div
-        }
-
-        window.onload = loadMarkdown;  // Load markdown when page is loaded
-    </script>
+    <div id="markdown-content"></div>
     <title>zcroft27</title>
 
     <script>
@@ -62,7 +51,8 @@
         <h2><a href="https://github.com/zcroft27" class="github" target="_blank">
             <i class="fab fa-github"></i> GitHub
         </a></h2>
-        <h2><a href="/web-server.md" class="server">C Web Server</a></h2>
+        <h2><a href="web-server.html" class="server">C Web Server</a>
+            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
     </div>
 </body>
 </html>

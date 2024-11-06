@@ -28,6 +28,21 @@ body {
     margin: auto;
 }
 
+.home-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-family: 'JetBrains Mono', monospace;  /* Use JetBrains Mono font */
+    color: white;  /* Set text color to white */
+    text-decoration: none;  /* Remove underline */
+    font-size: 18px;  /* Adjust size as needed */
+    background: none;  /* No background */
+    border: none;  /* No border */
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: color 0.3s ease;  /* Smooth color change on hover */
+}
+
 .emoji {
     font-size: 0.85em; /* Adjust this value to change the size */
 }
@@ -40,7 +55,6 @@ body {
 h1, h2, a {
     margin: 10px 0;
 }
-
 
 a {
     text-decoration: none;
