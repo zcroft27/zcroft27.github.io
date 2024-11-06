@@ -13,6 +13,17 @@
     <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="stylesheet" href="styles.css"> 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Function to fetch markdown file and render it as HTML
+        async function loadMarkdown() {
+            const response = await fetch('/web-server.md');
+            const markdownText = await response.text();
+            const htmlContent = marked(markdownText);  // Convert markdown to HTML
+            document.getElementById('markdown-container').innerHTML = htmlContent; // Inject HTML into div
+        }
+
+        window.onload = loadMarkdown;  // Load markdown when page is loaded
+    </script>
     <title>zcroft27</title>
 
     <script>
