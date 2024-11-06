@@ -51,6 +51,14 @@ a {
     color: antiquewhite;
 }
 
+.server {
+    color:firebrick;
+}
+
+.server:visited {
+    color: firebrick;
+}
+
 .linkedin {
     color: #0077B5; 
 }
