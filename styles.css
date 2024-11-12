@@ -87,6 +87,14 @@ a {
     color: firebrick;
 }
 
+.readme {
+    color: #2DBA4E;
+}
+
+.readme:visited {
+    color: #2DBA4E;
+}
+
 .linkedin {
     color: #0077B5; 
 }
