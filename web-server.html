@@ -52,7 +52,7 @@ a new thread after accepting a connection.
 - Utilizes a Least-recently-used (LRU) cache to store MAX_CACHE_QUEUE files in memory
 to speed up serving files.
 - Utilizes a dictionary alongside the LRU cache as a lookup table for cached nodes
-for quicker access (I don't think I actually implemented the dictionary with O(1) access... TODO).
+for quicker access (Not actually O(1) access, TODO: implement hashmap).
 - Enqueues requests from clients using a cute circular buffer I found that really confused me at first:  
 serve_file_args_t request_queue[MAX_QUEUE];  
 int queue_start = 0;  
@@ -60,7 +60,6 @@ int queue_end = 0;
 int queue_size = 0;   
 
 **On enqueue:**  
-
 request_queue[queue_end].clientfd = clientfd;  
 snprintf(request_queue[queue_end].filepath, sizeof(request_queue[queue_end].filepath), ".%s", filepath);  
 queue_end = (queue_end + 1) % MAX_QUEUE;  
@@ -71,13 +70,11 @@ serve_file_args_t request = request_queue[queue_start];
 queue_start = (queue_start + 1) % MAX_QUEUE;  
 queue_size--;  
 
-It just rotates the start and end pointers around... cool.
-
 ## What Did I Learn
 I used pthread_cond_signal--instead of using a variable representing an threads in use--to notify
 threads to start work on serving a file. pthread_cond_signal unblocks one thread (by default) that
 is waiting on the pthread_cond_t passed into it, as opposed to pthread_cond_broadcast which unblocks
-all threads waiting for the specified condition.
+all threads waiting for the specified condition. (In hindsight I could have used a semaphore instead).
 
 The dictionary/lookup table worked fine as as a singly linked-list, with a sentinel at the head for ease of removal/insertion. The queue of cache nodes (file path w/ data)
 worked to implement as a doubly linked-list, with the queue having pointers to head and tail, both initially pointing to a 'dummy' node
@@ -111,6 +108,10 @@ about supporting other methods, serving more file types, etc.
 - Experiment with using mmap instead of using a cache list on the heap.
 
 - Instead of only caching the first 2 bytes of large files, do not cache them at all. (2 bytes is current arbitrary choice for max size).
+
+- Modify dictionary for LRU cache to be a hashmap.
+
+- Create client with etag-caching (caches and hashes content, sends hash to server, server compares hash to hash of real content, serves content if invalid)
 
 - Switch to port 80.
     </script>
