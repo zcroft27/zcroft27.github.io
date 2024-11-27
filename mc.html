@@ -40,14 +40,12 @@ With minimal research I settled on PurPur instead of Mojang's default server .ja
 
 - Used systemd to start my services upon/before shutdown to start/stop the PurPur server in a separate screen.
 
-- Added DNS A record under my domain name to resolve to the server IP.
+- Hid VM IP using Cloudflare 'cloudflared' tunneling/reverse proxy, creating a CNAME record for mc.zachlearns.com resolving to Cloudflare's edge servers.
 
 - 8GiB of RAM is unnecessary for 1-10 players, 4GiB is fine for PurPur. 
 
 ## Intended Features/TODO
 - Migrate to a lighter-weight server so I can downsize to a B1s (1 vCPU, 1GiB RAM, ??GiB disk) instance.
-
-- Set up a reverse proxy using 'cloudflared' tunneling.
 
 - Configure an ssh client on my phone to be able to use the server console.
     </script>
