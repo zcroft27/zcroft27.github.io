@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+     body {
+            background-color: #212121;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+    .markdown-body {
+            background-color: #212121; 
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="markdown-content" class="markdown-body"></div>
+    <script type="text/markdown" id="markdown-script">
+# Hosting a Minecraft server on Azure 
+
+## Overview
+A PurPur Minecraft server hosted on a
+<a href=https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/bv1-series target="_blank">B2s</a> (2vCPU, 4GiB memory, 40GiB disk) instance.
+With minimal research I settled on PurPur instead of Mojang's default server .jar since PurPur's is somewhat lightweight.
+
+## What Did I Learn
+- Created a B2s instance on azure with extra disk space (<a href=https://azure.microsoft.com/en-us/free/students target="_blank">all for free with student credits</a>). I ran Ubuntu 24.04 LTS on it.
+
+- Used 'GNU screen' multiplexing tool to simply access multiple login sessions (one for server running, one for anything else).
+
+- Used systemd to start my services upon/before shutdown to start/stop the PurPur server in a separate screen.
+
+- Added DNS A record under my domain name to resolve to the server IP.
+
+- 8GiB of RAM is unnecessary for 1-10 players, 4GiB is fine for PurPur. 
+
+## Intended Features/TODO
+- Migrate to a lighter-weight server so I can downsize to a B1s (1 vCPU, 1GiB RAM, ??GiB disk) instance.
+
+- Set up a reverse proxy using 'cloudflared' tunneling.
+
+- Configure an ssh client on my phone to be able to use the server console.
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-script').textContent;
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>

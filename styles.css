@@ -95,6 +95,14 @@ a {
     color: #2DBA4E;
 }
 
+.azure {
+    color: #FDFD96;
+}
+
+.azure:visited {
+    color: #FDFD96;
+}
+
 .linkedin {
     color: #0077B5; 
 }
