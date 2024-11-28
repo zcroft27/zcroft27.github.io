@@ -80,27 +80,27 @@ a {
 }
 
 .server {
-    color:firebrick;
+    color:#FF6F61;
 }
 
 .server:visited {
-    color: firebrick;
+    color: #FF6F61;
 }
 
 .readme {
-    color: #2DBA4E;
+    color: #C77DFF;
 }
 
 .readme:visited {
-    color: #2DBA4E;
+    color: #C77DFF;
 }
 
 .azure {
-    color: #FDFD96;
+    color: #F8B400;
 }
 
 .azure:visited {
-    color: #FDFD96;
+    color: #F8B400;
 }
 
 .linkedin {
