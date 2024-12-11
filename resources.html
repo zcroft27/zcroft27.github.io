@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+     body {
+            background-color: #212121;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+    .markdown-body {
+            background-color: #212121; 
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="markdown-content" class="markdown-body"></div>
+    <script type="text/markdown" id="markdown-script">
+# Resources and Topics I Don't Want to Forget About/Want to Share
+- <a href=https://pages.cs.wisc.edu/~remzi/OSTEP/#book-chapters target="_blank">OSTEP Operating System PDFs</a>
+- <a href=https://diveintosystems.org/ target="_blank">Dive into Systems PDFs</a>
+- <a href=https://d2l.ai/ target="_blank">Intro to Deep Learning PDFs</a>
+- <a href=https://jameslarisch.com/pdf/alto.pdf target="_blank">Paper on virtualization</a>
+- <a href=https://shorturl.at/5fZpl target="_blank">Video on threads</a>
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-script').textContent;
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>
