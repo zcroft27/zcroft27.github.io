@@ -95,6 +95,14 @@ a {
     color: #C77DFF;
 }
 
+.resources {
+    color: #e2e2e2;
+}
+
+.resources:visited {
+    color: #e2e2e2;
+}
+
 .azure {
     color: #F8B400;
 }
