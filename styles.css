@@ -69,6 +69,14 @@ a {
     font-size: 20px;
 }
 
+.projects {
+    color: #758467;
+}
+
+.projects.visited {
+    color: #758467;
+}
+
 .email {
     text-decoration: none;
     color: antiquewhite;
@@ -88,19 +96,19 @@ a {
 }
 
 .readme {
-    color: #C77DFF;
+    color: #9CAF88;
 }
 
 .readme:visited {
-    color: #C77DFF;
+    color: #9CAF88;
 }
 
 .resources {
-    color: #e2e2e2;
+    color: #CBD5C0;
 }
 
 .resources:visited {
-    color: #e2e2e2;
+    color: #CBD5C0;
 }
 
 .azure {

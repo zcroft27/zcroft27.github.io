@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- prohibit browser from caching site, mostly for rapid development -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">  
+    <!-- jetbrains font -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <div id="markdown-content"></div>
+    <title>👨‍💻 Projects</title>
+
+    <script>
+        function copyEmail() {
+            const email = "croft.z@northeastern.edu";
+            navigator.clipboard.writeText(email)
+                .then(() => {
+                    const messageBubble = document.getElementById('copied-message');
+                    messageBubble.style.display = 'block'; 
+                    setTimeout(() => {
+                        messageBubble.style.display = 'none'; 
+                    }, 800);
+                })
+                .catch(err => {
+                    console.error("Could not copy email: ", err);
+                });
+        }
+    </script>
+</head>
+<body>
+    <div class="content">
+        <h1>
+            Projects
+        </h1>
+        <h2><a href="mc.html" class="azure">Minecraft Server</a>
+            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
+        <h2><a href="web-server.html" class="server">HTTP Server</a>
+            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
+    </div>
+</body>
+</html>
