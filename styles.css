@@ -70,11 +70,11 @@ a {
 }
 
 .projects {
-    color: #758467;
+    color: #819171;
 }
 
 .projects.visited {
-    color: #758467;
+    color: #819171;
 }
 
 .email {
@@ -96,19 +96,19 @@ a {
 }
 
 .readme {
-    color: #9CAF88;
+    color: #819171;
 }
 
 .readme:visited {
-    color: #9CAF88;
+    color: #819171;
 }
 
 .resources {
-    color: #CBD5C0;
+    color: #819171;
 }
 
 .resources:visited {
-    color: #CBD5C0;
+    color: #819171;
 }
 
 .azure {
