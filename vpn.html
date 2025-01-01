@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👨‍💻 Home VPN Server</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+     body {
+            background-color: #212121;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+    .markdown-body {
+            background-color: #212121; 
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="markdown-content" class="markdown-body"></div>
+    <script type="text/markdown" id="markdown-script">
+# Home VPN Server/Remote Desktop Connection (Summer 2024)
+      
+## Overview
+- Implemented a VPN Server running on Ubuntu VM within on-premise host PC running Windows OS utilizing [OpenVPN](https://openvpn.net/).
+
+- Configured bridged network adapters enabling DHCP to lease a private address to the VM as opposed to NAT against the host machine’s private IP.
+
+- Configured port forwarding to VPN Server.
+      
+- Allowed for remote connection to LAN to remote into my desktop PC without need for windows server license.
+
+- Supported connection to VPN server over terminal and supported RDC onto home desktop.
+      
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-script').textContent;
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>
