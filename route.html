@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👨‍💻 Route Optimizer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+     body {
+            background-color: #212121;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+    .markdown-body {
+            background-color: #212121; 
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="markdown-content" class="markdown-body"></div>
+    <script type="text/markdown" id="markdown-script">
+# Route Optimizer
+A JavaScript web-app I created in summer 2024 with the goal of helping the IT department I worked for efficiently deploy hardware. I was tasked with driving to ~40 locations
+across Massachusetts for some work, and I noticed there were not great free options to plan a route of this size effectively, so I made this program.
+      
+## Overview
+- A traveling-salesman-esque problem, solved with a nearest-neighbors approach utilizing the Google Maps API.
+- Autocompletes address input and displays a map widget illustrating planned route.
+
+## What I Learned
+This was my first experience with using a web framework (Express.js) and making endpoints. It was also my first time integrating a more complicated API
+and utilizing the Google Cloud console. This was a project to dip my toes into web-dev that exposed me to some simple problems requiring solutions like using an .env file,
+concurrent/asynchronous programming (and the following debugging pains), and time-efficient programming. With my initial innefficient approach, network latency, and the volume of
+comparisons made on a set of 20 locations, for example, Big O became relevant.   
+
+Perhaps a good learning experience: at the end of building this project, I realized that the Google Maps API offers a feature to do route optimizing for you--I was
+just using their Distance Matrix API and comparing retrieved distances between locations. This was a little defeating, but ultimately this project was for learning and functionality.
+Plus, this showed me the value in computing server-side and reducing network traffic, which later became relevant when optimizing SQL queries to offload computation
+to a PostgreSQL RDBMS as a software engineer in Generate.  
+      
+## Intended Features/TODO
+- Implement the ability to plan for multiple-session routes--i.e. given 40 locations and an 8-hour limit per session (returning home after each session), plan the best route.
+
+- Support automatic rest-stops--i.e. pick a window for a lunch break and present options around the location you will be around then. 
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-script').textContent;
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>
