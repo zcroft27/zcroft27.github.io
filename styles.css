@@ -127,6 +127,14 @@ a {
     color: #B19CD9;
 }
 
+.route {
+    color: #FFF5BA;
+}
+
+.route:visited {
+    color: #FFF5BA;
+}
+
 .linkedin {
     color: #0077B5; 
 }
