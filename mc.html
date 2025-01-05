@@ -28,14 +28,36 @@
     <script type="text/markdown" id="markdown-script">
 # Hosting a Minecraft server on Azure 
 
-A fullstack dashboard is in progress, shown on my <a href=https://github.com/zcroft27/Minecraft-Dashboard target="_blank">GitHub</a>.
+A fullstack dashboard has been built, shown on my <a href=https://github.com/zcroft27/Minecraft-Dashboard target="_blank">GitHub</a>.
 
-## Overview
+## Overview of the Server
 A PurPur Minecraft server hosted on a
 <a href=https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/bv1-series target="_blank">B2s</a> (2vCPU, 4GiB memory, 40GiB disk) instance.
 With minimal research I settled on PurPur instead of Mojang's default server .jar since PurPur's is somewhat lightweight.
 
-## What Did I Learn
+## Overview of the Dashboard
+A more in depth README can be found on the above linked GitHub repository.   
+### Backend
+I created a Golang backend using the [Fiber](https://docs.gofiber.io/) web framework with a three layer controller-service-repository
+architecture. I utilized the [Crypto SSH](https://pkg.go.dev/golang.org/x/crypto/ssh) library to make SSH connections to
+the VM hosting the Minecraft server, which utilized screen multiplexing to allow for multiple commands without sustaining
+a single session/connection.    
+
+I created a project in [Supabase](https://supabase.com/) and interfaced with their API using [pgx](https://pkg.go.dev/github.com/jackc/pgx)
+to make/manage user accounts and permissions. I also utilized their Auth service to register and sign-in, retrieving
+access tokens and managing them in cookies. I implemented custom middleware to authenticate and authorize in order to
+have protected public endpoints for starting an stopping the Minecraft server.
+
+### Frontend
+The frontend is relatively minimal, made with TypeScript and the React framework. I abstraced the code into multiple
+components and utilized [mui.com](https://mui.com/) for simple, sleek registration/login components. 
+ 
+Cross-Origin Resource Sharing (CORS) is a bit complicated, and necessary to consider when using cookies for credentials in something
+like a web browser and not Postman. OPTIONS HTTP requests are similarly relevant.
+I do not think I will use cookies for authentication and authorization for my next project--I would like to learn other approaches for
+session management.
+        
+## What Did I Learn Building the Minecraft Server
 - Created a B2s instance on azure with extra disk space (<a href=https://azure.microsoft.com/en-us/free/students target="_blank">all for free with student credits</a>). I ran Ubuntu 24.04 LTS on it.
 
 - Used 'GNU screen' multiplexing tool to simply access multiple login sessions (one for server running, one for anything else).
