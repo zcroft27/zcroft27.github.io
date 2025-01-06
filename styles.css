@@ -119,6 +119,22 @@ a {
     color: #F8B400;
 }
 
+.seam {
+    color: #A8D5BA;
+}
+
+.seam:visited {
+    color: #A8D5BA;
+}
+
+.maze {
+    color: #A9C5EB;
+}
+
+.maze:visited {
+    color: #A9C5EB;
+}
+
 .vpn {
     color: #B19CD9;
 }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👨‍💻 Seam Carving</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+     body {
+            background-color: #212121;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+    .markdown-body {
+            background-color: #212121; 
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="markdown-content" class="markdown-body"></div>
+    <script type="text/markdown" id="markdown-script">
+# Image Compression and Resizing
+You can watch a [video](https://youtu.be/9DEuui1XGyM) of my project in action.
+
+## Overview
+- Content aware image compression and resizing using the [seam carving](https://en.wikipedia.org/wiki/Seam_carving)
+technique, **optimized to linear time complexity** using dynamic programming.
+- You can resize images vertically and/or horizontally. 
+- You can toggle between a normal, grayscale, and ‘energy’ view.
+- You can reinsert removed seams from images.
+- Verified with 300+ tests.
+- Written in Java, it utilizes a graph structure with [deques](https://www.geeksforgeeks.org/deque-set-1-introduction-applications/) and
+[sentinels](https://en.wikipedia.org/wiki/Sentinel_value), emphasizing strong object-oriented principles. 
+
+## Purpose
+In order to shrink an image, necessarily some data must be compromised. The most straightforward method is to
+crop an image, but this is very lossy and must cut out significant features of an image. Another option might
+be to blend neighboring pixels together, but this decreases clarity across the entire image.   
+
+This solution calculates the energy* of pixels, and then calculates the minimum cumulative energy of connected (diagonal or touching)
+pixels in a specified direction (vertical or horizontal). I utilized dynamic programming to speed up this calculation process,
+given that for each pixel in a row, for example, there are 3 candidate pixels, and then 3 for each of those, etc., so 3<sup># rows</sup> comparisons.
+Employing dynamic programming can reduce this do linear complexity.
+
+This maintains the most 'important' parts of images, working very effectively. As shown in the linked video,
+main features like animals, buildings, and vehicles will typically persist, while sky, roads, and land will be removed.
+
+* Energy calculation:
+
+HorizEnergy(E)=(br(A)+2br(D)+br(G))−(br(C)+2br(F)+br(I))
+
+VertEnergy(E)=(br(A)+2br(B)+br(C))−(br(G)+2br(H)+br(I))
+
+Energy(E)= sqrt(HorizEnergy(E)<sup>2</sup>+VertEnergy(E)<sup>2</sup>)
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-script').textContent;
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👨‍💻 Maze Generation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+     body {
+            background-color: #212121;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+    .markdown-body {
+            background-color: #212121; 
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="markdown-content" class="markdown-body"></div>
+    <script type="text/markdown" id="markdown-script">
+# Maze Generation and Solving
+You can watch a [video](https://youtu.be/t4ye2VxWiUk) of my project in action.
+
+## Overview
+- Generates random mazes of arbitrary size using [minimum spanning trees and Kruskal’s algorithm](https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/) in both square-style and hexagonal-style.
+- Automatically solves mazes using breadth-first and depth-first search.
+- Toggleable heatmaps to show distance from start/end to all points in maze.
+- User is able to manually move through maze.
+- Verified with 200+ tests.
+
+## Design
+Written in Java, this implementation of Kruskal's Algorithm uses hashmaps to efficiently manage representatives for union-find operations, ensuring fast edge selection and cycle detection.
+The code emphasizes strong object-oriented principles for clarity and reusability.
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-script').textContent;
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>
