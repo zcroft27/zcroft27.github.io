@@ -50,7 +50,7 @@ you need to keep track of *all* the pointers to free-space, as well as their cor
 To keep track of free-space--which will be dynamic--you need a dynamic data structure like a linked-list, which necessitates
 memory allocation... Wait...
 
-Well, to make do with this situation, you must embed the free-list in the same memory that you are leasing out.
+Well, to make do with this situation, you can embed the free-list in the same memory that you are leasing out.
 
 ## Implementation
 If your program initially retrieves 4KiB from your operating system, you have 4096 bytes to work with.
