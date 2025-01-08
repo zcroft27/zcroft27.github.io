@@ -151,6 +151,14 @@ a {
     color: #FFF5BA;
 }
 
+.allocator {
+    color: #FF8C42;
+}
+
+.allocator:visited {
+    color: #FF8C42;
+}
+
 .linkedin {
     color: #0077B5; 
 }

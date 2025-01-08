@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👨‍💻 Memory Allocator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+     body {
+            background-color: #212121;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+    .markdown-body {
+            background-color: #212121; 
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="markdown-content" class="markdown-body"></div>
+    <script type="text/markdown" id="markdown-script">
+# Custom Memory Allocator in C
+A free-space management system built in C, replacing the built in malloc, calloc, and free. I built this
+last semester for CS 3650, and I implemented some extra features like coalescing, splitting, and defragmentation.
+I also ensured thread-safety, allowing concurrent processes to allocate/deallocate memory without deadlocks or race issues.
+
+## Why?
+What's wrong with stdlib malloc? Well, malloc is like the one-size-fits-all free-space management system.
+You often don't use C for one-size-fits-all projects, however, because it's a pain to write. You use it for
+time-sensitive, memory-limited, storage-constrained, or otherwise performance-critical projects. Perhaps you don't
+care about how long it takes for memory to be allocated each time you make a request, but you *really* don't want random slow downs from
+defragmentation during runtime. Or maybe you're working on a project with a very predictable memory allocation pattern, and the
+generalized approach of malloc just isn't efficient enough. 
+
+## How it Works
+To implement a free-space management system, your program must keep track of pointers to virtual memory. These
+pointers then must be labeled as free or allocated. The--deprecated--sbrk system call offers a simple interface
+to 'retrieve' memory from your operating system by adjusting your process' heap space.
+
+After getting a pointer to a defined address space from your operating system, you are now the arbiter of memory.
+You need to keep track of a pointer to your free-space, as well as the size of the space. Moreover, as you lease memory,
+you need to keep track of *all* the pointers to free-space, as well as their corresponding sizes. 
+To keep track of free-space--which will be dynamic--you need a dynamic data structure like a linked-list, which necessitates
+memory allocation... Wait...
+
+Well, to make do with this situation, you must embed the free-list in the same memory that you are leasing out.
+
+## Implementation
+If your program initially retrieves 4KiB from your operating system, you have 4096 bytes to work with.
+To keep track of free memory, you need a size and a pointer.
+Without revealing my implementation, it is true that a collection of these (in a struct) will take some
+memory. If your struct takes 8 bytes, then you could at most lease 4096 - 8 = 4088 bytes. In order for this
+design to work simply, your struct for an allocated memory block must also be 8 bytes. When you lease a pointer to memory,
+ensure you return a pointer *beyond* the metadata header you create, otherwise you are asking the lessee to
+overwrite your metadata. 
+
+## Sources
+[OSTEP Chapter 17](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-freespace.pdf)
+
+## Intended Features/TODO
+- Experiment with other allocation approaches, such as buddy allocation and best-fit.
+- Implement a minimal garbage collection system.
+- Allocate separate pools of memory from the OS for each thread using TLS in order to
+avoid locking.  
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-script').textContent;
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>
