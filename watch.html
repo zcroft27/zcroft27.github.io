@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👨‍💻 Docker Compose Watch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+     body {
+            background-color: #212121;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+    .markdown-body {
+            background-color: #212121; 
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="markdown-content" class="markdown-body"></div>
+    <script type="text/markdown" id="markdown-script">
+# Docker Compose Watch for Live-Reloading in Golang
+If you want to orchestrate containers for a full stack application with frontend
+and backend containers using Docker, development can be tedious if done incorrectly.
+
+With just Docker Compose and a Dockerfile, upon changing code during testing a developer must:
+- Bring down the cluster
+- Rebuild the image
+- Bring up the cluster
+
+This takes a relatively long time, especially if you are using larger base images and have a
+dense program to compile.
+
+Some options could include:
+- Volume mounting the backend directory, executing a shell instance in your backend container,
+and recompiling.
+- Volume mounting and using a live-reloading library like [fresh](https://github.com/gravityblast/fresh).
+
+The first approach is annoying and the second approach is shortsighted and won't work for frontend.
+
+[Docker Compose Watch](https://docs.docker.com/compose/how-tos/file-watch/) solves this issue by watching
+for changes in specified directories and then sync and restart. This is better than using something like fresh
+because it is extensible to frontend, databases, etc., without needing to find a specific hot/live reloading service.
+
+Here is an example of a docker-compose.yaml file for a full stack application with port mapping,
+DNS names for containers, dependencies, Docker Compose Watch, and commands.
+
+```go
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    command: npm run dev
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./frontend
+          target: /app
+    networks:
+      - app-network
+
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
+    command: go run main.go
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./backend
+          target: /app
+    networks:
+      - app-network
+    container_name: backend
+
+
+networks:
+  app-network:
+    driver: bridge
+```
+
+## To run
+```bash
+docker compose up --build --watch 
+```
+--watch is necessary to enable watch, otherwise press w after orchestrating!
+
+Your Dockerfile in the backend and frontend would both just compile your program but not execute it--it is
+the job of the orchestrator to run the program.
+
+With this approach, you would develop only using Docker Compose, and Watch will notice any changes,
+sync, and restart, executing the specified command "go run main.go" again.
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-script').textContent;
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>

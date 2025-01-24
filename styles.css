@@ -159,6 +159,14 @@ a {
     color: #FF8C42;
 }
 
+.watch {
+    color: #20B2AA;
+}
+
+.watch:visited {
+    color: #20B2AA;
+}
+
 .linkedin {
     color: #0077B5; 
 }
