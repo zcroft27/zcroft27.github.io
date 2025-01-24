@@ -30,8 +30,9 @@
 If you want to orchestrate containers for a full stack application with frontend
 and backend containers using Docker, development can be tedious if done incorrectly.
 
-With just Docker Compose and a Dockerfile, upon changing code during testing a developer must:
+With just Docker Compose and a Dockerfile, upon changing code during testing a developer must manually:
 - Bring down the cluster
+- Save changes and recompile
 - Rebuild the image
 - Bring up the cluster
 
@@ -40,7 +41,7 @@ dense program to compile.
 
 Some options could include:
 - Volume mounting the backend directory, executing a shell instance in your backend container,
-and recompiling.
+and recompiling + restarting.
 - Volume mounting and using a live-reloading library like [fresh](https://github.com/gravityblast/fresh).
 
 The first approach is annoying and the second approach is shortsighted and won't work for frontend.
@@ -99,7 +100,7 @@ docker compose up --build --watch
 --watch is necessary to enable watch, otherwise press w after orchestrating!
 
 Your Dockerfile in the backend and frontend would both just compile your program but not execute it--it is
-the job of the orchestrator to run the program.
+the job of the orchestrator to run the program in this approach.
 
 With this approach, you would develop only using Docker Compose, and Watch will notice any changes,
 sync, and restart, executing the specified command "go run main.go" again.
