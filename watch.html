@@ -52,7 +52,7 @@ because this is extensible to frontend, databases, etc., without needing to find
 for each container.
 
 Here is an example of a docker-compose.yaml file for a full stack application with port mapping,
-DNS names for containers, dependencies, Docker Compose Watch, and commands.
+DNS names for containers, dependencies, Watch, and commands.
 
 ```go
 services:
@@ -98,13 +98,15 @@ networks:
 ```bash
 docker compose up --build --watch 
 ```
---watch is necessary to enable watch, otherwise press w after orchestrating!
+--watch is necessary to enable Watch, otherwise press w after orchestrating!
 
-Your Dockerfile in the backend and frontend would both just compile your program but not execute it--it is
+The Dockerfiles in the backend and frontend would both just compile your program but not execute it--it is
 the job of the orchestrator to run the program in this approach.
 
 With this approach, you would develop only using Docker Compose and Watch will notice any changes,
-sync,  restart, and execute the specified command "go run main.go" again.
+sync,  restart, and execute the specified command "go run main.go" again. This decreases the time
+taken to reflect changes from 10-30 seconds manually to < 3 seconds in many cases, drastically
+increasing development efficiency. 
     </script>
 
     <script>
