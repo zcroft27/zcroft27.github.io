@@ -107,6 +107,10 @@ With this approach, you would develop only using Docker Compose and Watch will n
 sync,  restart, and execute the specified command "go run main.go" again. This decreases the time
 taken to reflect changes from 10-30 seconds manually to < 3 seconds in many cases, drastically
 increasing development efficiency. 
+
+Note: After a bit of development with this approach, we came to the conclusion that Docker Compose Watch was a bit slower than the
+        npm hot reloading for frontend--this can be solved by removing the 'watch:' property and volume-mounting the frontend, in which case the
+        default npm hot-reloading should be in effect.
     </script>
 
     <script>
