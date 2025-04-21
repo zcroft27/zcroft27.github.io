@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👨‍💻 SQL Notes</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            background-color: #212121;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .markdown-body {
+            background-color: #212121;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="markdown-content" class="markdown-body"></div>
+    <script type="text/markdown" id="markdown-script">
+# SQL Notes
+
+## PostgreSQL
+
+`SELECT`: it is best practice to specify the columns desired instead of using the `*` wildcard.
+- `SELECT ... FROM ... WHERE` is the correct order.  
+
+`LIKE`: the pattern is case-sensitive: e.g. `LIKE '%Tennis%'` != `LIKE '%tennis%'`.
+- `%` matches any number of characters (including none), and `_` matches exactly one character.
+
+`IN`: pass a list of possible values and if any match the target, the row is returned indicating success.
+- `IN` really takes a *table with a single column*--since a query returns a table, then a query that returns a single column
+can be passed into the `IN` operator.
+  - TODO: Explore the concept that `all SQl queries return a table`.
+  
+`AS`: label columns or expressions for display or reference.
+
+`CASE`: treat it like a SWITCH or MATCH statement.
+- `CASE` requires `WHEN`/`THEN` clause, `END`. Optional: `ELSE`.  
+
+`Timestamp format`: `YYYY-MM-DD hh:mm:ss.nnnnnn`.
+- Can be compared like regular data (>, <, etc.).
+- `2012-09-1` is *cast* to `2012-09-01 00:00:00`. 
+
+`DISTINCT`: This is relatively time-intensive, use it sparingly if on large datasets.
+
+`LIMIT`: Useful for pagination. Pair with the `OFFSET` keyword.
+
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-script').textContent;
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+
+</html>
