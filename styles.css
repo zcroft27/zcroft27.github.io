@@ -111,6 +111,30 @@ a {
     color: #CBD5C0;
 }
 
+.oracle {
+    color: #FF9EC7;
+}
+
+.oracle:visited {
+    color: #FF9EC7;
+}
+
+.arenius {
+    color: #D4A574;
+}
+
+.arenius:visited {
+    color: #D4A574;
+}
+
+.castaway {
+    color: #98E4D6;
+}
+
+.castaway:visited {
+    color: #98E4D6;
+}
+
 .azure {
     color: #F8B400;
 }
