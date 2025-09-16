@@ -31,6 +31,40 @@ A Golang server to facilitate the autograding of 3 technical challenges: 2 backe
 The backend challenges were split into two tracks--track 2 more difficult than track 1--for accessibility.
 The entire theme of the 3 challenges was around alien invasions, from either the perspective of the aliens
 or the humans being invaded.
+
+Since the challenge specifications are long, I will first discuss what I learned, what I am happy with, and what I would improve, and then
+briefly outline the challenges themselves.
+
+Find the code that I co-created with [Stone Liu](https://stoneliucs.github.io/) at [this GitHub link](https://github.com/stoneliuCS/generate_technical_2025).
+
+## What I Learned
+Most notably, I learned a lot about writing well-tested code and the value of using OpenAPI type-safe code generation and API documentation.
+My co-creator, Stone, and I wrote end-to-end tests using a custom testing harness; 
+including functional/integration/units tests with a testing Postgres database container, fuzzing tests,
+and performance tests. We also used OpenAPI to specify our API contract, generate type-safe handler code (auto-generated parameters and return types), and
+produce API documentation. I also learned what makes useful monitoring tools. I implemented middleware to
+send a Slack message via a webhook with a stack trace on runtime errors or slow requests, but after receiving our first
+in-production Slack-message (with weird mix of excitement and nervousness), I wanted
+additional context (requesting user ID, requesting user request body, etc.), which proved more helpful after implementation.
+
+## What I am Happy With
+I am very happy with our testing and monitoring--our system remained up 100% of the ~10 days it was up and active, with only
+2 runtime errors and a handful of slow requests. Thanks to the monitoring, Stone and I were able to patch the 2 runtime
+errors within minutes of them occuring, and our performance testing and grading timeouts significantly reduced slow requests. We received 3,600+
+submissions across 55+ candidates. I also implemented a batch queue for uploading request-log entries for requests to the
+frontend challenge point, using buffered channels, which was super exciting.
+
+# What I Would Improve
+As I was finishing this challenge, I was nearing the end of the book "Concurrency in Go" by Katherine Cox-Buday. I didn't necessarily follow best-practices with
+concurrency or use channels in the intended CSP-style. Also, we implemented rate limiting on a select few challenge endpoints for additional safety, however, in hindsight this rate limiting was per user ID, so a malicious actor could create multiple
+users and still effectively spam our server. Instead, I would likely use user-agnostic rate limiting, managed with a global sync.Pool in the
+Go standard library. Additionally, we learned a lot about writing clear specifications--there were some vague points in our specifications
+and I learned to be more verbose in challenge specifications and reduce complexity. Finally, I had written a script for
+interviewers to gain insights on candidate scores, number of attempts, average score, times of attempts, etc., but I gave out
+Postgres Superuser credentials in the script. Instead, I would create a read-only user and role, and distribute those credentials. 
+
+# Details (although, more details found in the code)
+
 ## Backend Challenges
 A score of 0 is considered perfect, a score of -1 indicates bad/ungradeable input, and a score greater than 0 indicates
 our Oracle expects a more optimal input.
@@ -63,10 +97,39 @@ one differing value, 1 point was added. If an alien had two incorrect values, fo
 This challenge received 366 total submissions.
 
 ### Track 2: Algorithm
+As the commander of a fortress being invaded, it is up to you to determine the optimal defense strategy
+to:  
+- Keep the fortress wall unbroken.
+- Minimize the damage done to the fortress wall.
+- Optimally eliminate the attacking aliens.
 
-## What I Learned
-      
-## Intended Features/TODO
+Given the gameplay sequence:
+- You attack aliens.
+- Aliens attack your wall.
+- Repeat unless wall is broken (loss), or all aliens are dead (win).
+
+Aliens have values ATK and HP which represent the amount of damage they deal in one round, and their current health.
+The wall has HP which represents the current health of the wall. 0 HP indicates alien elimination/broken wall.
+
+POWER is the sum of the ALIEN remaining HP and ATK.
+
+There are three defensive attack options:
+- "volley" - Targets the number of aliens sorted by descending POWER decided by taking your remaining HP modulo the remaining number of aliens, dealing 1 HP.
+- "focusedVolley" - Targets half of the remaining aliens, rounded up and sorted by descending POWER, dealing 2 HP.
+- "focusedShot" - Targets the alien with the highest POWER, killing them instantly.
+
+
+There are a few bits and bobs of edge-cases, related to tie-breakers, ordering, etc. that are outlined in the code and offical specification,
+but I will omit them here.
+
+## Frontend Challenge
+
+The candidate is an exceptionally talented alien who has been tasked with creating a dashboard to keep track of the other
+aliens participating in the invasion. An also-talented alien created a [design](https://www.figma.com/design/reKpbILCizcrTjnrBn6hzU/Generate-Coding-Challenge?node-id=1071-381) to follow, and it is the candidate's job to
+match the specification.
+
+The Oracle included a batch GET endpoint to retrieve a random list of aliens, to be stored in the
+context of the candidate's frontend, and manipulated throughout.
     </script>
 
     <script>
