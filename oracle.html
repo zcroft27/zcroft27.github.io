@@ -27,8 +27,42 @@
     <div id="markdown-content" class="markdown-body"></div>
     <script type="text/markdown" id="markdown-script">
 # Oracle and Take-home Challenges
-      
-## Overview
+A Golang server to facilitate the autograding of 3 technical challenges: 2 backend challenges, and 1 frontend challenge.
+The backend challenges were split into two tracks--track 2 more difficult than track 1--for accessibility.
+The entire theme of the 3 challenges was around alien invasions, from either the perspective of the aliens
+or the humans being invaded.
+## Backend Challenges
+A score of 0 is considered perfect, a score of -1 indicates bad/ungradeable input, and a score greater than 0 indicates
+our Oracle expects a more optimal input.
+### Track 1: ngrok
+Aliens are invading! The candidate was tasked with implementing a robust database API to store, retrieve, and filter alien species data.
+This involved the candidate building:
+- healthcheck endpoint.
+- POST endpoint for a set of ~600 aliens. 
+- GET endpoint with filter query parameters (7 unique filters).
+- DELETE endpoint to delete all aliens.
+
+Then, the candidate would run their server and expose it via a reverse proxy using ngrok. This would make
+their server publicly accessible so the autograder server could reach it. Then, they sent a POST request with their
+URL as a body parameter, as well as their unique user ID (UUID) as a query parameter, to submit their server for scoring.
+
+The autograding server would then:
+- Use an HTTP client to query the healthcheck endpoint.
+- If healthy, continue, otherwise, return and save a score of -1.
+- Send a DELETE request (cleaning up any previous tests on setup).
+- Send a POST request with a randomly generated set of aliens of a random length.
+  - The set of aliens and length is determined as a result of hashing their user ID. So, it remains the
+  between each request that they make, however, it is globally unique.
+- SEND 5 GET requests with randomly generated filter query parameters within 5 categories.
+
+
+After receiving the values from the GET requests, the server would calculate an aggregate score, where
+the expected alien set is compared to the received alien set, for each GET request. The details of the grading
+is best explained by reading the public source code, but essentially, for each alien missing or with at least
+one differing value, 1 point was added. If an alien had two incorrect values, for example, this was not double-counted.
+This challenge received 366 total submissions.
+
+### Track 2: Algorithm
 
 ## What I Learned
       
