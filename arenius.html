@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👨‍💻 Arenius</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+     body {
+            background-color: #212121;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+    .markdown-body {
+            background-color: #212121; 
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="markdown-content" class="markdown-body"></div>
+    <script type="text/markdown" id="markdown-script">
+# Arenius
+Arenius is a carbon-accounting platform to empower small-to-medium sized businesses to track, manage, and reduce their carbon footprint.
+
+I was a technical lead, alongside technical lead [Dessy Dusichka](https://dessydusichka.com/), design lead Rachel Ma, and product lead Grace Uecker.
+
+We led a team of 5 engineers and 4 designers over the course of one semester to build an app for our client Ned Botherway.
+
+[GitHub link](https://github.com/GenerateNU/arenius)
+
+Over this semester, our engineering team planned 100+ tickets, merged 170+ pull requests, and maintained thorough documentation along the way.
+
+## Key Features
+Notably, we implemented nightly data syncing from the accounting platform Xero using OAuth and a cron job, a variety of graphs and charts to display data,
+and user uthentication and authorization. Additionally, we created a 'reconciliation' process, where users would view their automatically imported
+transactions and assign carbon emissions factors, which would be used to calculate carbon footprint. To supplement this process, we created
+a separate neural network recommendation service to suggest carbon emissions factors to enhance the user experience.
+
+## What I Learned
+As a technical lead, some unique areas of development included planning, scoping, and creating tickets, researching integrations, and reviewing code.
+Additionally, we used Golang for our backend, React + Next.js / TypeScript for our frontend, and DigitalOcean for our deployment, which were
+great practical learning experiences.
+
+## Team Photo and Screenshots!
+![Team photo](team.png)
+![charts](charts.png)
+![Auth](auth.png)
+![Dashboard](dashboard.png)
+![Reconciliation](reconciliation.png)
+![Contacts](contacts.png)
+![Calendar](calendar.png)
+![AWS](aws.png)
+
+    </script>
+
+
+    <script>
+        const markdown = document.getElementById('markdown-script').textContent;
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>
