@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👨‍💻 TFTP Parser</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+     body {
+            background-color: #212121;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+    .markdown-body {
+            background-color: #212121; 
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="markdown-content" class="markdown-body"></div>
+    <script type="text/markdown" id="markdown-script">
+# TFTP Parser
+A Golang program to parse the binary TFTP protocol.
+
+I am in the process of building out a client/server for this too. It will include lossless reading / writing (get, put) of files over UDP,
+requiring custom ACKs, retransmission handling, checksums, and duplicate handling.
+
+[GitHub link](https://github.com/zcroft27/tftp)
+
+## What I Learned
+Strictly speaking about the completed parser, I have learned some fundamentals about binary protocols. Some learnings include that
+networks (like the Internet) widely use big-endian encoding for byte ordering, data is not interpreted in the parsing layer,
+and data is not length-prefixed in TFTP.
+
+## What I Intend to do
+I am currently buliding out a TFTP client that can send/receive files, following the RFC spec and using my own parser. This will be
+a useful opportunity to learn how protocols are implemented.
+
+I started with TFTP because I wanted to build a DNS parser but wanted to develop my fundamentals first. I'd like to build a DNS client.
+    </script>
+
+    <script>
+        const markdown = document.getElementById('markdown-script').textContent;
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+    </script>
+</body>
+</html>
