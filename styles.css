@@ -104,11 +104,11 @@ a {
 }
 
 .resources {
-    color: #CBD5C0;
+    color: #ACBD98;
 }
 
 .resources:visited {
-    color: #CBD5C0;
+    color: #ACBD98;
 }
 
 .oracle {
@@ -223,4 +223,33 @@ a {
     display: none; /* Initially hidden */
     font-size: 14px; 
     margin-left: 0px; 
+}
+
+.back-link {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #CBD5C0;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 11px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background: #2a2a2a;
+    z-index: 1000;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #ffffff;
+    border-color: #758467;
+}
+
+.travels {
+    color: #BCCBA8;
+}
+
+.travels:visited {
+    color: #BCCBA8;
 }

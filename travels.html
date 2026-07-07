@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- prohibit browser from caching site, mostly for rapid development -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <title>🌍 Travels</title>
+    <style>
+        html, body { height: auto; }
+        body {
+            display: block;
+            width: 88%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 70px 0 60px 0;
+        }
+        .travels-title { color: antiquewhite; font-size: 26px; margin: 0 0 4px 0; }
+        .travels-sub { color: #9CAF88; font-size: 13px; margin: 0 0 34px 0; }
+        .trip { margin-bottom: 40px; }
+        .trip-head {
+            display: flex; align-items: baseline; gap: 10px;
+            border-bottom: 1px solid #3a3a3a; padding-bottom: 8px;
+            margin-bottom: 16px; flex-wrap: wrap;
+        }
+        .trip-name { color: antiquewhite; font-size: 19px; font-weight: 600; }
+        .trip-places { color: #CBD5C0; font-size: 12.5px; }
+        .trip-blurb { color: #a9a9a9; font-size: 12.5px; margin: -6px 0 14px 0; font-style: italic; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 12px;
+        }
+        .tile {
+            position: relative; aspect-ratio: 4 / 3; border-radius: 8px;
+            overflow: hidden; background: #2a2a2a; border: 1px solid #3a3a3a;
+            cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+        .tile:hover { transform: translateY(-2px); border-color: #758467; }
+        .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .tile .cap {
+            position: absolute; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.75));
+            color: antiquewhite; font-size: 11px; padding: 18px 8px 6px 8px;
+            opacity: 0; transition: opacity 0.15s ease;
+        }
+        .tile:hover .cap { opacity: 1; }
+        .tile.placeholder {
+            cursor: default; display: flex; align-items: center;
+            justify-content: center; text-align: center;
+        }
+        .tile.placeholder:hover { transform: none; border-color: #3a3a3a; }
+        .ph-inner { color: #6f6f6f; font-size: 11px; padding: 8px; line-height: 1.5; }
+        .ph-inner i { font-size: 22px; display: block; margin-bottom: 6px; color: #555; }
+        .ph-inner code { color: #8a8a8a; font-size: 10px; }
+        #lightbox {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            z-index: 2000; align-items: center; justify-content: center;
+            flex-direction: column; padding: 24px;
+        }
+        #lightbox.open { display: flex; }
+        #lightbox img { max-width: 92vw; max-height: 82vh; border-radius: 6px; }
+        #lightbox .lb-cap { color: antiquewhite; font-size: 13px; margin-top: 14px; min-height: 16px; }
+        #lightbox .lb-close {
+            position: absolute; top: 18px; right: 24px; color: antiquewhite;
+            font-size: 30px; cursor: pointer; line-height: 1;
+        }
+        #lightbox .lb-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 52px; height: 52px; border-radius: 50%; border: none;
+            background: rgba(255,255,255,0.12); color: #fff; font-size: 30px;
+            line-height: 1; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; transition: background 0.15s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        #lightbox .lb-nav:hover { background: rgba(255,255,255,0.28); }
+        #lightbox .lb-prev { left: 20px; }
+        #lightbox .lb-next { right: 20px; }
+        #lightbox .lb-count {
+            position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+            color: antiquewhite; font-size: 12px; opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link"
+       onclick="if(history.length>1){history.back();return false;}">&larr; Back</a>
+
+    <h1 class="travels-title">Travels 🌍</h1>
+    <p class="travels-sub">A few favorite shots!</p>
+
+    <div id="gallery"></div>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="lb-close" onclick="closeLightbox()">&times;</span>
+        <button class="lb-nav lb-prev" aria-label="Previous photo" onclick="lbNav(event,-1)">&#8249;</button>
+        <img id="lb-img" src="" alt="" onclick="event.stopPropagation()">
+        <button class="lb-nav lb-next" aria-label="Next photo" onclick="lbNav(event,1)">&#8250;</button>
+        <div class="lb-cap" id="lb-cap"></div>
+        <div class="lb-count" id="lb-count"></div>
+    </div>
+
+    <script>
+    /*
+      HOW TO ADD YOUR OWN PHOTOS
+      --------------------------
+      1. Drop image files into the matching folder, e.g. photos/italy/1.jpg
+      2. The grid shows every photo in a section. Click one to open it full-size,
+         then use the < > arrows (or your keyboard arrows) to shuffle through
+         that section's photos.
+      3. Add/remove filenames in a section's `photos` list below.
+         A photo can be "1.jpg" or { file: "1.jpg", caption: "..." }.
+      4. Missing files just show a tidy placeholder tile.
+    */
+    const trips = [
+        { id: "italy", name: "Italy", emoji: "🇮🇹", places: "Rome · Florence · San Gimignano", blurb: "Currently learning to speak Italian. Daje Roma!", photos: ["1.jpg", "2.jpg"] },
+        { id: "switzerland", name: "Switzerland", emoji: "🇨🇭", places: "Zurich · Lucerne · Lauterbrunnen", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "cape-cod", name: "Cape Cod", emoji: "🏖️", places: "Summers on the Cape", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "pacific-northwest", name: "Pacific Northwest", emoji: "🌲", places: "Vancouver · Vancouver Island", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "new-york-city", name: "New York City", emoji: "🗽", places: "NYC", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "puerto-rico", name: "Puerto Rico", emoji: "🌴", places: "San Juan", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "south-africa", name: "South Africa", emoji: "🦓", places: "Orchestra tour", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "trumpet", name: "Trumpet", emoji: "🎺", places: "Music", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "climbing", name: "Rock climbing", emoji: "🧗", places: "", blurb: "", photos: ["1.jpg", "2.jpg"] }
+    ];
+
+    let lbGroup = [];
+    let lbIndex = 0;
+
+    function esc(s) {
+        return String(s).replace(/[&<>"']/g, c => (
+            {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]
+        ));
+    }
+
+    function photoParts(trip, p) {
+        const file = typeof p === "string" ? p : p.file;
+        const caption = typeof p === "string" ? "" : (p.caption || "");
+        return { src: "photos/" + trip.id + "/" + file, caption: caption };
+    }
+
+    function render() {
+        const gallery = document.getElementById("gallery");
+        gallery.innerHTML = trips.map(trip => {
+            const tiles = trip.photos.map((p, idx) => {
+                const { src, caption } = photoParts(trip, p);
+                const file = src.split("/").pop();
+                const capHtml = caption ? '<div class="cap">' + esc(caption) + '</div>' : "";
+                const ph = '<div class=\'ph-inner\'><i class=\'fas fa-camera\'></i>add <code>photos/'
+                    + esc(trip.id) + "/" + esc(file) + '</code></div>';
+                return '<div class="tile" '
+                    + 'onclick="openLightbox(\'' + esc(trip.id) + '\',' + idx + ')">'
+                    + '<img src="' + esc(src) + '" alt="' + esc(caption) + '" '
+                    + 'onerror="this.parentNode.classList.add(\'placeholder\');'
+                    + 'this.parentNode.onclick=null;'
+                    + 'this.parentNode.innerHTML=\'' + ph.replace(/'/g, "\\'") + '\';">'
+                    + capHtml
+                    + '</div>';
+            }).join("");
+            const blurb = trip.blurb ? '<p class="trip-blurb">' + esc(trip.blurb) + '</p>' : "";
+            return '<section class="trip">'
+                + '<div class="trip-head">'
+                + '<span class="trip-name">' + esc(trip.name) + ' ' + trip.emoji + '</span>'
+                + '<span class="trip-places">' + esc(trip.places) + '</span>'
+                + '</div>'
+                + blurb
+                + '<div class="grid">' + tiles + '</div>'
+                + '</section>';
+        }).join("");
+    }
+
+    function openLightbox(tripId, idx) {
+        const trip = trips.find(t => t.id === tripId);
+        lbGroup = trip.photos.map(p => photoParts(trip, p));
+        lbIndex = idx;
+        showLb();
+        document.getElementById("lightbox").classList.add("open");
+    }
+    function showLb() {
+        const cur = lbGroup[lbIndex];
+        document.getElementById("lb-img").src = cur.src;
+        document.getElementById("lb-cap").textContent = cur.caption || "";
+        const multi = lbGroup.length > 1;
+        document.getElementById("lb-count").textContent = multi ? (lbIndex + 1) + " / " + lbGroup.length : "";
+        document.querySelector(".lb-prev").style.display = multi ? "flex" : "none";
+        document.querySelector(".lb-next").style.display = multi ? "flex" : "none";
+    }
+    function lbNav(e, dir) {
+        e.stopPropagation();
+        const n = lbGroup.length;
+        lbIndex = (lbIndex + dir + n) % n;
+        showLb();
+    }
+    function closeLightbox() {
+        document.getElementById("lightbox").classList.remove("open");
+    }
+    document.addEventListener("keydown", e => {
+        if (!document.getElementById("lightbox").classList.contains("open")) return;
+        if (e.key === "Escape") closeLightbox();
+        else if (e.key === "ArrowLeft") lbNav(e, -1);
+        else if (e.key === "ArrowRight") lbNav(e, 1);
+    });
+
+    render();
+    </script>
+</body>
+</html>
