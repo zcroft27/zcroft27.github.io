@@ -6,69 +6,130 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Zachary Croft</title>
     <script>
-        function copyEmail() {
-            const email = "croft.z@northeastern.edu";
-            navigator.clipboard.writeText(email)
+        function copyEmail(e) {
+            if (e) e.preventDefault();
+            navigator.clipboard.writeText("croft.z@northeastern.edu")
                 .then(() => {
-                    const messageBubble = document.getElementById('copied-message');
-                    messageBubble.style.display = 'block';
-                    setTimeout(() => {
-                        messageBubble.style.display = 'none';
-                    }, 800);
+                    const el = document.getElementById('copied');
+                    el.classList.add('show');
+                    setTimeout(() => el.classList.remove('show'), 1000);
                 })
-                .catch(err => {
-                    console.error("Could not copy email: ", err);
-                });
+                .catch(err => console.error("Could not copy email: ", err));
         }
     </script>
 </head>
-<body class="home">
-    <div class="content">
-        <h1>
-            Zachary Croft <br>
-            <span class="emoji">💻</span>
-            <span class="emoji">🎺</span>
-            <span class="emoji">🏃</span>
-            <span class="emoji">🌲</span>
-            <span class="emoji">🦓</span>
-        </h1>
+<body>
+    <main class="stage">
+        <div class="intro">
+            <div class="hero-top">
+                <div class="portrait reveal">
+                    <img src="photos/me/headshot.png" alt="Zachary Croft" width="720" height="720">
+                </div>
+                <div class="hero-text">
+                    <p class="kicker reveal">Computer Science @ Northeastern</p>
+                    <h1 class="reveal" style="--d: 80ms">Zachary Croft</h1>
+                    <p class="emojis reveal" style="--d: 140ms">💻 🎺 🏃 🌲 🦓</p>
+                    <p class="bio reveal" style="--d: 200ms">
+                        CS student at Northeastern focused on systems. I read about tech and play trumpet.
+                    </p>
+                </div>
+            </div>
 
-        <div class="email-container">
-            <h2>
-                <a href="#" onclick="copyEmail(); return false;" class="email">
-                    <i class="fas fa-envelope mail-icon"></i>
-                    croft[.]z[@]northeastern[.]edu
+            <div class="actions reveal" style="--d: 280ms">
+                <a href="projects.html" class="btn btn-primary">See my projects <i class="fas fa-arrow-right"></i></a>
+                <a href="https://www.linkedin.com/in/zachary-croft/" class="btn btn-linkedin" target="_blank" rel="noopener">
+                    <i class="fab fa-linkedin"></i> LinkedIn
                 </a>
-                <div id="copied-message" class="message-bubble">Copied!</div>
-            </h2>
-        </div>
+                <a href="https://github.com/zcroft27" class="btn btn-github" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <button type="button" class="btn btn-ghost copy-email" onclick="copyEmail(event)">
+                    <i class="fas fa-envelope"></i> croft.z@northeastern.edu
+                    <span id="copied" class="copied">Copied</span>
+                </button>
+            </div>
 
-        <h2><a href="https://www.linkedin.com/in/zachary-croft/" class="linkedin" target="_blank">
-            <i class="fab fa-linkedin"></i> LinkedIn
-        </a></h2>
-        <h2><a href="https://github.com/zcroft27" class="github" target="_blank">
-            <i class="fab fa-github"></i> GitHub
-        </a></h2>
-        <h2><a href="projects.html" class="projects">Projects</a></h2>
-        <h2><a href="readme.html" class="readme">About Me</a></h2>
-        <h2><a href="resources.html" class="resources">Resources</a></h2>
-        <h2><a href="travels.html" class="travels">Travels</a></h2>
+            <nav class="section-nav reveal" style="--d: 340ms" aria-label="Sections">
+                <a href="readme.html" class="readme">About Me</a>
+                <a href="resources.html" class="resources">Resources</a>
+                <a href="travels.html" class="travels">Travels</a>
+            </nav>
 
-        <div class="photo-preview">
-            <a href="travels.html" class="photo-preview-grid" aria-label="See travel photos">
-                <img src="photos/switzerland/1.jpg" alt="Switzerland">
-                <img src="photos/pacific-northwest/1.jpg" alt="Pacific Northwest">
-                <img src="photos/italy/1.jpg" alt="Italy">
-                <img src="photos/climbing/1.jpg" alt="Rock climbing">
-            </a>
-            <a href="travels.html" class="photo-preview-link">more photos &rarr;</a>
+            <section class="shots-wrap reveal" style="--d: 400ms">
+                <div class="shots-head">
+                    <a href="travels.html">All photos <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="shots" id="shots"></div>
+            </section>
         </div>
+    </main>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="lb-close" onclick="closeLightbox()">&times;</span>
+        <button class="lb-nav lb-prev" aria-label="Previous" onclick="lbNav(event,-1)">&#8249;</button>
+        <img id="lb-img" src="" alt="" onclick="event.stopPropagation()">
+        <button class="lb-nav lb-next" aria-label="Next" onclick="lbNav(event,1)">&#8250;</button>
+        <div class="lb-cap" id="lb-cap"></div>
+        <div class="lb-count" id="lb-count"></div>
     </div>
+
+    <script>
+    const photos = [
+        { src: "photos/me/cow.png", cap: "Lauterbrunnen, Switzerland" },
+        { src: "photos/switzerland/1.jpg", cap: "Lauterbrunnen, Switzerland" },
+        { src: "photos/italy/1.jpg", cap: "Rome, Italy" },
+        { src: "photos/pacific-northwest/1.jpg", cap: "Vancouver Island" },
+        { src: "photos/climbing/1.jpg", cap: "Bouldering" },
+        { src: "photos/puerto-rico/1.jpg", cap: "San Juan, Puerto Rico" },
+        { src: "photos/south-africa/1.jpg", cap: "South Africa" },
+        { src: "photos/cape-cod/1.jpg", cap: "Cape Cod" }
+    ];
+
+    const shots = document.getElementById("shots");
+    photos.forEach((p, i) => {
+        const el = document.createElement("div");
+        el.className = "shot";
+        el.style.zIndex = photos.length - i;
+        const posStyle = p.pos ? ' style="object-position:' + p.pos + '"' : '';
+        el.innerHTML = '<img src="' + p.src + '"' + posStyle + ' alt="' + p.cap + '">'
+            + '<div class="cap">' + p.cap + '</div>';
+        el.addEventListener("click", () => openLightbox(i));
+        shots.appendChild(el);
+    });
+
+    let lbIndex = 0;
+    function openLightbox(i) {
+        lbIndex = i;
+        showLb();
+        document.getElementById("lightbox").classList.add("open");
+    }
+    function showLb() {
+        document.getElementById("lb-img").src = photos[lbIndex].src;
+        document.getElementById("lb-cap").textContent = photos[lbIndex].cap;
+        document.getElementById("lb-count").textContent = (lbIndex + 1) + " / " + photos.length;
+    }
+    function lbNav(e, dir) {
+        e.stopPropagation();
+        lbIndex = (lbIndex + dir + photos.length) % photos.length;
+        showLb();
+    }
+    function closeLightbox() {
+        document.getElementById("lightbox").classList.remove("open");
+    }
+    document.addEventListener("keydown", e => {
+        if (!document.getElementById("lightbox").classList.contains("open")) return;
+        if (e.key === "Escape") closeLightbox();
+        else if (e.key === "ArrowLeft") lbNav(e, -1);
+        else if (e.key === "ArrowRight") lbNav(e, 1);
+    });
+    </script>
 </body>
 </html>

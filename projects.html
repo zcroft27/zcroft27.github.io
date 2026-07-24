@@ -6,26 +6,34 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Projects</title>
 </head>
-<body class="home">
-    <a href="index.html" class="back-link">&larr; Back</a>
-    <div class="content">
-        <h2><a href="oracle.html" class="oracle">*Oracle & Take-home Challenges*</a></h2>
-        <h2><a href="arenius.html" class="arenius">*Arenius*</a></h2>
-        <h2><a href="tftp.html" class="tftp">TFTP Parser</a></h2>
-        <h2><a href="mc.html" class="azure">Minecraft Server & Dashboard</a></h2>
-        <h2><a href="watch.html" class="watch">Orchestrating with Docker Compose Watch</a></h2>
-        <h2><a href="web-server.html" class="server">HTTP Server</a></h2>
-        <h2><a href="vpn.html" class="vpn">Home VPN Server</a></h2>
-        <h2><a href="route.html" class="route">Route Optimizer</a></h2>
-        <h2><a href="seam.html" class="seam">Image Compression</a></h2>
-        <h2><a href="maze.html" class="maze">Maze Generation & Solving</a></h2>
-        <h2><a href="allocator.html" class="allocator">Custom Memory Allocator</a></h2>
-    </div>
+<body>
+    <a href="index.html" class="home-link"><i class="fas fa-arrow-left"></i> Home</a>
+    <main class="subpage">
+        <p class="eyebrow reveal">Selected work</p>
+        <h1 class="page-title reveal" style="--d: 80ms">Projects</h1>
+        <p class="page-intro reveal" style="--d: 160ms">Systems, servers, and tools I've built.</p>
+
+        <div class="proj-list reveal" style="--d: 240ms">
+            <a href="oracle.html" style="--c:#FF9EC7"><span class="idx">01</span><span class="pname">Oracle &amp; Take-home Challenges</span><span class="pgo"><i class="fas fa-arrow-right"></i></span></a>
+            <a href="arenius.html" style="--c:#98E4D6"><span class="idx">02</span><span class="pname">Arenius</span><span class="pgo"><i class="fas fa-arrow-right"></i></span></a>
+            <a href="tftp.html" style="--c:#D4A574"><span class="idx">03</span><span class="pname">TFTP Parser</span><span class="pgo"><i class="fas fa-arrow-right"></i></span></a>
+            <a href="mc.html" style="--c:#F8B400"><span class="idx">04</span><span class="pname">Minecraft Server &amp; Dashboard</span><span class="pgo"><i class="fas fa-arrow-right"></i></span></a>
+            <a href="watch.html" style="--c:#20B2AA"><span class="idx">05</span><span class="pname">Orchestrating with Docker Compose Watch</span><span class="pgo"><i class="fas fa-arrow-right"></i></span></a>
+            <a href="web-server.html" style="--c:#FF6F61"><span class="idx">06</span><span class="pname">HTTP Server</span><span class="pgo"><i class="fas fa-arrow-right"></i></span></a>
+            <a href="vpn.html" style="--c:#B19CD9"><span class="idx">07</span><span class="pname">Home VPN Server</span><span class="pgo"><i class="fas fa-arrow-right"></i></span></a>
+            <a href="route.html" style="--c:#E4C65B"><span class="idx">08</span><span class="pname">Route Optimizer</span><span class="pgo"><i class="fas fa-arrow-right"></i></span></a>
+            <a href="seam.html" style="--c:#A8D5BA"><span class="idx">09</span><span class="pname">Image Compression</span><span class="pgo"><i class="fas fa-arrow-right"></i></span></a>
+            <a href="maze.html" style="--c:#A9C5EB"><span class="idx">10</span><span class="pname">Maze Generation &amp; Solving</span><span class="pgo"><i class="fas fa-arrow-right"></i></span></a>
+            <a href="allocator.html" style="--c:#FF8C42"><span class="idx">11</span><span class="pname">Custom Memory Allocator</span><span class="pgo"><i class="fas fa-arrow-right"></i></span></a>
+        </div>
+    </main>
 </body>
 </html>
