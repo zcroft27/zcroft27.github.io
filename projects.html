@@ -3,63 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- prohibit browser from caching site, mostly for rapid development -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">  
-    <!-- jetbrains font -->
+    <meta http-equiv="Expires" content="0">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-    <div id="markdown-content"></div>
-    <title>👨‍💻 Projects</title>
-
-    <script>
-        function copyEmail() {
-            const email = "croft.z@northeastern.edu";
-            navigator.clipboard.writeText(email)
-                .then(() => {
-                    const messageBubble = document.getElementById('copied-message');
-                    messageBubble.style.display = 'block'; 
-                    setTimeout(() => {
-                        messageBubble.style.display = 'none'; 
-                    }, 800);
-                })
-                .catch(err => {
-                    console.error("Could not copy email: ", err);
-                });
-        }
-    </script>
+    <title>Projects</title>
 </head>
-<body>
-    <a href="index.html" class="back-link" style="position:fixed;top:16px;left:16px;font-family:'JetBrains Mono',monospace;color:#CBD5C0;text-decoration:none;font-size:14px;padding:6px 11px;border:1px solid #444;border-radius:6px;background:#2a2a2a;z-index:1000;" onclick="if(history.length>1){history.back();return false;}">&larr; Back</a>
+<body class="home">
+    <a href="index.html" class="back-link">&larr; Back</a>
     <div class="content">
-        <h2><a href="oracle.html" class="oracle">*Oracle & Take-home Challenges*</a>
-            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
-         <h2><a href="arenius.html" class="arenius">*Arenius*</a>
-                <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
-        <!-- <h2><a href="https://castaway.zachlearns.com" class="castaway">Castaway</a>
-            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2> -->
-        <h2><a href="tftp.html" class="tftp">TFTP Parser</a>
-            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
-                    <h2><a href="mc.html" class="azure">Minecraft Server & Dashboard</a>
-            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
-        <h2><a href="watch.html" class="watch">Orchestrating with Docker Compose Watch</a>
-            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
-        <h2><a href="web-server.html" class="server">HTTP Server</a>
-            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
-        <h2><a href="vpn.html" class="vpn">Home VPN Server</a>
-            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
-        <h2><a href="route.html" class="route">Route Optimizer</a>
-            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
-        <h2><a href="seam.html" class="seam">Image Compression</a>
-            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
-        <h2><a href="maze.html" class="maze">Maze Generation & Solving</a>
-            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
-        <h2><a href="allocator.html" class="allocator">Custom Memory Allocator</a>
-            <div id="markdown-content" class="markdown-body" style="display: none;"></div></h2>
+        <h2><a href="oracle.html" class="oracle">*Oracle & Take-home Challenges*</a></h2>
+        <h2><a href="arenius.html" class="arenius">*Arenius*</a></h2>
+        <h2><a href="tftp.html" class="tftp">TFTP Parser</a></h2>
+        <h2><a href="mc.html" class="azure">Minecraft Server & Dashboard</a></h2>
+        <h2><a href="watch.html" class="watch">Orchestrating with Docker Compose Watch</a></h2>
+        <h2><a href="web-server.html" class="server">HTTP Server</a></h2>
+        <h2><a href="vpn.html" class="vpn">Home VPN Server</a></h2>
+        <h2><a href="route.html" class="route">Route Optimizer</a></h2>
+        <h2><a href="seam.html" class="seam">Image Compression</a></h2>
+        <h2><a href="maze.html" class="maze">Maze Generation & Solving</a></h2>
+        <h2><a href="allocator.html" class="allocator">Custom Memory Allocator</a></h2>
     </div>
 </body>
 </html>
-

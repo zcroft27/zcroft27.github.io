@@ -10,46 +10,42 @@
     font-family: 'JetBrains Mono';
     src: url('fonts/JetBrainsMono-Bold.woff2') format('woff2'),
          url('fonts/JetBrainsMono-Bold.woff') format('woff');
-    font-weight: 700; 
+    font-weight: 700;
     font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
     background-color: #212121;
     color: #ffffff;
     font-family: 'JetBrains Mono', monospace;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* center horizontal */
-    justify-content: center; /* center vertical */
-    height: 100vh;
-    text-align: left;
-    width: 80%;
-    margin: auto;
+    margin: 0;
 }
 
-.home-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-family: 'JetBrains Mono', monospace;  /* Use JetBrains Mono font */
-    color: white;  /* Set text color to white */
-    text-decoration: none;  /* Remove underline */
-    font-size: 18px;  /* Adjust size as needed */
-    background: none;  /* No background */
-    border: none;  /* No border */
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: color 0.3s ease;  /* Smooth color change on hover */
+body.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: left;
+    width: 80%;
+    max-width: 640px;
+    margin: auto;
+    padding: 48px 0 64px;
 }
 
 .emoji {
-    font-size: 0.85em; /* Adjust this value to change the size */
+    font-size: 0.85em;
 }
 
 .content {
     color: antiquewhite;
     font-size: 15.5px;
+    width: 100%;
 }
 
 h1, h2, a {
@@ -60,20 +56,18 @@ a {
     text-decoration: none;
 }
 
+.mail-icon {
+    color: antiquewhite;
+    font-size: 20px;
+    margin-right: 4px;
+}
+
 .mail-icon:hover {
     cursor: pointer;
 }
 
-.mail-icon {
-    color: antiquewhite;
-    font-size: 20px;
-}
-
-.projects {
-    color: #758467;
-}
-
-.projects.visited {
+.projects,
+.projects:visited {
     color: #758467;
 }
 
@@ -84,172 +78,187 @@ a {
 }
 
 .email:visited {
-    color:antiquewhite;
+    color: antiquewhite;
 }
 
-.server {
-    color:#FF6F61;
-}
-
+.server,
 .server:visited {
     color: #FF6F61;
 }
 
-.readme {
-    color: #9CAF88;
-}
-
+.readme,
 .readme:visited {
     color: #9CAF88;
 }
 
-.resources {
-    color: #ACBD98;
-}
-
+.resources,
 .resources:visited {
     color: #ACBD98;
 }
 
-.oracle {
-    color: #FF9EC7;
-}
-
+.oracle,
 .oracle:visited {
     color: #FF9EC7;
 }
 
-.tftp {
-    color: #D4A574;
-}
-
+.tftp,
 .tftp:visited {
     color: #D4A574;
 }
 
-.arenius {
-    color: #98E4D6;
-}
-
+.arenius,
 .arenius:visited {
     color: #98E4D6;
 }
 
-.azure {
-    color: #F8B400;
-}
-
+.azure,
 .azure:visited {
     color: #F8B400;
 }
 
-.seam {
-    color: #A8D5BA;
-}
-
+.seam,
 .seam:visited {
     color: #A8D5BA;
 }
 
-.maze {
-    color: #A9C5EB;
-}
-
+.maze,
 .maze:visited {
     color: #A9C5EB;
 }
 
-.vpn {
-    color: #B19CD9;
-}
-
+.vpn,
 .vpn:visited {
     color: #B19CD9;
 }
 
-.route {
-    color: #FFF5BA;
-}
-
+.route,
 .route:visited {
     color: #FFF5BA;
 }
 
-.allocator {
-    color: #FF8C42;
-}
-
+.allocator,
 .allocator:visited {
     color: #FF8C42;
 }
 
-.watch {
-    color: #20B2AA;
-}
-
+.watch,
 .watch:visited {
     color: #20B2AA;
 }
 
-.linkedin {
-    color: #0077B5; 
-}
-
-.github {
-    color: #c9510c; 
-}
-
+.linkedin,
 .linkedin:visited {
     color: #0077B5;
 }
 
+.github,
 .github:visited {
-    color: #c9510c; 
+    color: #c9510c;
+}
+
+.travels,
+.travels:visited {
+    color: #BCCBA8;
 }
 
 .email-container {
-    position: relative; 
+    position: relative;
 }
 
 .message-bubble {
     position: absolute;
-    top: 50%; 
-    left: 95%; 
-    transform: translateY(-50%); 
+    top: 50%;
+    left: 95%;
+    transform: translateY(-50%);
     background-color: rgba(255, 255, 255, 0.12);
     color: antiquewhite;
-    padding: 8px 12px; 
+    padding: 8px 12px;
     border-radius: 5px;
-    display: none; /* Initially hidden */
-    font-size: 14px; 
-    margin-left: 0px; 
+    display: none;
+    font-size: 14px;
 }
 
+/* Quiet text back link — no box, no glow */
 .back-link {
     position: fixed;
-    top: 16px;
-    left: 16px;
+    top: 18px;
+    left: 18px;
     font-family: 'JetBrains Mono', monospace;
-    color: #CBD5C0;
+    color: #9a9a9a;
     text-decoration: none;
     font-size: 14px;
-    padding: 6px 11px;
-    border: 1px solid #444;
-    border-radius: 6px;
-    background: #2a2a2a;
     z-index: 1000;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    background: none;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    outline: none;
 }
 
-.back-link:hover {
-    color: #ffffff;
-    border-color: #758467;
+.back-link:hover,
+.back-link:focus,
+.back-link:focus-visible {
+    color: antiquewhite;
+    outline: none;
+    box-shadow: none;
 }
 
-.travels {
+.photo-preview {
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid #3a3a3a;
+}
+
+.photo-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 0;
+}
+
+.photo-preview-grid img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    border: 1px solid #3a3a3a;
+    opacity: 0.92;
+    transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.photo-preview-grid:hover img {
+    opacity: 1;
+    border-color: #555;
+}
+
+.photo-preview-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #BCCBA8;
+    font-size: 13px;
+}
+
+.photo-preview-link:visited {
     color: #BCCBA8;
 }
 
-.travels:visited {
-    color: #BCCBA8;
+.photo-preview-link:hover {
+    color: antiquewhite;
+}
+
+@media (max-width: 520px) {
+    body.home {
+        width: 90%;
+        padding: 32px 0 48px;
+    }
+
+    .photo-preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .message-bubble {
+        left: 0;
+        top: calc(100% + 6px);
+        transform: none;
+    }
 }
