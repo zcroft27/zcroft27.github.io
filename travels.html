@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=24">
+    <link rel="stylesheet" href="styles.css?v=28">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Travels</title>
     <style>
@@ -158,34 +158,121 @@
     </style>
 </head>
 <body>
+    <!-- Hand-inked "odd squiggle" vocabulary, stamped with <use> in the scenes
+         below. The paths are drawn deliberately off-true — control points
+         nudged out of symmetry, arcs that don't quite match their neighbours —
+         so the lines wobble like brushwork instead of reading as generated
+         geometry. Children that need filling say so on themselves; everything
+         else inherits fill/stroke from the .art-squig host. -->
     <svg class="svg-defs" aria-hidden="true" focusable="false">
         <defs>
-            <filter id="litho-rough" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
-                <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="11" result="noise"/>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
-            </filter>
+            <symbol id="sq-arch" viewBox="0 0 100 72">
+                <path d="M5 68C6 31 27 8 50 7c24-1 44 22 45 61"/>
+                <path d="M17 68C18 39 32 20 50 19c19-1 34 20 34 49"/>
+                <path d="M29 68c1-21 8-36 21-36.5C63 31 71 46 71.5 68"/>
+                <path d="M41 68c.5-13 3-24 9-24.5C56 43 59 55 59.5 68"/>
+            </symbol>
+            <symbol id="sq-zigzag" viewBox="0 0 100 62">
+                <path d="M4 26 17 6 27 27 40 5 51 26 64 6 74 27 87 5 96 22"/>
+                <path d="M6 56 17 38 29 57 41 36 52 56 65 37 75 57 88 36 97 52"/>
+            </symbol>
+            <symbol id="sq-wave" viewBox="0 0 100 56">
+                <path d="M4 12c8-9 14 8 22 0s14 9 22 1 14 8 22 0c4-4 6-2 8 0"/>
+                <path d="M5 30c8-10 14 8 22 0s14 9 22 1 14 8 22-1c4-4 6-1 8 1"/>
+                <path d="M4 48c8-9 14 8 22 0s14 9 22 1 14 8 22 0c4-4 6-2 8 1"/>
+            </symbol>
+            <symbol id="sq-stripes" viewBox="0 0 100 70">
+                <path d="M8 8c22-2 46-1 81 1" stroke-width="3.2"/>
+                <path d="M4 21c26-3 51 0 88 2" stroke-width="2"/>
+                <path d="M11 34c20-1 44 1 77-1" stroke-width="3.6"/>
+                <path d="M6 47c24 2 53-2 84 0" stroke-width="2.2"/>
+                <path d="M13 60c18-2 41 1 71 1" stroke-width="3"/>
+            </symbol>
+            <symbol id="sq-vbars" viewBox="0 0 80 100">
+                <path d="M7 6c-2 28-1 60 1 88"/>
+                <path d="M20 9c2 26 0 58-1 84"/>
+                <path d="M33 5c-1 30 1 62 0 90" stroke-width="3.2"/>
+                <path d="M46 8c2 28-1 56 1 86"/>
+                <path d="M59 6c-2 26 1 60-1 88" stroke-width="3.2"/>
+                <path d="M72 10c1 28 0 54-1 82"/>
+            </symbol>
+            <symbol id="sq-spiral" viewBox="0 0 100 100">
+                <path d="M50 7c24 0 43 19 43 43 0 23-19 42-44 42-23 0-40-17-40-40 0-21 16-36 37-36 18 0 32 13 32 31 0 15-12 27-28 27-13 0-23-10-23-24 0-11 9-20 21-20 10 0 17 8 17 18 0 8-6 14-14 14"/>
+            </symbol>
+            <symbol id="sq-loops" viewBox="0 0 100 92">
+                <path d="M42 5c19-2 34 15 35 35 1 21-12 40-31 41C27 82 11 65 10 45 9 25 23 7 42 5Z"/>
+                <path d="M64 12c17-1 27 17 28 34 1 20-10 37-27 38-18 1-29-17-30-36-1-18 10-35 29-36Z"/>
+            </symbol>
+            <symbol id="sq-rings" viewBox="0 0 100 72">
+                <path d="M18 8c8 0 13 4 13 9.5S25 27 17 27 5 22 5 17.5 10 8 18 8Z"/>
+                <path d="M51 5c7-1 11 4 11 8.5S57 22 50 22s-11-4-11-8.5S44 6 51 5Z"/>
+                <path d="M83 10c8 0 12 5 12 10s-5 9-13 9-11-5-11-9.5S75 10 83 10Z"/>
+                <path d="M26 42c8-1 12 4 12 8.5S33 59 25 59s-11-4-11-8 4-8 12-9Z"/>
+                <path d="M61 42c9 0 14 5 14 10.5S69 63 60 63s-13-5-13-10 5-11 14-11Z"/>
+                <path d="M91 40c6 0 9 4 9 7.5S96 55 90 55s-9-3-9-7 4-8 10-8Z"/>
+            </symbol>
+            <symbol id="sq-speckle" viewBox="0 0 100 100">
+                <g stroke-width="5">
+                    <path d="M11 13l5 6"/><path d="M33 8l6 4"/><path d="M56 14l4 6"/><path d="M79 9l6 5"/>
+                    <path d="M20 32l6 5"/><path d="M44 29l4 6"/><path d="M67 34l6 4"/><path d="M88 30l4 6"/>
+                    <path d="M9 52l6 5"/><path d="M32 55l4 5"/><path d="M55 50l6 5"/><path d="M78 55l5 5"/>
+                    <path d="M19 74l5 6"/><path d="M42 78l6 4"/><path d="M65 73l4 6"/><path d="M87 77l6 5"/>
+                    <path d="M30 94l5 4"/><path d="M62 92l5 5"/>
+                </g>
+            </symbol>
+            <symbol id="sq-moon" viewBox="0 0 100 58">
+                <path fill="currentColor" stroke="none"
+                      d="M19 3c14 1 25 13 25 26 0 14-11 26-26 26-1 0-2-1-2-2V5c0-1 1-2 3-2Z"/>
+                <path fill="currentColor" stroke="none"
+                      d="M58 5c15 0 28 12 28 25S73 55 58 55c-2 0-3-1-3-2V7c0-1 1-2 3-2Z"/>
+            </symbol>
+            <symbol id="sq-sparkle" viewBox="0 0 100 100">
+                <path fill="currentColor" stroke="none"
+                      d="M50 2c4 31 16 44 47 47-30 4-44 17-47 49-4-31-17-44-48-48 31-4 44-17 48-48Z"/>
+            </symbol>
+            <symbol id="sq-scribble" viewBox="0 0 100 64">
+                <path d="M6 40c-3-12 8-22 18-16s6 24 17 26 18-14 12-24S37 12 44 6s21 4 24 15-8 22 0 28 20-3 25-13"/>
+            </symbol>
         </defs>
     </svg>
+    <!-- This page's content column is 1000px, so the gutters are narrow —
+         everything here stays small and hugs the edge. -->
     <div class="art-scene" aria-hidden="true">
-        <div class="art art--md" style="--top:10%; --left:1.5%; --size:108px; color:var(--moss)" data-depth="0.10" data-mouse="9">
-            <div class="art-i" style="--dur:26s; --dx:8px; --dy:-12px; --rot:4deg; --op:.3"><div class="art-halftone"></div></div>
+        <!-- left gutter -->
+        <div class="art" style="--top:12%; --left:0.7%; --size:62px" data-depth="0.08" data-mouse="6">
+            <div class="art-i" style="--dur:29s; --dx:6px; --dy:-9px; --rot:3deg; --op:.22"><div class="art-flat flat-blob" style="--fc:var(--collage-teal); --tilt:-7deg"></div></div>
         </div>
-        <div class="art art--heavy" style="--top:14%; --left:90%; --size:112px" data-depth="0.16" data-mouse="13">
-            <div class="art-i" style="--dur:30s; --dx:-8px; --dy:10px; --rot:-5deg; --op:.26"><div class="art-sunburst"></div></div>
+        <div class="art" style="--top:9%; --left:2.4%; --w:64px; --h:74px" data-depth="0.12" data-mouse="9">
+            <div class="art-i" style="--dur:26s; --dx:7px; --dy:-11px; --rot:2deg; --op:.42"><div class="art-cut cut-globe" style="--tilt:-7deg"></div></div>
         </div>
-        <div class="art art--text" style="--top:82%; --left:1.5%" data-depth="0.09" data-mouse="7">
-            <div class="art-i" style="--dur:24s; --dx:6px; --dy:-6px; --rot:0deg; --op:.45"><div class="art-fig"><span>Fig. II</span><i></i></div></div>
+        <div class="art" style="--top:33%; --left:1.4%; --w:82px; --h:48px" data-depth="0.10" data-mouse="8">
+            <div class="art-i" style="--dur:25s; --dx:6px; --dy:-10px; --rot:4deg; --op:.30"><svg class="art-squig" style="--sw:2.4; --tilt:4deg"><use href="#sq-wave"/></svg></div>
+        </div>
+        <div class="art" style="--top:56%; --left:0.9%; --size:54px" data-depth="0.09" data-mouse="7">
+            <div class="art-i" style="--dur:30s; --dx:-5px; --dy:10px; --rot:-3deg; --op:.24"><div class="art-flat flat-disc" style="--fc:var(--collage-mustard)"></div></div>
+        </div>
+        <div class="art" style="--top:52%; --left:2.2%; --w:62px; --h:106px" data-depth="0.14" data-mouse="10">
+            <div class="art-i" style="--dur:24s; --dx:6px; --dy:-12px; --rot:3deg; --op:.44"><div class="art-cut cut-lobster" style="--tilt:6deg"></div></div>
+        </div>
+        <div class="art" style="--top:78%; --left:1.8%; --size:54px" data-depth="0.17" data-mouse="11">
+            <div class="art-i" style="--dur:22s; --dx:7px; --dy:-11px; --rot:5deg; --op:.26"><svg class="art-squig" style="--tilt:-5deg"><use href="#sq-speckle"/></svg></div>
         </div>
 
-        <!-- Lithograph emoji — small and tight, this page's content column is 1000px -->
-        <div class="art art--emoji" style="--top:42%; --left:1%; --size:32px" data-depth="0.10" data-mouse="6">
-            <div class="art-i litho" data-e="🌲" style="--dur:28s; --dx:6px; --dy:-10px; --rot:3deg; --op:.3; --tilt:-8deg"><span class="art-emoji">🌲</span></div>
+        <!-- right gutter -->
+        <div class="art" style="--top:14%; --left:92%; --w:68px; --h:49px; color:var(--collage-red)" data-depth="0.13" data-mouse="10">
+            <div class="art-i" style="--dur:28s; --dx:-7px; --dy:10px; --rot:-4deg; --op:.36"><svg class="art-squig" style="--sw:3; --tilt:-4deg"><use href="#sq-arch"/></svg></div>
         </div>
-        <div class="art art--emoji" style="--top:38%; --left:94%; --size:28px" data-depth="0.12" data-mouse="6">
-            <div class="art-i litho" data-e="🦓" style="--dur:24s; --dx:-6px; --dy:9px; --rot:-4deg; --op:.3; --tilt:11deg"><span class="art-emoji">🦓</span></div>
+        <div class="art" style="--top:40%; --left:90.6%; --size:58px" data-depth="0.08" data-mouse="6">
+            <div class="art-i" style="--dur:31s; --dx:6px; --dy:9px; --rot:-3deg; --op:.22"><div class="art-flat flat-blob" style="--fc:var(--collage-sage); --tilt:5deg"></div></div>
         </div>
-        <div class="art art--emoji" style="--top:70%; --left:93.5%; --size:26px" data-depth="0.09" data-mouse="5">
-            <div class="art-i litho" data-e="🎺" style="--dur:26s; --dx:-5px; --dy:-8px; --rot:5deg; --op:.28; --tilt:-13deg"><span class="art-emoji">🎺</span></div>
+        <div class="art" style="--top:34%; --left:92.4%; --w:70px; --h:94px" data-depth="0.13" data-mouse="10">
+            <div class="art-i" style="--dur:27s; --dx:-6px; --dy:-10px; --rot:4deg; --op:.42"><div class="art-cut cut-pine" style="--tilt:8deg"></div></div>
+        </div>
+        <div class="art" style="--top:60%; --left:91%; --size:74px; color:var(--collage-teal)" data-depth="0.12" data-mouse="9">
+            <div class="art-i" style="--dur:26s; --dx:-7px; --dy:11px; --rot:-4deg; --op:.34"><svg class="art-squig" style="--sw:2.8; --tilt:5deg"><use href="#sq-loops"/></svg></div>
+        </div>
+        <div class="art" style="--top:80%; --left:93.5%; --size:22px; color:var(--collage-mustard)" data-depth="0.18" data-mouse="12">
+            <div class="art-i" style="--dur:21s; --dx:-5px; --dy:-8px; --rot:7deg; --op:.48"><svg class="art-squig"><use href="#sq-sparkle"/></svg></div>
         </div>
     </div>
     <a href="index.html" class="home-link"><i class="fas fa-arrow-left"></i> Home</a>
@@ -298,6 +385,6 @@
 
     render();
     </script>
-    <script src="decor.js?v=24" defer></script>
+    <script src="decor.js?v=28" defer></script>
 </body>
 </html>
