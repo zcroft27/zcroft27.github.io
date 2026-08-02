@@ -39,9 +39,14 @@
         for (var i = 0; i < pieces.length; i++) {
             var el = pieces[i];
             var depth = parseFloat(el.getAttribute("data-depth")) || 0.1;
-            var mf = parseFloat(el.getAttribute("data-mouse")) || 0;
-            var tx = mx * mf;
-            var ty = sy * depth + my * mf;
+            var mfx = parseFloat(el.getAttribute("data-mouse")) || 0;
+            // Each piece leans on one axis: wide objects swing across, tall ones
+            // up and down. Falls back to the horizontal figure when unset, and a
+            // negative amplitude makes a piece counter-move against its neighbours.
+            var mfyAttr = el.getAttribute("data-mouse-y");
+            var mfy = mfyAttr === null ? mfx : (parseFloat(mfyAttr) || 0);
+            var tx = mx * mfx;
+            var ty = sy * depth + my * mfy;
             el.style.transform = "translate3d(" + tx.toFixed(2) + "px," + ty.toFixed(2) + "px,0)";
         }
     }
