@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=20">
+    <link rel="stylesheet" href="styles.css?v=24">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Travels</title>
     <style>
@@ -158,6 +158,36 @@
     </style>
 </head>
 <body>
+    <svg class="svg-defs" aria-hidden="true" focusable="false">
+        <defs>
+            <filter id="litho-rough" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="11" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </defs>
+    </svg>
+    <div class="art-scene" aria-hidden="true">
+        <div class="art art--md" style="--top:10%; --left:1.5%; --size:108px; color:var(--moss)" data-depth="0.10" data-mouse="9">
+            <div class="art-i" style="--dur:26s; --dx:8px; --dy:-12px; --rot:4deg; --op:.3"><div class="art-halftone"></div></div>
+        </div>
+        <div class="art art--heavy" style="--top:14%; --left:90%; --size:112px" data-depth="0.16" data-mouse="13">
+            <div class="art-i" style="--dur:30s; --dx:-8px; --dy:10px; --rot:-5deg; --op:.26"><div class="art-sunburst"></div></div>
+        </div>
+        <div class="art art--text" style="--top:82%; --left:1.5%" data-depth="0.09" data-mouse="7">
+            <div class="art-i" style="--dur:24s; --dx:6px; --dy:-6px; --rot:0deg; --op:.45"><div class="art-fig"><span>Fig. II</span><i></i></div></div>
+        </div>
+
+        <!-- Lithograph emoji — small and tight, this page's content column is 1000px -->
+        <div class="art art--emoji" style="--top:42%; --left:1%; --size:32px" data-depth="0.10" data-mouse="6">
+            <div class="art-i litho" data-e="🌲" style="--dur:28s; --dx:6px; --dy:-10px; --rot:3deg; --op:.3; --tilt:-8deg"><span class="art-emoji">🌲</span></div>
+        </div>
+        <div class="art art--emoji" style="--top:38%; --left:94%; --size:28px" data-depth="0.12" data-mouse="6">
+            <div class="art-i litho" data-e="🦓" style="--dur:24s; --dx:-6px; --dy:9px; --rot:-4deg; --op:.3; --tilt:11deg"><span class="art-emoji">🦓</span></div>
+        </div>
+        <div class="art art--emoji" style="--top:70%; --left:93.5%; --size:26px" data-depth="0.09" data-mouse="5">
+            <div class="art-i litho" data-e="🎺" style="--dur:26s; --dx:-5px; --dy:-8px; --rot:5deg; --op:.28; --tilt:-13deg"><span class="art-emoji">🎺</span></div>
+        </div>
+    </div>
     <a href="index.html" class="home-link"><i class="fas fa-arrow-left"></i> Home</a>
     <div class="travels-wrap">
         <p class="eyebrow reveal">Film &amp; feet</p>
@@ -223,7 +253,7 @@
                     + '</div>';
             }).join("");
             const blurb = trip.blurb ? '<p class="trip-blurb">' + esc(trip.blurb) + '</p>' : "";
-            return '<section class="trip">'
+            return '<section class="trip" data-reveal>'
                 + '<div class="trip-head">'
                 + '<span class="trip-name">' + esc(trip.name) + ' ' + trip.emoji + '</span>'
                 + '<span class="trip-places">' + esc(trip.places) + '</span>'
@@ -268,5 +298,6 @@
 
     render();
     </script>
+    <script src="decor.js?v=24" defer></script>
 </body>
 </html>

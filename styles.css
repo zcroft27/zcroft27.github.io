@@ -815,3 +815,216 @@ a {
     .portrait { width: 136px; height: 136px; border-radius: 26px; }
     .hero-text h1 { font-size: clamp(2.6rem, 12vw, 3.4rem); }
 }
+
+/* ================= Vintage-print decor ================= */
+
+/* Keep real content above the decorative art layers */
+.stage,
+.subpage,
+.travels-wrap,
+.article {
+    position: relative;
+    z-index: 1;
+}
+
+/* Hairline graph-paper grid — engineering-paper texture on the dark field.
+   Meant to be noticed on second glance; nudge the alpha to taste. */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.038) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.038) 1px, transparent 1px);
+    background-size: 52px 52px;
+}
+
+/* Global film-grain / paper texture overlay — crisp, printed, no glow */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+    background-size: 130px 130px;
+}
+
+/* Floating art scene */
+.art-scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    min-height: 620px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Off-screen home for the SVG filter primitives the emoji pieces reference */
+.svg-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.art {
+    position: absolute;
+    top: var(--top, 50%);
+    left: var(--left, 50%);
+    width: var(--size, 150px);
+    height: var(--size, 150px);
+    color: var(--sage);
+    will-change: transform;
+}
+
+.art--text,
+.art--emoji {
+    width: auto;
+    height: auto;
+}
+
+.art svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+}
+
+.art-i {
+    width: 100%;
+    height: 100%;
+    opacity: var(--op, 0.4);
+    will-change: transform;
+    animation: art-drift var(--dur, 24s) ease-in-out infinite alternate;
+}
+
+@keyframes art-drift {
+    from { transform: translate3d(0, 0, 0) rotate(0deg); }
+    to   { transform: translate3d(var(--dx, 8px), var(--dy, -12px), 0) rotate(var(--rot, 3deg)); }
+}
+
+/* The emoji share the field with the abstract pieces now — hold the abstract
+   art back a touch so the composition doesn't read as crowded. Delete this
+   rule to put the art back at its original weight. */
+.art:not(.art--emoji) .art-i {
+    opacity: calc(var(--op, 0.4) * 0.85);
+}
+
+/* CSS-drawn pieces */
+.art-halftone {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-image: radial-gradient(var(--moss) 21%, transparent 24%);
+    background-size: 10px 10px;
+    -webkit-mask-image: radial-gradient(circle, #000 46%, transparent 70%);
+    mask-image: radial-gradient(circle, #000 46%, transparent 70%);
+}
+
+.art-sunburst {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: repeating-conic-gradient(var(--sage) 0deg 2.4deg, transparent 2.4deg 9deg);
+    -webkit-mask-image: radial-gradient(circle, transparent 24%, #000 26%, #000 60%, transparent 72%);
+    mask-image: radial-gradient(circle, transparent 24%, #000 26%, #000 60%, transparent 72%);
+}
+
+.art-glyph {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--sage);
+}
+
+.art-fig {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-label);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--sage);
+    white-space: nowrap;
+}
+
+.art-fig i {
+    display: block;
+    width: 68px;
+    height: 1px;
+    background: currentColor;
+}
+
+/* ---- Lithograph emoji ----------------------------------------------------
+   Each glyph prints twice, deliberately out of register, echoing the riso
+   piece already in the scene: `.art-emoji` is the main plate, `.litho::before`
+   is a lighter second impression nudged by --ox/--oy. brightness() above 1
+   paired with contrast() below 1 crushes the glyph into one mid-tone ink band,
+   so dark emoji (💻, 🦓) don't sink into the dark field and bright ones (🎺)
+   don't blow out. sepia + hue-rotate lands that band in the sage/olive family
+   the abstract art already uses. url(#litho-rough) then roughens both plates
+   together with turbulence so they read as printed rather than vector-clean;
+   it sits in its own declaration so the colour treatment survives on its own
+   if that reference ever fails to resolve. */
+.art--emoji .art-i {
+    position: relative;
+    filter: url(#litho-rough);
+}
+
+.art-emoji,
+.litho::before {
+    display: block;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    font-size: var(--size, 36px);
+    line-height: 1;
+    transform: rotate(var(--tilt, 0deg));
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.art-emoji {
+    filter: grayscale(1) brightness(1.45) contrast(0.68)
+            sepia(0.85) hue-rotate(18deg) saturate(1.15);
+}
+
+.litho::before {
+    content: attr(data-e);
+    position: absolute;
+    top: var(--oy, -3px);
+    left: var(--ox, 3.5px);
+    opacity: 0.45;
+    filter: grayscale(1) brightness(1.6) contrast(0.55)
+            sepia(1) hue-rotate(46deg) saturate(1.7) blur(0.3px);
+}
+
+/* Scroll reveal (progressive enhancement — hidden only when JS opts in) */
+.js-reveal [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js-reveal [data-reveal].in {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .art-i { animation: none; }
+    .js-reveal [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* Decor only shows on wide screens where the gutters have room; otherwise
+   just the grid and film grain remain so mobile/tablet stay clean. */
+@media (max-width: 1200px) {
+    .art-scene { display: none; }
+}
