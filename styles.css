@@ -900,21 +900,21 @@ body::after {
     overflow: visible;
 }
 
+/* Ambient motion used to live here as a keyframe drift between two fixed
+   points. decor.js now owns all of it, so a piece floats along a path with no
+   repeating period instead of shuttling down a line — see the note there. The
+   --dur/--dx/--dy/--rot variables authored on each piece are still read, but by
+   the script rather than by a keyframe: they now set the piece's rhythm, the
+   lean of its float and which way it sets off, while the size of the motion
+   comes from how large the piece is. */
 .art-i {
     width: 100%;
     height: 100%;
     opacity: var(--op, 0.4);
-    will-change: transform;
-    animation: art-drift var(--dur, 24s) ease-in-out infinite alternate;
 }
 
-@keyframes art-drift {
-    from { transform: translate3d(0, 0, 0) rotate(0deg); }
-    to   { transform: translate3d(var(--dx, 8px), var(--dy, -12px), 0) rotate(var(--rot, 3deg)); }
-}
-
-/* Static off-axis tilt lives on the innermost node so it survives both the
-   drift keyframes on .art-i and the parallax transform decor.js writes to .art */
+/* Static off-axis tilt lives on the innermost node so it survives the composed
+   float and parallax transform decor.js writes to .art */
 .art-cut,
 .art-squig {
     transform: rotate(var(--tilt, 0deg));
@@ -959,8 +959,10 @@ body::after {
     transform: none;
 }
 
+/* decor.js bails before it touches a transform under reduced motion, which
+   leaves every piece at its authored position, so there is no decor animation
+   left here to switch off. */
 @media (prefers-reduced-motion: reduce) {
-    .art-i { animation: none; }
     .js-reveal [data-reveal] { opacity: 1; transform: none; transition: none; }
 }
 
@@ -976,20 +978,38 @@ body::after {
    below the strip — the decor layer is one viewport tall while the content sits
    at a fixed offset, so on a short window these fall back to the gutter. These
    positions live here rather than inline so the override below can win. */
-.art-lower--speckle { --top: 87%; --left: 8.9%; }
-.art-lower--sparkle { --top: 20%; --left: 95.8%; }
+.art-lower--speckle { --top: 89%; --left: 8.9%; }
+.art-lower--sparkle { --top: 24%; --left: 95.8%; }
 
-/* The rules have no short-window fallback because the gutters cannot hold them.
-   Pieces are placed by percentage but sized in pixels, so a 620px-tall window
-   packs the right-hand column to 445px of cutout in 620px of room; the largest
-   gap left anywhere is 47px and these need 64px before drift. The two smaller
-   pieces above still fit, so only this one stands down. */
-.art-lower--stripes { display: none; }
+/* Pieces stand down as the window shortens. Decor is positioned as a percentage
+   of the viewport but sized in pixels, so a short window slides the gutter
+   pieces together while they stay the same size — the left column alone is
+   521px of artwork in 620px of room. That was survivable when the pieces barely
+   moved; now that they float tens of pixels it is not. The classes name the
+   height each piece needs, and the marks that go first are the most generic
+   ones, so what survives is the artwork rather than the filler. */
+.art-min900,
+.art-min760 { display: none; }
+
+/* The right gutter holds three cutouts totalling 247px, and on a short window
+   the parallax spread alone closes the space between them before the float is
+   even counted. Thinning the column is not enough there, so the two outer
+   cutouts also move apart to give the zebra its own room. Positions live here
+   rather than inline because an inline --top would win over the query. */
+.art-short--trumpet { --top: 24%; }
+.art-short--globe { --top: 74%; }
+
+@media (min-width: 1201px) and (min-height: 760px) {
+    .art-min760 { display: block; }
+    .art-short--trumpet { --top: 31%; }
+    .art-short--globe { --top: 63%; }
+}
 
 @media (min-width: 1201px) and (min-height: 900px) {
+    .art-min900 { display: block; }
     .art-lower--speckle { --top: 90.8%; --left: 24%; }
     .art-lower--sparkle { --top: 94%; --left: 72%; }
-    .art-lower--stripes { display: block; --top: 89.9%; --left: 46%; }
+    .art-lower--stripes { --top: 89.9%; --left: 46%; }
 }
 
 /* A custom property is inert until something references it, so naming the files
