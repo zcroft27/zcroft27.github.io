@@ -67,3 +67,17 @@ the paper-keying pipeline rather than flattened to ink density.
   drawings the publisher released into the public domain and donated to
   Wikimedia Commons
 - **License:** Public domain (released by the copyright holder)
+
+## `zebra.png`
+
+- **Subject:** The Zebra, plate 21 — hand-coloured steel engraving
+- **Source:** <https://commons.wikimedia.org/wiki/File:Mammals-00030_ZEBRA_(22901095473).jpg>
+- **Creator / collection:** drawn by Charles Hamilton Smith, engraved by W. H.
+  Lizars, for Jardine's *The Naturalist's Library*
+- **License:** Public domain (published 1830s)
+- **Processing:** cut as a filled silhouette rather than as ink density. The
+  usual ink key inverts a zebra — its white coat would go transparent and its
+  dark stripes print pale — so instead the largest connected ink region is
+  isolated, its enclosed area flood-filled to give the body, and the plate's own
+  colour kept in the RGB. The drawn ground is removed by tracking each leg row
+  by row down through the turf hatching. Palette-quantised to 64 colours.

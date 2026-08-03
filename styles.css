@@ -977,13 +977,19 @@ body::after {
    at a fixed offset, so on a short window these fall back to the gutter. These
    positions live here rather than inline so the override below can win. */
 .art-lower--speckle { --top: 87%; --left: 8.9%; }
-.art-lower--stripes { --top: 45%; --left: 90.5%; }
 .art-lower--sparkle { --top: 20%; --left: 95.8%; }
+
+/* The rules have no short-window fallback because the gutters cannot hold them.
+   Pieces are placed by percentage but sized in pixels, so a 620px-tall window
+   packs the right-hand column to 445px of cutout in 620px of room; the largest
+   gap left anywhere is 47px and these need 64px before drift. The two smaller
+   pieces above still fit, so only this one stands down. */
+.art-lower--stripes { display: none; }
 
 @media (min-width: 1201px) and (min-height: 900px) {
     .art-lower--speckle { --top: 90.8%; --left: 24%; }
-    .art-lower--stripes { --top: 89.9%; --left: 46%; }
     .art-lower--sparkle { --top: 94%; --left: 72%; }
+    .art-lower--stripes { display: block; --top: 89.9%; --left: 46%; }
 }
 
 /* A custom property is inert until something references it, so naming the files
@@ -994,6 +1000,7 @@ body::after {
 .cut-pine       { --src: url("assets/collage/pine-branch-color.png"); }
 .cut-lobster    { --src: url("assets/collage/lobster.png"); }
 .cut-globe      { --src: url("assets/collage/globe.png"); }
+.cut-zebra      { --src: url("assets/collage/zebra.png"); }
 
 @media (min-width: 1201px) {
     .art-cut {
