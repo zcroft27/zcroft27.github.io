@@ -14,6 +14,7 @@
         if (reduce) {
             // reduced motion: reveal immediately, no transition
             for (var i = 0; i < revealEls.length; i++) revealEls[i].classList.add("in");
+            document.documentElement.classList.add("js-ready");
         } else {
             var io = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
@@ -25,6 +26,15 @@
             }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
             for (var j = 0; j < revealEls.length; j++) io.observe(revealEls[j]);
 
+            /* Two frames so the opacity:0 starting style from .js-reveal actually
+               paints before .in flips it — otherwise a slow cold load adds both
+               classes in one turn and the transition has nothing to run from. */
+            var afterPaint = function (fn) {
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(fn);
+                });
+            };
+
             /* The observer deliberately waits until an element is well inside the
                viewport, which is right for anything you scroll down to and wrong
                for anything already on screen when the page opens: the bottom of
@@ -35,18 +45,53 @@
                case webfonts reflow the column. */
             var showOnScreen = function () {
                 for (var k = 0; k < revealEls.length; k++) {
-                    var el = revealEls[k];
-                    if (el.classList.contains("in")) continue;
-                    if (el.getBoundingClientRect().top < window.innerHeight) {
-                        el.classList.add("in");
-                        io.unobserve(el);
-                    }
+                    (function (el) {
+                        if (el.classList.contains("in")) return;
+                        if (el.getBoundingClientRect().top < window.innerHeight) {
+                            afterPaint(function () {
+                                if (el.classList.contains("in")) return;
+                                el.classList.add("in");
+                                io.unobserve(el);
+                            });
+                        }
+                    })(revealEls[k]);
                 }
             };
-            requestAnimationFrame(showOnScreen);
+
+            /* Hold the CSS .reveal cascade (via js-ready) until fonts have had a
+               brief chance, then release — capped so a slow font CDN cannot leave
+               the hero blank. */
+            var armed = false;
+            var armLoadCascade = function () {
+                if (armed) return;
+                armed = true;
+                afterPaint(function () {
+                    document.documentElement.classList.add("js-ready");
+                    showOnScreen();
+                });
+            };
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(armLoadCascade);
+            }
+            setTimeout(armLoadCascade, 140);
             window.addEventListener("load", function () {
-                requestAnimationFrame(showOnScreen);
+                afterPaint(showOnScreen);
             });
+        }
+    } else if (document.documentElement.classList.contains("js-wait")) {
+        /* No data-reveal on this page, but the load cascade still needs releasing. */
+        if (reduce) {
+            document.documentElement.classList.add("js-ready");
+        } else {
+            var release = function () {
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                        document.documentElement.classList.add("js-ready");
+                    });
+                });
+            };
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(release);
+            setTimeout(release, 140);
         }
     }
 
@@ -93,10 +138,9 @@
     var SPIN_CAP = 3;      // degrees
     var BREATHE = 0.02;    // scale, either side of 1
 
-    /* The mouse follow used to be the largest motion in the field. Now that the
-       pieces genuinely drift it steps back into a supporting role, which also
-       hands its share of the gutter clearance over to the float. */
-    var MOUSE = 0.6;
+    /* Full cursor amplitude (pre-ambient multiplier). The ambient float already
+       owns the continuous drift; mouse follow stays a direct push on top of it. */
+    var MOUSE = 1;
 
     /* Weights sum to 1 so two waves still peak at the stated amplitude. The
        period multipliers avoid small whole-number ratios in both directions, or

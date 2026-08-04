@@ -64,8 +64,24 @@ a {
     animation-delay: var(--d, 0ms);
 }
 
+/* On a slow first load the cascade would finish while the page was still
+   blank (fonts/CSS/defer), so by first paint everything sat at the end state.
+   js-wait is stamped inline before paint; decor.js flips js-ready once a frame
+   has committed the starting opacity and the cascade can actually be seen. */
+.js-wait .reveal {
+    animation: none;
+    opacity: 0;
+}
+
+.js-wait.js-ready .reveal {
+    animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 0ms);
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .reveal { animation: none; }
+    .reveal,
+    .js-wait .reveal,
+    .js-wait.js-ready .reveal { animation: none; opacity: 1; }
 }
 
 /* ---------- Home ---------- */
@@ -457,15 +473,14 @@ a {
 }
 
 .feat-slot + .feat-slot {
-    margin-top: -28px;
+    margin-top: 8px;
 }
 
-/* An overlapped card carries enough extra padding that the sheet in front covers
-   only dead space. Without it the seam crops the last line of the card behind,
-   which looks like a mistake rather than a stack. Kept just far enough clear to
-   breathe, since hovering lifts the card and puts this padding on show. */
+/* Extra bottom padding kept the overlapped seam from cropping the card behind.
+   With only a light stack gap now, match the card's normal padding so the first
+   sheet does not grow a dead strip under its last line. */
 .feat-stack > .feat-slot:not(:last-child) .feat-card {
-    padding-bottom: 46px;
+    padding-bottom: 26px;
 }
 
 /* Lifting a card has to lift its slot too, or the sheet in front keeps its
@@ -1087,7 +1102,7 @@ a {
 
     .feat-card .feat-frame { order: -1; }
     .feat-card .feat-text { order: 0; }
-    .feat-slot + .feat-slot { margin-top: -16px; }
+    .feat-slot + .feat-slot { margin-top: 10px; }
     .feat-name { font-size: 1.35rem; }
     .feat-term { font-size: 10px; line-height: 1.9; }
     .feat-media--term { padding: 0 12px; }
@@ -1141,7 +1156,12 @@ body::after {
     background-size: 130px 130px;
 }
 
-/* Floating art scene */
+/* Floating art scene.
+   Height stays one viewport so --top percentages keep their authored layout.
+   overflow-x:clip still holds gutter float inside the sides; overflow-y:visible
+   lets scroll parallax carry a piece past the bottom edge instead of shearing it
+   in half while the featured section is on screen. (overflow-x:hidden would
+   force y to auto and reintroduce the clip.) */
 .art-scene {
     position: absolute;
     top: 0;
@@ -1149,7 +1169,8 @@ body::after {
     width: 100%;
     height: 100vh;
     min-height: 620px;
-    overflow: hidden;
+    overflow-x: clip;
+    overflow-y: visible;
     pointer-events: none;
     z-index: 0;
 }
@@ -1238,7 +1259,7 @@ body::after {
     transform: none;
 }
 
-/* Only the second sheet reveals on scroll; the first one rides the load sequence
+/* Only the lower sheet reveals on scroll; the upper one rides the load sequence
    because it breaks the fold. It travels a little further than the other reveals
    so the sheet reads as being dealt onto the stack. */
 .js-reveal .feat-slot[data-reveal] {
@@ -1272,7 +1293,9 @@ body::after {
    height the name and the photo strip can most afford to lose, which keeps the
    heading and the top of the first sheet in view without cramping the hero. */
 @media (min-width: 561px) and (max-height: 880px) {
-    .stage { padding-top: 64px; }
+    /* 72px keeps a little more air under the wave squiggle than the original
+       peek trim (64px) without giving back the whole fold budget. */
+    .stage { padding-top: 72px; }
     .hero-text h1 { font-size: clamp(2.5rem, 5.4vw, 3.75rem); }
     .shot { width: 156px; }
     .feat { margin-top: 38px; }

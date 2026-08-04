@@ -10,10 +10,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=41">
+    <link rel="stylesheet" href="styles.css?v=44">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Zachary Croft</title>
     <script>
+        /* Stamp before first paint so .reveal stays at opacity 0 until decor.js
+           releases js-ready — otherwise a slow cold load finishes the cascade
+           while the page is still blank and the fade looks skipped. */
+        document.documentElement.classList.add("js-wait");
+        setTimeout(function () {
+            document.documentElement.classList.add("js-ready");
+        }, 2500);
         function copyEmail(e) {
             if (e) e.preventDefault();
             navigator.clipboard.writeText("croft.z@northeastern.edu")
@@ -156,9 +163,10 @@
         <!-- Above the hero, where the old asterisk sat. The only piece over the
              content column rather than a gutter, so it gets a negative depth: it
              rises out of frame as you scroll instead of drifting down onto the
-             heading, and doubles as the field's one scroll counter-mover. -->
-        <div class="art" style="--top:2.0%; --left:44.0%; --w:88px; --h:50px" data-depth="-0.05" data-mouse="5" data-mouse-y="3" data-float="0.5">
-            <div class="art-i" style="--dur:27s; --dx:6px; --dy:-8px; --rot:-2deg; --op:.16"><svg class="art-squig" style="--sw:2.4; --tilt:-2deg"><use href="#sq-wave"/></svg></div>
+             heading, and doubles as the field's one scroll counter-mover.
+             Kept high enough that the float path clears the kicker. -->
+        <div class="art" style="--top:-0.8%; --left:44.0%; --w:88px; --h:50px" data-depth="-0.05" data-mouse="5" data-mouse-y="3" data-float="0.35">
+            <div class="art-i" style="--dur:27s; --dx:6px; --dy:-10px; --rot:-2deg; --op:.16"><svg class="art-squig" style="--sw:2.4; --tilt:-2deg"><use href="#sq-wave"/></svg></div>
         </div>
     </div>
     <main class="stage">
@@ -225,35 +233,6 @@
 
                 <div class="feat-stack">
                     <div class="feat-slot reveal" style="--d: 520ms">
-                        <a class="feat-card" href="arenius.html" style="--c:#98E4D6">
-                            <div class="feat-text">
-                                <p class="feat-eyebrow">Carbon accounting</p>
-                                <h3 class="feat-name">🌲 Arenius</h3>
-                                <p class="feat-body">
-                                    A carbon accounting platform for small and medium businesses. I was
-                                    one of two technical leads on a team of five engineers and four
-                                    designers, and we built it over a semester: nightly Xero syncing,
-                                    the charts you see here, and a service that recommends emissions
-                                    factors.
-                                </p>
-                                <p class="feat-meta">Go, Next.js, Postgres, DigitalOcean</p>
-                                <span class="feat-go">Read the writeup <i class="fas fa-arrow-right"></i></span>
-                            </div>
-                            <div class="feat-frame">
-                                <div class="feat-bar">
-                                    <span class="feat-dots"><span></span><span></span><span></span></span>
-                                    <span class="feat-bar-label">arenius — dashboard</span>
-                                </div>
-                                <div class="feat-media">
-                                    <img src="assets/shots/arenius-landing.png"
-                                         alt="Arenius dashboard: a gross emissions bar chart beside a list of top emissions factors"
-                                         width="900" height="483" loading="lazy" decoding="async">
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="feat-slot" data-reveal>
                         <a class="feat-card feat-card--flip" href="oracle.html" style="--c:#FF9EC7">
                             <div class="feat-text">
                                 <p class="feat-eyebrow">Go autograder</p>
@@ -287,6 +266,35 @@
                                         <span class="tl" style="--i:6"><span class="tpass">PASS</span></span>
                                         <span class="tl tcom" style="--i:7"># 3,612 submissions graded in ten days</span>
                                     </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="feat-slot" data-reveal>
+                        <a class="feat-card" href="arenius.html" style="--c:#98E4D6">
+                            <div class="feat-text">
+                                <p class="feat-eyebrow">Carbon accounting</p>
+                                <h3 class="feat-name">🌲 Arenius</h3>
+                                <p class="feat-body">
+                                    A carbon accounting platform for small and medium businesses. I was
+                                    one of two technical leads on a team of five engineers and four
+                                    designers, and we built it over a semester: nightly Xero syncing,
+                                    the charts you see here, and a service that recommends emissions
+                                    factors.
+                                </p>
+                                <p class="feat-meta">Go, Next.js, Postgres, DigitalOcean</p>
+                                <span class="feat-go">Read the writeup <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="feat-frame">
+                                <div class="feat-bar">
+                                    <span class="feat-dots"><span></span><span></span><span></span></span>
+                                    <span class="feat-bar-label">arenius — dashboard</span>
+                                </div>
+                                <div class="feat-media">
+                                    <img src="assets/shots/arenius-landing.png"
+                                         alt="Arenius dashboard: a gross emissions bar chart beside a list of top emissions factors"
+                                         width="900" height="483" loading="lazy" decoding="async">
                                 </div>
                             </div>
                         </a>
@@ -355,6 +363,6 @@
         else if (e.key === "ArrowRight") lbNav(e, 1);
     });
     </script>
-    <script src="decor.js?v=41" defer></script>
+    <script src="decor.js?v=44" defer></script>
 </body>
 </html>
