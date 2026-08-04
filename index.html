@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=39">
+    <link rel="stylesheet" href="styles.css?v=40">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Zachary Croft</title>
     <script>
@@ -146,9 +146,6 @@
         <div class="art" style="--top:44.0%; --left:87.8%; --w:110px; --h:105px" data-depth="0.1956" data-mouse="9.8" data-mouse-y="8.2">
             <div class="art-i" style="--dur:29s; --dx:7px; --dy:9px; --rot:-3deg; --op:.55"><div class="art-cut cut-zebra" style="--tilt:-2deg"></div></div>
         </div>
-        <div class="art art-min900 art-lower art-lower--stripes" style="--w:92px; --h:64px" data-depth="0.1392" data-mouse="12.6" data-mouse-y="6.0">
-            <div class="art-i" style="--dur:26s; --dx:-7px; --dy:-10px; --rot:3deg; --op:.3"><svg class="art-squig" style="--sw:2.4; --tilt:3deg"><use href="#sq-stripes"/></svg></div>
-        </div>
         <div class="art art-short--globe" style="--left:88.9%; --w:72px; --h:84px" data-depth="0.1418" data-mouse="9.9" data-mouse-y="9.9">
             <div class="art-i" style="--dur:25s; --dx:-6px; --dy:-11px; --rot:4deg; --op:.60"><div class="art-cut art-cut--ink cut-globe" style="--tilt:8deg; --ink:var(--collage-teal)"></div></div>
         </div>
@@ -205,6 +202,91 @@
                     <a href="travels.html">All photos <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="shots" id="shots"></div>
+            </section>
+
+            <!-- Featured pair. The two sheets overlap the way the photo strip's
+                 tiles do, only vertically, and hovering one lifts it clear of the
+                 other. The .feat-slot wrappers exist so the scroll reveal and the
+                 hover lift are not both transforming the same element. Each card
+                 carries the accent colour it already has on projects.html. -->
+            <section class="feat" aria-labelledby="feat-title">
+                <div class="feat-head" data-reveal>
+                    <div>
+                        <p class="kicker feat-kicker">Featured work</p>
+                        <h2 class="feat-title" id="feat-title">The two I'd show you first</h2>
+                    </div>
+                    <a href="projects.html" class="feat-all">All projects <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="feat-stack">
+                    <div class="feat-slot" data-reveal>
+                        <a class="feat-card" href="arenius.html" style="--c:#98E4D6">
+                            <div class="feat-text">
+                                <p class="feat-eyebrow">Carbon accounting</p>
+                                <h3 class="feat-name">🌲 Arenius</h3>
+                                <p class="feat-body">
+                                    A carbon accounting platform for small and medium businesses. I was
+                                    one of two technical leads on a team of five engineers and four
+                                    designers, and we built it over a semester: nightly Xero syncing,
+                                    the charts you see here, and a service that recommends emissions
+                                    factors.
+                                </p>
+                                <p class="feat-meta">Go, Next.js, Postgres, DigitalOcean</p>
+                                <span class="feat-go">Read the writeup <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="feat-frame">
+                                <div class="feat-bar">
+                                    <span class="feat-dots"><span></span><span></span><span></span></span>
+                                    <span class="feat-bar-label">arenius — dashboard</span>
+                                </div>
+                                <div class="feat-media">
+                                    <img src="assets/shots/arenius-landing.png"
+                                         alt="Arenius dashboard: a gross emissions bar chart beside a list of top emissions factors"
+                                         width="900" height="483" loading="lazy" decoding="async">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="feat-slot" data-reveal>
+                        <a class="feat-card feat-card--flip" href="oracle.html" style="--c:#FF9EC7">
+                            <div class="feat-text">
+                                <p class="feat-eyebrow">Go autograder</p>
+                                <h3 class="feat-name">👽 Autograder Oracle</h3>
+                                <p class="feat-body">
+                                    A Go server that autograded three take-home challenges, all themed
+                                    around an alien invasion. Stone Liu and I wrote the specs, the
+                                    OpenAPI contract, and an end-to-end harness with a Postgres
+                                    container and fuzzing tests. It graded 3,600+ submissions from 55+
+                                    candidates and stayed up the whole ten days.
+                                </p>
+                                <p class="feat-meta">Go, OpenAPI, Postgres, Docker</p>
+                                <span class="feat-go">Read the writeup <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="feat-frame">
+                                <div class="feat-bar">
+                                    <span class="feat-dots"><span></span><span></span><span></span></span>
+                                    <span class="feat-bar-label">oracle — go test</span>
+                                </div>
+                                <!-- Oracle has no UI to screenshot, so its panel is the harness
+                                     output, set in real markup rather than faked as an image. -->
+                                <div class="feat-media feat-media--term">
+                                    <div class="feat-term" role="img"
+                                         aria-label="Terminal output: go test over the Oracle packages, all passing, 3,612 submissions graded in ten days">
+                                        <span class="tl" style="--i:0"><span class="tp">$</span> go test ./oracle/... -run Invasion</span>
+                                        <span class="tl" style="--i:1"><span class="tok">ok</span>  oracle/track1/aliens      1.28s</span>
+                                        <span class="tl" style="--i:2"><span class="tok">ok</span>  oracle/track2/fortress    0.91s</span>
+                                        <span class="tl" style="--i:3"><span class="tok">ok</span>  oracle/openapi/contract   0.24s</span>
+                                        <span class="tl" style="--i:4"><span class="tok">ok</span>  oracle/harness/fuzz       4.06s</span>
+                                        <span class="tl" style="--i:5"><span class="tok">ok</span>  oracle/grade/scoring      2.15s</span>
+                                        <span class="tl" style="--i:6"><span class="tpass">PASS</span></span>
+                                        <span class="tl tcom" style="--i:7"># 3,612 submissions graded in ten days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </section>
         </div>
     </main>
@@ -268,6 +350,6 @@
         else if (e.key === "ArrowRight") lbNav(e, 1);
     });
     </script>
-    <script src="decor.js?v=39" defer></script>
+    <script src="decor.js?v=40" defer></script>
 </body>
 </html>

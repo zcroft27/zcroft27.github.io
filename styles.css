@@ -312,7 +312,8 @@ a {
     margin-bottom: 4px;
 }
 
-.shots-head a {
+.shots-head a,
+.feat-all {
     font-size: 14px;
     color: var(--sage);
     display: inline-flex;
@@ -321,7 +322,8 @@ a {
     transition: gap 0.2s ease, color 0.2s ease;
 }
 
-.shots-head a:hover {
+.shots-head a:hover,
+.feat-all:hover {
     color: var(--moss);
     gap: 11px;
 }
@@ -390,6 +392,255 @@ a {
 .shot:hover .cap {
     opacity: 1;
 }
+
+/* ---------- Featured project pair ----------------------------------------
+   Two sheets overlapping, which is the photo strip's negative-margin trick
+   turned on its end, and the same hover that lifts a photo out of that strip
+   lifts a card out of this one. Sticky was the other way to do it, but the last
+   card in a sticky deck parks at the top of the window, so closing the deck
+   needs most of a screen of content underneath it — this is the final section on
+   the page, so that room would have been dead space, and on a tall monitor there
+   would be no scroll left to close the deck at all. The overlap here is a fact of
+   the layout instead, and the scroll only has to bring it in. */
+.feat {
+    margin-top: 78px;
+}
+
+.feat-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.feat-kicker {
+    margin: 0 0 8px;
+}
+
+.feat-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 3.6vw, 2.15rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+}
+
+.feat-all {
+    flex: none;
+    padding-bottom: 4px;
+}
+
+.feat-stack {
+    display: flex;
+    flex-direction: column;
+}
+
+/* The reveal rides on the slot so the card keeps its transform for hover, rather
+   than the two fighting over the same property. */
+.feat-slot {
+    position: relative;
+}
+
+.feat-stack > .feat-slot:nth-child(1) { z-index: 1; }
+.feat-stack > .feat-slot:nth-child(2) { z-index: 2; }
+
+/* The sheet in front is a shade lighter, which is what tells the eye it is in
+   front. Two identical panels overlapping just read as one tall panel with a
+   line across it, and a drop shadow is not on the table here. */
+.feat-stack > .feat-slot:nth-child(2) .feat-card {
+    background: #27272b;
+}
+
+.feat-slot + .feat-slot {
+    margin-top: -28px;
+}
+
+/* An overlapped card carries enough extra padding that the sheet in front covers
+   only dead space. Without it the seam crops the last line of the card behind,
+   which looks like a mistake rather than a stack. Kept just far enough clear to
+   breathe, since hovering lifts the card and puts this padding on show. */
+.feat-stack > .feat-slot:not(:last-child) .feat-card {
+    padding-bottom: 46px;
+}
+
+/* Lifting a card has to lift its slot too, or the sheet in front keeps its
+   corner over the one being raised. Without :has() the lift still happens and
+   only the overlapped edge stays put, which is a fair place to land. */
+.feat-stack > .feat-slot:has(.feat-card:hover) {
+    z-index: 5;
+}
+
+.feat-card {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: 30px;
+    padding: 26px 28px;
+    /* Opaque twin of --fill over --bg. A sheet in this stack has to hide the one
+       behind it, so it cannot be the translucent fill the rest of the site uses. */
+    background: #232325;
+    border: 1px solid var(--line-strong);
+    border-radius: 18px;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.feat-card--flip .feat-text { order: 2; }
+.feat-card--flip .feat-frame { order: 1; }
+
+/* Same lift the photo strip gives a tile. The eyebrow, the arrow and the
+   screenshot carry the rest of the hover, so the border stays put. */
+.feat-card:hover {
+    transform: translateY(-6px);
+}
+
+.feat-eyebrow {
+    font-family: var(--font-label);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 9px;
+    transition: color 0.25s ease;
+}
+
+.feat-card:hover .feat-eyebrow {
+    color: var(--c);
+}
+
+.feat-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    margin: 0 0 10px;
+    color: var(--ink);
+}
+
+.feat-body {
+    margin: 0 0 12px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--muted);
+}
+
+.feat-meta {
+    margin: 0 0 14px;
+    font-size: 12.5px;
+    color: var(--faint);
+}
+
+.feat-go {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    transition: gap 0.22s ease, color 0.22s ease;
+}
+
+.feat-go i {
+    font-size: 12px;
+}
+
+.feat-card:hover .feat-go {
+    color: var(--c);
+    gap: 12px;
+}
+
+/* Shared window treatment. The screenshot and the hand-built terminal wear the
+   same chrome and the same box, which is what makes them read as a pair rather
+   than as one real panel and one stand-in. */
+.feat-frame {
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #17171a;
+}
+
+.feat-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid var(--line);
+}
+
+.feat-dots {
+    display: flex;
+    gap: 5px;
+    flex: none;
+}
+
+.feat-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.feat-bar-label {
+    font-family: 'SFMono-Regular', ui-monospace, Menlo, monospace;
+    font-size: 10.5px;
+    color: var(--faint);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Both panels are pinned to the screenshot's aspect ratio, so the two cards come
+   out exactly the same height and the deck edge stays parallel. */
+.feat-media {
+    aspect-ratio: 900 / 483;
+    overflow: hidden;
+    background: #101012;
+}
+
+.feat-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    /* A light interface dropped raw onto this field glares. Holding it a little
+       under full brightness sits it in the page; hover hands the full picture
+       back, which is reward enough without a shadow or a halo. */
+    filter: saturate(0.94) brightness(0.93) contrast(1.02);
+    transition: filter 0.35s ease;
+}
+
+.feat-card:hover .feat-media img {
+    filter: none;
+}
+
+.feat-media--term {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.feat-term {
+    font-family: 'SFMono-Regular', ui-monospace, Menlo, monospace;
+    font-size: 10.5px;
+    line-height: 1.95;
+    color: #c4c4c1;
+    width: 100%;
+}
+
+.feat-term .tl {
+    display: block;
+    white-space: pre;
+}
+
+.feat-term .tp { color: var(--faint); }
+.feat-term .tok { color: var(--sage); }
+.feat-term .tpass { color: var(--moss); font-weight: 600; }
+.feat-term .tcom { color: var(--faint); }
 
 /* ---------- Lightbox ---------- */
 #lightbox {
@@ -814,6 +1065,32 @@ a {
     margin: 30px 0;
 }
 
+/* One column below this, with the panel above the words so the screenshot is the
+   thing you meet. The sheets still overlap, just by less, because a tall stacked
+   card needs a smaller bite taken out of it to still read as a stack. */
+@media (max-width: 760px) {
+    .feat { margin-top: 58px; }
+
+    .feat-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .feat-card {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .feat-card .feat-frame { order: -1; }
+    .feat-card .feat-text { order: 0; }
+    .feat-slot + .feat-slot { margin-top: -16px; }
+    .feat-name { font-size: 1.35rem; }
+    .feat-term { font-size: 10px; line-height: 1.9; }
+    .feat-media--term { padding: 0 12px; }
+}
+
 @media (max-width: 560px) {
     .stage { padding: 72px 22px 80px; }
     .subpage { padding: 84px 22px 80px; }
@@ -959,11 +1236,36 @@ body::after {
     transform: none;
 }
 
+/* The two sheets arrive one after the other so the stack reads as being dealt
+   rather than as one block appearing. */
+.js-reveal .feat-slot[data-reveal] {
+    transform: translateY(26px);
+}
+
+.js-reveal .feat-stack > .feat-slot:nth-child(2)[data-reveal] {
+    transition-delay: 120ms;
+}
+
+/* The terminal types itself in a line at a time once its card lands, which gives
+   the hand-built panel something of its own to answer the screenshot's colour. */
+.js-reveal .feat-slot[data-reveal] .tl {
+    opacity: 0;
+    transform: translateY(3px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    transition-delay: calc(var(--i, 0) * 85ms + 320ms);
+}
+
+.js-reveal .feat-slot[data-reveal].in .tl {
+    opacity: 1;
+    transform: none;
+}
+
 /* decor.js bails before it touches a transform under reduced motion, which
    leaves every piece at its authored position, so there is no decor animation
    left here to switch off. */
 @media (prefers-reduced-motion: reduce) {
     .js-reveal [data-reveal] { opacity: 1; transform: none; transition: none; }
+    .js-reveal .feat-slot[data-reveal] .tl { opacity: 1; transform: none; transition: none; }
 }
 
 /* Decor only shows on wide screens where the gutters have room; otherwise
@@ -972,12 +1274,11 @@ body::after {
     .art-scene { display: none; }
 }
 
-/* The band under the photo strip is the widest open space on the homepage, so
-   the three smallest pieces move into it and break the gutters out of a single
-   vertical file. It only exists when the viewport is tall enough to leave room
-   below the strip — the decor layer is one viewport tall while the content sits
-   at a fixed offset, so on a short window these fall back to the gutter. These
-   positions live here rather than inline so the override below can win. */
+/* These two used to move into the middle of the page on a tall window, where the
+   band under the photo strip was the widest open space going. The featured pair
+   occupies that band now, and scroll parallax carried them a further 30-110px
+   down into its heading on top of that, so both keep their gutter positions at
+   every height and the content column stays clear. */
 .art-lower--speckle { --top: 89%; --left: 8.9%; }
 .art-lower--sparkle { --top: 24%; --left: 95.8%; }
 
@@ -1007,9 +1308,6 @@ body::after {
 
 @media (min-width: 1201px) and (min-height: 900px) {
     .art-min900 { display: block; }
-    .art-lower--speckle { --top: 90.8%; --left: 24%; }
-    .art-lower--sparkle { --top: 94%; --left: 72%; }
-    .art-lower--stripes { --top: 89.9%; --left: 46%; }
 }
 
 /* A custom property is inert until something references it, so naming the files
