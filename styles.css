@@ -318,7 +318,7 @@ a {
 
 /* ---------- Overlapping photo scroll ---------- */
 .shots-wrap {
-    margin-top: 32px;
+    margin-top: 28px;
 }
 
 .shots-head {
@@ -421,7 +421,7 @@ a {
 /* Deliberately tight: the pair has to break the fold at ordinary laptop heights,
    or nobody learns it is there. See the max-height rule near the reveal styles. */
 .feat {
-    margin-top: 46px;
+    margin-top: 40px;
 }
 
 .feat-head {
@@ -1298,7 +1298,11 @@ body::after {
     .stage { padding-top: 72px; }
     .hero-text h1 { font-size: clamp(2.5rem, 5.4vw, 3.75rem); }
     .shot { width: 156px; }
-    .feat { margin-top: 38px; }
+    /* A few more px off the strip and the feat gap so the lede clears the fold
+       on ~800px-tall laptop viewports without touching the wave/kicker pad. */
+    .shots-wrap { margin-top: 22px; }
+    .shots { padding: 10px 48px 6px 4px; }
+    .feat { margin-top: 28px; }
 }
 
 /* Decor only shows on wide screens where the gutters have room; otherwise
