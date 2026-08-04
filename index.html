@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=40">
+    <link rel="stylesheet" href="styles.css?v=41">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Zachary Croft</title>
     <script>
@@ -208,9 +208,14 @@
                  tiles do, only vertically, and hovering one lifts it clear of the
                  other. The .feat-slot wrappers exist so the scroll reveal and the
                  hover lift are not both transforming the same element. Each card
-                 carries the accent colour it already has on projects.html. -->
+                 carries the accent colour it already has on projects.html.
+
+                 The heading and the first sheet break the fold, so they ride the
+                 load sequence with the hero; a scroll reveal would hold the part
+                 already on screen at opacity 0 and it would read as empty space.
+                 Only the second sheet waits for the observer. -->
             <section class="feat" aria-labelledby="feat-title">
-                <div class="feat-head" data-reveal>
+                <div class="feat-head reveal" style="--d: 460ms">
                     <div>
                         <p class="kicker feat-kicker">Featured work</p>
                         <h2 class="feat-title" id="feat-title">The two I'd show you first</h2>
@@ -219,7 +224,7 @@
                 </div>
 
                 <div class="feat-stack">
-                    <div class="feat-slot" data-reveal>
+                    <div class="feat-slot reveal" style="--d: 520ms">
                         <a class="feat-card" href="arenius.html" style="--c:#98E4D6">
                             <div class="feat-text">
                                 <p class="feat-eyebrow">Carbon accounting</p>
@@ -350,6 +355,6 @@
         else if (e.key === "ArrowRight") lbNav(e, 1);
     });
     </script>
-    <script src="decor.js?v=40" defer></script>
+    <script src="decor.js?v=41" defer></script>
 </body>
 </html>

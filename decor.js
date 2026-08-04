@@ -24,6 +24,29 @@
                 });
             }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
             for (var j = 0; j < revealEls.length; j++) io.observe(revealEls[j]);
+
+            /* The observer deliberately waits until an element is well inside the
+               viewport, which is right for anything you scroll down to and wrong
+               for anything already on screen when the page opens: the bottom of
+               the first screen would sit at opacity 0 and read as empty space
+               rather than as content continuing below. Anything on screen already
+               is therefore let through on its own, keeping the observer for the
+               parts that are genuinely further down. Runs again after load in
+               case webfonts reflow the column. */
+            var showOnScreen = function () {
+                for (var k = 0; k < revealEls.length; k++) {
+                    var el = revealEls[k];
+                    if (el.classList.contains("in")) continue;
+                    if (el.getBoundingClientRect().top < window.innerHeight) {
+                        el.classList.add("in");
+                        io.unobserve(el);
+                    }
+                }
+            };
+            requestAnimationFrame(showOnScreen);
+            window.addEventListener("load", function () {
+                requestAnimationFrame(showOnScreen);
+            });
         }
     }
 
