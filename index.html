@@ -238,10 +238,9 @@
                                 <p class="feat-eyebrow">Go autograder</p>
                                 <h3 class="feat-name">👽 Autograder Oracle</h3>
                                 <p class="feat-body">
-                                    A Go server that autograded three take-home challenges, all themed
-                                    around an alien invasion. Stone Liu and I wrote the specs, the
-                                    OpenAPI contract, and an end-to-end harness with a Postgres
-                                    container and fuzzing tests. It graded 3,600+ submissions from 55+
+                                    A Go autograder Stone Liu and I built for Generate's take-homes —
+                                    alien invasions in 2025, a bank heist in 2026. OpenAPI, Postgres
+                                    harness, fuzzing. The 2025 run graded 3,600+ submissions from 55+
                                     candidates and stayed up the whole ten days.
                                 </p>
                                 <p class="feat-meta">Go, OpenAPI, Postgres, Docker</p>
@@ -257,9 +256,9 @@
                                 <div class="feat-media feat-media--term">
                                     <div class="feat-term" role="img"
                                          aria-label="Terminal output: go test over the Oracle packages, all passing, 3,612 submissions graded in ten days">
-                                        <span class="tl" style="--i:0"><span class="tp">$</span> go test ./oracle/... -run Invasion</span>
-                                        <span class="tl" style="--i:1"><span class="tok">ok</span>  oracle/track1/aliens      1.28s</span>
-                                        <span class="tl" style="--i:2"><span class="tok">ok</span>  oracle/track2/fortress    0.91s</span>
+                                        <span class="tl" style="--i:0"><span class="tp">$</span> go test ./oracle/... -count=1</span>
+                                        <span class="tl" style="--i:1"><span class="tok">ok</span>  oracle/track1/ngrok       1.28s</span>
+                                        <span class="tl" style="--i:2"><span class="tok">ok</span>  oracle/heist/graph         0.91s</span>
                                         <span class="tl" style="--i:3"><span class="tok">ok</span>  oracle/openapi/contract   0.24s</span>
                                         <span class="tl" style="--i:4"><span class="tok">ok</span>  oracle/harness/fuzz       4.06s</span>
                                         <span class="tl" style="--i:5"><span class="tok">ok</span>  oracle/grade/scoring      2.15s</span>
