@@ -1187,8 +1187,11 @@ body::after {
     position: absolute;
     top: var(--top, 50%);
     left: var(--left, 50%);
-    width: var(--w, var(--size, 150px));
-    height: var(--h, var(--size, 150px));
+    /* Modest size bump over the authored --w/--h/--size so the gutters read a
+       bit fuller without rewriting every piece. Keep in the 1.08–1.15 range. */
+    --art-scale: 1.12;
+    width: calc(var(--w, var(--size, 150px)) * var(--art-scale));
+    height: calc(var(--h, var(--size, 150px)) * var(--art-scale));
     color: var(--collage-cream);
     will-change: transform;
 }
@@ -1334,13 +1337,13 @@ body::after {
    even counted. Thinning the column is not enough there, so the two outer
    cutouts also move apart to give the zebra its own room. Positions live here
    rather than inline because an inline --top would win over the query. */
-.art-short--trumpet { --top: 24%; }
-.art-short--globe { --top: 74%; }
+.art-short--trumpet { --top: 22%; }
+.art-short--globe { --top: 76%; }
 
 @media (min-width: 1201px) and (min-height: 760px) {
     .art-min760 { display: block; }
-    .art-short--trumpet { --top: 31%; }
-    .art-short--globe { --top: 63%; }
+    .art-short--trumpet { --top: 30%; }
+    .art-short--globe { --top: 64%; }
 }
 
 @media (min-width: 1201px) and (min-height: 900px) {
