@@ -5,11 +5,12 @@ Wikimedia Commons and processed locally. No AI generation was used.
 
 Two pipelines, chosen by what the original actually contains:
 
-- **Ink-density cutouts** (`typewriter`, `trumpet`, `lobster`, `globe`, and the
-  original `pine-branch`) come from monochrome engravings: greyscale → invert →
-  contrast-stretch → alpha = ink density, trimmed and resized to ~300px. These
-  carry no colour of their own, so the site tints them at render time by using
-  the PNG as a CSS mask and painting a palette colour through it.
+- **Ink-density cutouts** (`typewriter`, `trumpet`, `lobster`, `globe`, the
+  original `pine-branch`, and `chess-knight`) come from monochrome engravings
+  or etched plates: greyscale → invert → contrast-stretch → alpha = ink density,
+  trimmed and resized to ~300px. These carry no colour of their own, so the site
+  tints them at render time by using the PNG as a CSS mask and painting a palette
+  colour through it.
 - **Paper-keyed plates** (`pine-branch-color`) come from chromolithographs that
   are genuinely in colour. Alpha is instead "distance from paper white", so the
   sheet drops out and the original RGB survives. Because the artwork was printed
@@ -81,3 +82,13 @@ the paper-keying pipeline rather than flattened to ink density.
   isolated, its enclosed area flood-filled to give the body, and the plate's own
   colour kept in the RGB. The drawn ground is removed by tracking each leg row
   by row down through the turf hatching. Palette-quantised to 64 colours.
+
+## `chess-knight.png`
+
+- **Subject:** Ornate crowned chess knight (horse head on a pedestal)
+- **Source:** User-supplied reference image for this portfolio (site owner)
+- **License:** Provided by the site owner for use on zcroft27.github.io — not a
+  scraped public-domain plate
+- **Processing:** leftmost piece cropped from a three-piece etched collage;
+  black surround and parchment backing knocked out so only the ink etching
+  remains as an alpha mask for palette tinting

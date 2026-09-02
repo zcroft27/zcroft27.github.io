@@ -1359,6 +1359,7 @@ body::after {
 .cut-lobster    { --src: url("assets/collage/lobster.png"); }
 .cut-globe      { --src: url("assets/collage/globe.png"); }
 .cut-zebra      { --src: url("assets/collage/zebra.png"); }
+.cut-knight     { --src: url("assets/collage/chess-knight.png"); }
 
 @media (min-width: 1201px) {
     .art-cut {
