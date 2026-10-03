@@ -299,30 +299,32 @@ a {
 .section-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 10px;
     margin-bottom: 8px;
 }
 
 .section-nav a {
-    font-size: 15.5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 14.5px;
     font-weight: 600;
-    position: relative;
-    padding-bottom: 2px;
+    border-radius: 980px;
+    border: 1px solid color-mix(in srgb, currentColor 38%, transparent);
+    background: color-mix(in srgb, currentColor 12%, transparent);
+    color: inherit;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.section-nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-    width: 0;
-    height: 1px;
-    background: currentColor;
-    transition: width 0.22s ease;
+.section-nav a:hover {
+    background: color-mix(in srgb, currentColor 20%, transparent);
+    border-color: color-mix(in srgb, currentColor 55%, transparent);
 }
 
-.section-nav a:hover::after {
-    width: 100%;
+.section-nav a:active {
+    background: color-mix(in srgb, currentColor 26%, transparent);
 }
 
 .section-nav .projects { color: var(--sage-deep); }
