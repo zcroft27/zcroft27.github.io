@@ -135,7 +135,7 @@
        term also grows, so peak excursion rises a bit more than AMP alone. PERIOD
        stays put so the path lengthens without slowing the drift. */
     var AMP = 0.23;
-    var PERIOD = 0.75;     // multiplier on the authored duration
+    var PERIOD = 0.714;    // multiplier on the authored duration
     var HORIZ = 0.55;      // horizontal travel, as a share of the vertical
     var SPIN = 0.45;       // share of the authored tilt swing to oscillate through
     var SPIN_CAP = 3;      // degrees
