@@ -29,14 +29,6 @@
     --font-display: 'Playfair Display', Georgia, serif;
     --font-label: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-atkinson: 'Atkinson Hyperlegible Mono', ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', monospace;
-}
-
-body.font-atkinson {
-    --font-display: var(--font-atkinson);
-    --font-label: var(--font-atkinson);
-    --font-body: var(--font-atkinson);
-    font-family: var(--font-atkinson);
 }
 
 * {
@@ -135,8 +127,6 @@ a {
     border-radius: 32px;
     overflow: hidden;
     border: 1px solid var(--line-strong);
-    cursor: default;
-    transition: border-color 0.35s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .portrait img {
@@ -145,16 +135,6 @@ a {
     object-fit: cover;
     object-position: center;
     display: block;
-    transition: filter 0.35s ease;
-}
-
-.portrait:hover {
-    border-color: var(--sage);
-    transform: translateY(-4px) scale(1.03);
-}
-
-.portrait:hover img {
-    filter: brightness(1.06);
 }
 
 .kicker {
@@ -312,32 +292,30 @@ a {
 .section-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
     margin-bottom: 8px;
 }
 
 .section-nav a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    padding: 0 16px;
-    font-size: 14.5px;
+    font-size: 15.5px;
     font-weight: 600;
-    border-radius: 980px;
-    border: 1px solid color-mix(in srgb, currentColor 38%, transparent);
-    background: color-mix(in srgb, currentColor 12%, transparent);
-    color: inherit;
-    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    position: relative;
+    padding-bottom: 2px;
 }
 
-.section-nav a:hover {
-    background: color-mix(in srgb, currentColor 20%, transparent);
-    border-color: color-mix(in srgb, currentColor 55%, transparent);
+.section-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.22s ease;
 }
 
-.section-nav a:active {
-    background: color-mix(in srgb, currentColor 26%, transparent);
+.section-nav a:hover::after {
+    width: 100%;
 }
 
 .section-nav .projects { color: var(--sage-deep); }
@@ -376,7 +354,7 @@ a {
 .shots {
     display: flex;
     overflow-x: auto;
-    padding: 36px 48px 12px 4px;
+    padding: 24px 48px 16px 4px;
     scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -404,15 +382,16 @@ a {
 }
 
 .shot-lift {
+    position: relative;
     width: 100%;
     height: 100%;
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.16);
     background: var(--fill);
-    transform-origin: center bottom;
+    transform-origin: center center;
     will-change: transform;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
 }
 
 .shot img {
@@ -420,7 +399,6 @@ a {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: filter 0.3s ease;
 }
 
 .shot:hover {
@@ -428,8 +406,9 @@ a {
 }
 
 .shot:hover .shot-lift {
-    transform: translateY(-12px) scale(1.06);
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: scale(1.06);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
 }
 
 .shot .cap {
@@ -451,6 +430,10 @@ a {
 
 .shots:has(.shot:hover) .shot:not(:hover) {
     pointer-events: none;
+}
+
+.shots:has(.shot:hover) .shot:not(:hover) .shot-lift {
+    opacity: 0.55;
 }
 
 /* ---------- Featured project pair ----------------------------------------
@@ -1348,7 +1331,7 @@ body::after {
     /* A few more px off the strip and the feat gap so the lede clears the fold
        on ~800px-tall laptop viewports without touching the wave/kicker pad. */
     .shots-wrap { margin-top: 22px; }
-    .shots { padding: 10px 48px 6px 4px; }
+    .shots { padding: 20px 48px 14px 4px; }
     .feat { margin-top: 28px; }
 }
 
