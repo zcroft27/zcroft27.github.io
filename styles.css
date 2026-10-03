@@ -127,7 +127,8 @@ a {
     border-radius: 32px;
     overflow: hidden;
     border: 1px solid var(--line-strong);
-    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    cursor: default;
+    transition: border-color 0.35s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .portrait img {
@@ -136,11 +137,16 @@ a {
     object-fit: cover;
     object-position: center;
     display: block;
+    transition: filter 0.35s ease;
 }
 
 .portrait:hover {
     border-color: var(--sage);
-    box-shadow: 0 0 0 3px rgba(156, 175, 136, 0.18);
+    transform: translateY(-4px) scale(1.03);
+}
+
+.portrait:hover img {
+    filter: brightness(1.06);
 }
 
 .kicker {
@@ -347,7 +353,7 @@ a {
 .shots {
     display: flex;
     overflow-x: auto;
-    padding: 14px 48px 8px 4px;
+    padding: 36px 48px 12px 4px;
     scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -362,20 +368,28 @@ a {
     width: 178px;
     aspect-ratio: 4 / 5;
     margin-left: -54px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background: var(--fill);
     cursor: pointer;
     position: relative;
     scroll-snap-align: center;
-    will-change: transform;
-    transform-origin: center bottom;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: visible;
+    background: transparent;
+    border: none;
 }
 
 .shot:first-child {
     margin-left: 0;
+}
+
+.shot-lift {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: var(--fill);
+    transform-origin: center bottom;
+    will-change: transform;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .shot img {
@@ -387,8 +401,11 @@ a {
 }
 
 .shot:hover {
-    transform: translateY(-12px) scale(1.06);
     z-index: 999 !important;
+}
+
+.shot:hover .shot-lift {
+    transform: translateY(-12px) scale(1.06);
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -407,6 +424,10 @@ a {
 
 .shot:hover .cap {
     opacity: 1;
+}
+
+.shots:has(.shot:hover) .shot:not(:hover) {
+    pointer-events: none;
 }
 
 /* ---------- Featured project pair ----------------------------------------

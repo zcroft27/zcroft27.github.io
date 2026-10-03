@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=48">
+    <link rel="stylesheet" href="styles.css?v=49">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Zachary Croft</title>
     <script>
@@ -319,7 +319,7 @@
 
     <script>
     const photos = [
-        { src: "photos/me/cow.png", cap: "Lauterbrunnen, Switzerland" },
+        { src: "photos/switzerland/cow.png", cap: "Lauterbrunnen, Switzerland" },
         { src: "photos/switzerland/1.jpg", cap: "Lauterbrunnen, Switzerland" },
         { src: "photos/italy/1.jpg", cap: "Rome, Italy" },
         { src: "photos/pacific-northwest/1.jpg", cap: "Vancouver Island" },
@@ -335,8 +335,8 @@
         el.className = "shot";
         el.style.zIndex = photos.length - i;
         const posStyle = p.pos ? ' style="object-position:' + p.pos + '"' : '';
-        el.innerHTML = '<img src="' + p.src + '"' + posStyle + ' alt="' + p.cap + '">'
-            + '<div class="cap">' + p.cap + '</div>';
+        el.innerHTML = '<div class="shot-lift"><img src="' + p.src + '"' + posStyle + ' alt="' + p.cap + '">'
+            + '<div class="cap">' + p.cap + '</div></div>';
         el.addEventListener("click", () => openLightbox(i));
         shots.appendChild(el);
     });
