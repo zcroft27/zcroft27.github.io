@@ -1218,11 +1218,8 @@ body::after {
     position: absolute;
     top: var(--top, 50%);
     left: var(--left, 50%);
-    /* Modest size bump over the authored --w/--h/--size so the gutters read a
-       bit fuller without rewriting every piece. Keep in the 1.08–1.15 range. */
-    --art-scale: 1.12;
-    width: calc(var(--w, var(--size, 150px)) * var(--art-scale));
-    height: calc(var(--h, var(--size, 150px)) * var(--art-scale));
+    width: var(--w, var(--size, 150px));
+    height: var(--h, var(--size, 150px));
     color: var(--collage-cream);
     will-change: transform;
 }
