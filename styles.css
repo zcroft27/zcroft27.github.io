@@ -440,10 +440,6 @@ a {
     pointer-events: none;
 }
 
-.shots:has(.shot:hover) .shot:not(:hover) .shot-lift {
-    opacity: 0.55;
-}
-
 /* ---------- Featured project pair ----------------------------------------
    Two sheets overlapping, which is the photo strip's negative-margin trick
    turned on its end, and the same hover that lifts a photo out of that strip
