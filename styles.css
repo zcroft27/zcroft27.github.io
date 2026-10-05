@@ -86,16 +86,19 @@ a {
 
 /* ---------- Home ---------- */
 .stage {
+    --stage-pad: 32px;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 76px 32px 96px;
+    padding: 76px var(--stage-pad) 96px;
     max-width: 860px;
     margin: 0 auto;
 }
 
 .intro {
+    --content-left: calc((100vw - min(860px, 100vw)) / 2 + var(--stage-pad));
     width: 100%;
+    translate: calc(round(nearest, var(--content-left), 52px) - var(--content-left)) 0;
 }
 
 /* Hero portrait + intro text */
@@ -192,12 +195,11 @@ a {
 .btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
+    gap: 9px;
+    padding: 13px 22px;
     border-radius: 980px;
-    font-size: 14.5px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    font-size: 15.5px;
+    font-weight: 600;
     border: 1px solid transparent;
     cursor: pointer;
     font-family: var(--font-body);
@@ -205,7 +207,7 @@ a {
 }
 
 .btn i {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .btn:hover {
@@ -1140,7 +1142,7 @@ a {
 }
 
 @media (max-width: 560px) {
-    .stage { padding: 72px 22px 80px; }
+    .stage { --stage-pad: 22px; padding: 72px var(--stage-pad) 80px; }
     .subpage { padding: 84px 22px 80px; }
     .shot { width: 168px; margin-left: -56px; }
     .article { padding: 100px 22px 100px; font-size: 17px; }
