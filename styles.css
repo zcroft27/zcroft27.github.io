@@ -86,16 +86,19 @@ a {
 
 /* ---------- Home ---------- */
 .stage {
+    --stage-pad: 32px;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 76px 32px 96px;
+    padding: 76px var(--stage-pad) 96px;
     max-width: 860px;
     margin: 0 auto;
 }
 
 .intro {
+    --content-left: calc((100vw - min(860px, 100vw)) / 2 + var(--stage-pad));
     width: 100%;
+    translate: calc(round(nearest, var(--content-left), 52px) - var(--content-left)) 0;
 }
 
 /* Hero portrait + intro text */
@@ -127,7 +130,6 @@ a {
     border-radius: 32px;
     overflow: hidden;
     border: 1px solid var(--line-strong);
-    transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .portrait img {
@@ -136,11 +138,6 @@ a {
     object-fit: cover;
     object-position: center;
     display: block;
-}
-
-.portrait:hover {
-    border-color: var(--sage);
-    box-shadow: 0 0 0 3px rgba(156, 175, 136, 0.18);
 }
 
 .kicker {
@@ -200,17 +197,25 @@ a {
     align-items: center;
     gap: 9px;
     padding: 13px 22px;
-    border-radius: 12px;
+    border-radius: 980px;
     font-size: 15.5px;
     font-weight: 600;
     border: 1px solid transparent;
     cursor: pointer;
     font-family: var(--font-body);
-    transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, opacity 0.18s ease, transform 0.18s ease;
 }
 
 .btn i {
     font-size: 16px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
 }
 
 .btn-primary {
@@ -219,19 +224,25 @@ a {
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
     background: var(--moss);
 }
 
+.btn-primary:active {
+    opacity: 0.92;
+}
+
 .btn-ghost {
-    background: var(--fill);
-    border-color: var(--line);
+    background: transparent;
+    border-color: var(--line-strong);
     color: var(--ink);
 }
 
 .btn-ghost:hover {
-    transform: translateY(-2px);
-    border-color: var(--line-strong);
+    background: var(--fill);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-ghost:active {
     background: var(--fill-hover);
 }
 
@@ -241,8 +252,11 @@ a {
 }
 
 .btn-linkedin:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.08);
+    background: #0669a0;
+}
+
+.btn-linkedin:active {
+    opacity: 0.92;
 }
 
 .btn-github {
@@ -251,8 +265,11 @@ a {
 }
 
 .btn-github:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.08);
+    background: #b3480b;
+}
+
+.btn-github:active {
+    opacity: 0.92;
 }
 
 .copy-email {
@@ -347,7 +364,7 @@ a {
 .shots {
     display: flex;
     overflow-x: auto;
-    padding: 14px 48px 8px 4px;
+    padding: 24px 48px 16px 4px;
     scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -362,20 +379,29 @@ a {
     width: 178px;
     aspect-ratio: 4 / 5;
     margin-left: -54px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background: var(--fill);
     cursor: pointer;
     position: relative;
     scroll-snap-align: center;
-    will-change: transform;
-    transform-origin: center bottom;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: visible;
+    background: transparent;
+    border: none;
 }
 
 .shot:first-child {
     margin-left: 0;
+}
+
+.shot-lift {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: var(--fill);
+    transform-origin: center center;
+    will-change: transform;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
 }
 
 .shot img {
@@ -383,13 +409,16 @@ a {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: filter 0.3s ease;
 }
 
 .shot:hover {
-    transform: translateY(-12px) scale(1.06);
     z-index: 999 !important;
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.shot:hover .shot-lift {
+    transform: scale(1.06);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
 }
 
 .shot .cap {
@@ -407,6 +436,10 @@ a {
 
 .shot:hover .cap {
     opacity: 1;
+}
+
+.shots:has(.shot:hover) .shot:not(:hover) {
+    pointer-events: none;
 }
 
 /* ---------- Featured project pair ----------------------------------------
@@ -1109,7 +1142,7 @@ a {
 }
 
 @media (max-width: 560px) {
-    .stage { padding: 72px 22px 80px; }
+    .stage { --stage-pad: 22px; padding: 72px var(--stage-pad) 80px; }
     .subpage { padding: 84px 22px 80px; }
     .shot { width: 168px; margin-left: -56px; }
     .article { padding: 100px 22px 100px; font-size: 17px; }
@@ -1301,7 +1334,7 @@ body::after {
     /* A few more px off the strip and the feat gap so the lede clears the fold
        on ~800px-tall laptop viewports without touching the wave/kicker pad. */
     .shots-wrap { margin-top: 22px; }
-    .shots { padding: 10px 48px 6px 4px; }
+    .shots { padding: 20px 48px 14px 4px; }
     .feat { margin-top: 28px; }
 }
 
@@ -1334,13 +1367,13 @@ body::after {
    even counted. Thinning the column is not enough there, so the two outer
    cutouts also move apart to give the zebra its own room. Positions live here
    rather than inline because an inline --top would win over the query. */
-.art-short--trumpet { --top: 24%; }
-.art-short--globe { --top: 74%; }
+.art-short--trumpet { --top: 22%; }
+.art-short--globe { --top: 76%; }
 
 @media (min-width: 1201px) and (min-height: 760px) {
     .art-min760 { display: block; }
-    .art-short--trumpet { --top: 31%; }
-    .art-short--globe { --top: 63%; }
+    .art-short--trumpet { --top: 30%; }
+    .art-short--globe { --top: 64%; }
 }
 
 @media (min-width: 1201px) and (min-height: 900px) {
@@ -1356,6 +1389,7 @@ body::after {
 .cut-lobster    { --src: url("assets/collage/lobster.png"); }
 .cut-globe      { --src: url("assets/collage/globe.png"); }
 .cut-zebra      { --src: url("assets/collage/zebra.png"); }
+.cut-knight     { --src: url("assets/collage/chess-knight.png"); }
 
 @media (min-width: 1201px) {
     .art-cut {
