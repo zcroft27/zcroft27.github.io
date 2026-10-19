@@ -334,10 +334,11 @@ a {
 .section-nav .travels { color: var(--travels); }
 
 /* ---------- Work logos ---------- */
+/* Three equal columns, so the tiles always match in width and shrink
+   together on narrow screens instead of wrapping. */
 .logos {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 136px));
     gap: 12px;
     margin: 0;
 }
@@ -364,8 +365,8 @@ a {
 .logo-tile {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 44px;
-    padding: 0 14px;
     border-radius: 9px;
     background: var(--tile);
     transition: translate 0.2s ease;
@@ -374,6 +375,8 @@ a {
 .logo-img {
     display: block;
     width: auto;
+    max-width: 82%;
+    object-fit: contain;
     height: 22px;
 }
 
@@ -389,8 +392,8 @@ a {
 .hero-text .bio + .logos { margin-top: 18px; }
 
 @media (max-width: 560px) {
-    .logos { gap: 12px 12px; }
-    .logo-tile { height: 36px; padding: 0 10px; border-radius: 7px; }
+    .logos { gap: 10px; }
+    .logo-tile { height: 36px; border-radius: 7px; }
     .logo-img { height: 17px; }
     .logo-img--smartleaf { height: 12px; }
     .logo-img--janestreet { height: 20px; }
