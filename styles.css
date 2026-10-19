@@ -338,15 +338,13 @@ a {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    gap: 14px 32px;
+    gap: 14px 16px;
     margin: 0;
 }
 
-/* Every logo sits in a row of the same height, so the years line up
-   however tall each mark is drawn. */
 .logo-item {
     display: grid;
-    grid-template-rows: auto 34px;
+    grid-template-rows: auto auto;
     align-items: center;
     gap: 6px;
 }
@@ -360,35 +358,38 @@ a {
     color: var(--faint);
 }
 
-/* Heights are tuned per mark so the three read at the same visual size:
-   Jane Street's lockup is mostly roundel, so it runs taller. */
+/* Each logo sits on its brand's own tile, the way the companies show it:
+   Smartleaf's mark on white, Klaviyo's cream on poppy, Jane Street's white
+   on blue. Heights are tuned per mark so the three read at the same size. */
+.logo-tile {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 9px;
+    background: var(--tile);
+    transition: translate 0.2s ease;
+}
+
 .logo-img {
     display: block;
     width: auto;
-    height: 26px;
-    opacity: 0.92;
-    transition: opacity 0.2s ease;
+    height: 22px;
 }
 
-.logo-img--janestreet { height: 32px; }
+.logo-img--smartleaf { height: 28px; }
+.logo-img--janestreet { height: 26px; }
 
-/* The archived mark is a deep green that sinks into the dark field;
-   lift it towards the olive of their later print logo. */
-.logo-img--smartleaf {
-    height: 30px;
-    filter: brightness(1.6) saturate(0.85);
-}
-
-.logo-item:hover .logo-img { opacity: 1; }
+.logo-item:hover .logo-tile { translate: 0 -2px; }
 
 .hero-text .bio + .logos { margin-top: 18px; }
 
 @media (max-width: 560px) {
-    .logos { gap: 12px 22px; }
-    .logo-item { grid-template-rows: auto 28px; }
-    .logo-img { height: 21px; }
-    .logo-img--smartleaf { height: 24px; }
-    .logo-img--janestreet { height: 26px; }
+    .logos { gap: 12px 12px; }
+    .logo-tile { height: 36px; padding: 0 10px; border-radius: 7px; }
+    .logo-img { height: 17px; }
+    .logo-img--smartleaf { height: 22px; }
+    .logo-img--janestreet { height: 20px; }
 }
 
 /* ---------- Overlapping photo scroll ---------- */
