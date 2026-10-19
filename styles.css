@@ -367,10 +367,12 @@ a {
     display: grid;
     grid-template-rows: auto auto;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
 }
 
+/* The year sits under its tile so it doesn't run into the bio line above. */
 .logo-tag {
+    order: 1;
     font-family: var(--font-label);
     font-size: 11px;
     font-weight: 500;
@@ -433,7 +435,7 @@ a {
 .logo-img--smartleaf { height: 15px; }
 .logo-img--janestreet { height: 26px; }
 
-.hero-text .bio + .logos { margin-top: 9px; }
+.hero-text .bio + .logos { margin-top: 10px; }
 
 @media (max-width: 560px) {
     .logos { gap: 10px; }
