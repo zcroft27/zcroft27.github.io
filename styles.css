@@ -361,7 +361,7 @@ a {
 }
 
 /* Heights are tuned per mark so the three read at the same visual size:
-   Smartleaf is a long thin wordmark, Jane Street's lockup is mostly roundel. */
+   Jane Street's lockup is mostly roundel, so it runs taller. */
 .logo-img {
     display: block;
     width: auto;
@@ -372,38 +372,22 @@ a {
 
 .logo-img--janestreet { height: 32px; }
 
-.logo-lockup {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    opacity: 0.85;
-    transition: opacity 0.2s ease;
+/* Smartleaf's classic serif mark only ships in its green on white, so it
+   is knocked out to white here to match the other two. */
+.logo-img--smartleaf {
+    height: 30px;
+    filter: brightness(0) invert(1);
 }
 
-.logo-tile {
-    display: block;
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
-}
+.logo-item:hover .logo-img { opacity: 1; }
 
-.logo-name {
-    font-family: var(--font-label);
-    font-size: 17px;
-    font-weight: 600;
-    color: #fff;
-    letter-spacing: 0.01em;
-}
-
-.logo-item:hover .logo-img,
-.logo-item:hover .logo-lockup { opacity: 1; }
+.hero-text .bio + .logos { margin-top: 18px; }
 
 @media (max-width: 560px) {
     .logos { gap: 12px 22px; }
     .logo-item { grid-template-rows: auto 28px; }
     .logo-img { height: 21px; }
-    .logo-tile { width: 23px; height: 23px; border-radius: 6px; }
-    .logo-name { font-size: 14.5px; }
+    .logo-img--smartleaf { height: 24px; }
     .logo-img--janestreet { height: 26px; }
 }
 
