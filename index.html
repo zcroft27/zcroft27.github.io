@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=59">
+    <link rel="stylesheet" href="styles.css?v=60">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Zachary Croft</title>
     <script>
@@ -185,29 +185,22 @@
                 </div>
             </div>
 
-            <!-- Work history as rubber stamps, read left to right as then / now /
-                 next. Each logo is a mask painted in a collage ink, the same way
-                 the engravings are tinted, so the brands sit in the site's palette
-                 instead of shouting their own colours. The worn edges come from a
-                 noise mask on the whole stamp. The incoming one is inked lighter
-                 and its frame is dashed because it hasn't happened yet. -->
-            <div class="stamps" role="list" aria-label="Where I've worked">
-                <div class="stamp" role="listitem" style="--ink:var(--collage-sage); --tilt:-4deg; --i:0">
-                    <span class="stamp-tag">Then</span>
-                    <span class="stamp-logo stamp-logo--smartleaf" role="img" aria-label="Smartleaf"
-                          style="--src:url(assets/logos/smartleaf.png)"></span>
+            <!-- Work history: the logos as the companies draw them, white
+                 versions for the dark field (Smartleaf's own knockout keeps its
+                 green leaf). Plain <img> tags, so this also works opened
+                 straight from disk. -->
+            <div class="logos reveal" style="--d: 240ms" role="list" aria-label="Where I've worked">
+                <div class="logo-item" role="listitem">
+                    <span class="logo-tag">Then</span>
+                    <img src="assets/logos/smartleaf.png" alt="Smartleaf" class="logo-img logo-img--smartleaf" width="900" height="125">
                 </div>
-                <svg class="stamp-arrow" viewBox="0 0 48 20" aria-hidden="true"><path d="M3 12c12-7 26-8 40-2"/><path d="M36 4l7 6-8 5"/></svg>
-                <div class="stamp stamp--now" role="listitem" style="--ink:var(--collage-cream); --tilt:2.5deg; --i:1">
-                    <span class="stamp-tag">Now</span>
-                    <span class="stamp-logo" role="img" aria-label="Klaviyo"
-                          style="--src:url(assets/logos/klaviyo.svg)"></span>
+                <div class="logo-item" role="listitem">
+                    <span class="logo-tag">Now</span>
+                    <img src="assets/logos/klaviyo-white.svg" alt="Klaviyo" class="logo-img" width="581" height="172">
                 </div>
-                <svg class="stamp-arrow" viewBox="0 0 48 20" aria-hidden="true"><path d="M3 9c13 6 27 7 40 1"/><path d="M35 4l8 6-7 6"/></svg>
-                <div class="stamp stamp--next" role="listitem" style="--ink:var(--collage-mustard); --tilt:-1.5deg; --i:2">
-                    <span class="stamp-tag">Incoming</span>
-                    <span class="stamp-logo stamp-logo--janestreet" role="img" aria-label="Jane Street"
-                          style="--src:url(assets/logos/jane-street.svg)"></span>
+                <div class="logo-item" role="listitem">
+                    <span class="logo-tag">Incoming</span>
+                    <img src="assets/logos/jane-street-white.svg" alt="Jane Street" class="logo-img logo-img--janestreet" width="181" height="49">
                 </div>
             </div>
 
