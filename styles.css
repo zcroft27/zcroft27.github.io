@@ -333,6 +333,141 @@ a {
 .section-nav .resources { color: var(--resources); }
 .section-nav .travels { color: var(--travels); }
 
+/* ---------- Work stamps ---------- */
+.stamps {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 10px;
+    max-width: 640px;
+    margin: 6px 0 30px;
+}
+
+.stamp {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px 14px;
+    color: var(--ink);
+    border: 2px solid currentColor;
+    border-radius: 10px;
+    /* Inner rule of the double frame. An outline would sit outside the
+       border box and get clipped by the wear mask, so it's drawn inset. */
+    box-shadow: inset 0 0 0 3px var(--bg), inset 0 0 0 4px currentColor;
+    opacity: 0.82;
+    rotate: var(--tilt, 0deg);
+    /* Rubber wear: fractal noise thresholded into a mask, so the ink drops out
+       in specks the way a real stamp skips on paper. */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.6 2.15'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.6 2.15'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    transition: rotate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.25s ease;
+    animation: stamp-in 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+    animation-delay: calc(220ms + var(--i, 0) * 150ms);
+}
+
+.stamp:hover {
+    rotate: 0deg;
+    scale: 1.04;
+    opacity: 1;
+}
+
+.stamp--next {
+    border-style: dashed;
+    opacity: 0.7;
+}
+
+.stamp-tag {
+    font-family: var(--font-label);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.stamp-logo {
+    width: 100%;
+    height: 34px;
+    background-color: currentColor;
+    -webkit-mask: var(--src) center / contain no-repeat;
+            mask: var(--src) center / contain no-repeat;
+}
+
+/* The Smartleaf mark is a long wordmark, so contain alone shrinks it to a
+   thread; let it run a little taller to match the others' visual weight. */
+.stamp-logo--smartleaf {
+    height: 24px;
+    margin: 5px 0;
+}
+
+/* Jane Street's lockup is mostly roundel, so its wordmark needs extra height
+   to read at the same size as the other two. */
+.stamp-logo--janestreet {
+    height: 42px;
+    margin: -4px 0;
+}
+
+.stamp-arrow {
+    width: 38px;
+    height: 16px;
+    fill: none;
+    stroke: var(--faint);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.stamp-arrow path:first-child {
+    stroke-dasharray: 3 4;
+}
+
+@keyframes stamp-in {
+    0% { opacity: 0; scale: 1.5; rotate: calc(var(--tilt, 0deg) + 8deg); }
+    60% { opacity: 0.9; scale: 0.96; }
+    100% { scale: 1; rotate: var(--tilt, 0deg); }
+}
+
+.js-wait .stamp {
+    animation: none;
+    opacity: 0;
+}
+
+.js-wait.js-ready .stamp {
+    animation: stamp-in 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+    animation-delay: calc(220ms + var(--i, 0) * 150ms);
+    opacity: 0.82;
+}
+
+.js-wait.js-ready .stamp--next { opacity: 0.7; }
+.js-wait.js-ready .stamp:hover { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+    .stamp,
+    .js-wait .stamp,
+    .js-wait.js-ready .stamp { animation: none; opacity: 0.82; }
+}
+
+@media (max-width: 560px) {
+    .stamps {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    .stamp-arrow { display: none; }
+
+    .stamp { padding: 10px 8px 12px; }
+
+    .stamp-logo { height: 24px; }
+
+    .stamp-logo--smartleaf { height: 16px; margin: 4px 0; }
+
+    .stamp-logo--janestreet { height: 30px; margin: -3px 0; }
+}
+
 /* ---------- Overlapping photo scroll ---------- */
 .shots-wrap {
     margin-top: 28px;
