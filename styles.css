@@ -337,16 +337,18 @@ a {
 .logos {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 14px 40px;
-    margin: 8px 0 30px;
+    align-items: flex-start;
+    gap: 14px 32px;
+    margin: 0;
 }
 
+/* Every logo sits in a row of the same height, so the years line up
+   however tall each mark is drawn. */
 .logo-item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 9px;
+    display: grid;
+    grid-template-rows: auto 34px;
+    align-items: center;
+    gap: 6px;
 }
 
 .logo-tag {
@@ -354,7 +356,6 @@ a {
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
-    text-transform: uppercase;
     line-height: 1;
     color: var(--faint);
 }
@@ -364,21 +365,22 @@ a {
 .logo-img {
     display: block;
     width: auto;
-    height: 28px;
+    height: 26px;
     opacity: 0.85;
     transition: opacity 0.2s ease;
 }
 
-.logo-img--smartleaf { height: 18px; margin-bottom: 4px; }
-.logo-img--janestreet { height: 34px; margin-bottom: -3px; }
+.logo-img--smartleaf { height: 17px; }
+.logo-img--janestreet { height: 32px; }
 
 .logo-item:hover .logo-img { opacity: 1; }
 
 @media (max-width: 560px) {
-    .logos { gap: 14px 26px; }
-    .logo-img { height: 22px; }
-    .logo-img--smartleaf { height: 14px; margin-bottom: 3px; }
-    .logo-img--janestreet { height: 28px; margin-bottom: -3px; }
+    .logos { gap: 12px 22px; }
+    .logo-item { grid-template-rows: auto 28px; }
+    .logo-img { height: 21px; }
+    .logo-img--smartleaf { height: 14px; }
+    .logo-img--janestreet { height: 26px; }
 }
 
 /* ---------- Overlapping photo scroll ---------- */
