@@ -381,10 +381,6 @@ a {
 }
 
 .logo-img--smartleaf { height: 15px; }
-
-/* Smartleaf's navy is close to the page colour, so a hairline keeps the
-   tile's edge visible. */
-.logo-tile--smartleaf { box-shadow: inset 0 0 0 1px var(--line-strong); }
 .logo-img--janestreet { height: 26px; }
 
 .logo-item:hover .logo-tile { translate: 0 -2px; }
