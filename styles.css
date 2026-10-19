@@ -422,30 +422,6 @@ a {
     outline-offset: 3px;
 }
 
-/* Corner arrow that says "opens their site"; hidden until hover so the
-   tiles stay clean at rest. */
-.logo-go {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 8px;
-    height: 8px;
-    fill: none;
-    stroke: #fff;
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    opacity: 0;
-    translate: -2px 2px;
-    transition: opacity 0.18s ease, translate 0.18s ease;
-}
-
-.logo-item:hover .logo-go,
-.logo-item:focus-visible .logo-go {
-    opacity: 0.75;
-    translate: 0 0;
-}
-
 .logo-img {
     display: block;
     width: auto;
