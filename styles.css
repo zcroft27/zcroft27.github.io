@@ -370,16 +370,40 @@ a {
     transition: opacity 0.2s ease;
 }
 
-.logo-img--smartleaf { height: 17px; }
 .logo-img--janestreet { height: 32px; }
 
-.logo-item:hover .logo-img { opacity: 1; }
+.logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+}
+
+.logo-tile {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+}
+
+.logo-name {
+    font-family: var(--font-label);
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.01em;
+}
+
+.logo-item:hover .logo-img,
+.logo-item:hover .logo-lockup { opacity: 1; }
 
 @media (max-width: 560px) {
     .logos { gap: 12px 22px; }
     .logo-item { grid-template-rows: auto 28px; }
     .logo-img { height: 21px; }
-    .logo-img--smartleaf { height: 14px; }
+    .logo-tile { width: 23px; height: 23px; border-radius: 6px; }
+    .logo-name { font-size: 14.5px; }
     .logo-img--janestreet { height: 26px; }
 }
 
