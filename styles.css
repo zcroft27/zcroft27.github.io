@@ -366,17 +366,17 @@ a {
     display: block;
     width: auto;
     height: 26px;
-    opacity: 0.85;
+    opacity: 0.92;
     transition: opacity 0.2s ease;
 }
 
 .logo-img--janestreet { height: 32px; }
 
-/* Smartleaf's classic serif mark only ships in its green on white, so it
-   is knocked out to white here to match the other two. */
+/* The archived mark is a deep green that sinks into the dark field;
+   lift it towards the olive of their later print logo. */
 .logo-img--smartleaf {
     height: 30px;
-    filter: brightness(0) invert(1);
+    filter: brightness(1.6) saturate(0.85);
 }
 
 .logo-item:hover .logo-img { opacity: 1; }
