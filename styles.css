@@ -1651,31 +1651,17 @@ body::after {
     font-weight: 600;
 }
 
+/* No underline: hovering brightens a link, and the current page is marked
+   in the site's sage green. */
 .site-nav-links a {
     position: relative;
     color: var(--muted);
     padding-bottom: 3px;
-    transition: color 0.18s ease;
-}
-
-.site-nav-links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 1.5px;
-    border-radius: 2px;
-    background: var(--sage);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.22s ease;
+    transition: color 0.15s ease;
 }
 
 .site-nav-links a:hover { color: var(--ink); }
-.site-nav-links a:hover::after { transform: scaleX(1); }
-.site-nav-links a[aria-current="page"] { color: var(--ink); }
-.site-nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+.site-nav-links a[aria-current="page"] { color: var(--sage); }
 
 .page-head { margin-bottom: 36px; }
 .page .hero-top { margin-bottom: 0; }
