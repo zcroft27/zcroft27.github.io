@@ -1651,36 +1651,20 @@ body::after {
     font-weight: 600;
 }
 
-/* Hover and the current page get a sage underline that draws in from the
-   left. The links carry a padded hit area (cancelled by negative margins so
-   nothing moves), so the underline is inset by the same padding to sit right
-   under the word, where it always was. */
+/* No underline: hovering brightens a link, and the current page is marked
+   in the site's sage green. */
 .site-nav-links a {
     position: relative;
     color: var(--muted);
+    /* Bigger hit area, same footprint: the padding is cancelled by an equal
+       negative margin, so the links don't move. */
     padding: 9px 11px 12px;
     margin: -9px -11px;
-    transition: color 0.18s ease;
-}
-
-.site-nav-links a::after {
-    content: "";
-    position: absolute;
-    left: 11px;
-    right: 11px;
-    bottom: 8px;
-    height: 1.5px;
-    border-radius: 2px;
-    background: var(--sage);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.22s ease;
+    transition: color 0.15s ease;
 }
 
 .site-nav-links a:hover { color: var(--ink); }
-.site-nav-links a:hover::after { transform: scaleX(1); }
-.site-nav-links a[aria-current="page"] { color: var(--ink); }
-.site-nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+.site-nav-links a[aria-current="page"] { color: var(--sage); }
 
 .page-head { margin-bottom: 36px; }
 .page .hero-top { margin-bottom: 0; }
