@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=98">
+    <link rel="stylesheet" href="styles.css?v=99">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Zach Croft</title>
     <script>
@@ -36,10 +36,12 @@
 <body>
     <script src="scene.js?v=4"></script>
     <main class="stage">
-        <!-- Same top bar as the inner pages. It sits in the stage's top padding
-             (absolute), so the hero and the fold don't move. No name link here:
-             the heading right below already is the home page. -->
+        <!-- Same top bar as the inner pages, byte for byte apart from the
+             current-page marker, so it doesn't move when you change page. It
+             sits in the stage's top padding (absolute), so the hero and the
+             fold don't move either. -->
         <nav class="site-nav site-nav--home" aria-label="Site">
+            <a href="./" class="site-nav-home">Zach Croft</a>
             <div class="site-nav-links">
                 <a href="projects.html">Projects</a>
                 <a href="readme.html">About</a>

@@ -1619,6 +1619,16 @@ body::after {
 
 .art-scene { view-transition-name: decor; }
 .site-nav { view-transition-name: site-nav; }
+.site-nav-links { view-transition-name: site-nav-links; }
+
+/* The bar is identical on every page, so it should not animate at all:
+   no morph, no crossfade, it just stays put. */
+::view-transition-group(site-nav),
+::view-transition-group(site-nav-links),
+::view-transition-old(site-nav),
+::view-transition-new(site-nav),
+::view-transition-old(site-nav-links),
+::view-transition-new(site-nav-links) { animation: none; }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -1633,21 +1643,32 @@ body::after {
 
 /* ---------- Shell ---------- */
 .page {
+    --stage-pad: 32px;
+    --content-left: calc((100vw - min(860px, 100vw)) / 2 + var(--stage-pad));
     position: relative;
     z-index: 1;
     max-width: 860px;
     margin: 0 auto;
-    padding: 0 32px 120px;
+    padding: 0 var(--stage-pad) 120px;
+    /* Same grid snap as the landing page's .intro, so the column, and with it
+       the top bar, sits at exactly the same x on every page. */
+    translate: calc(round(nearest, var(--content-left), 52px) - var(--content-left)) 0;
+}
+
+@media (max-width: 900px) {
+    .page { translate: none; }
 }
 
 .site-nav {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
-    gap: 16px 28px;
+    gap: 10px 28px;
     flex-wrap: wrap;
+    min-height: 32px;
     padding: 30px 0 0;
     margin-bottom: 72px;
+    line-height: 32px;
 }
 
 .site-nav-home {
@@ -1727,7 +1748,7 @@ body::after {
 .page section + section { margin-top: 64px; }
 
 @media (max-width: 560px) {
-    .page { padding: 0 22px 90px; }
+    .page { --stage-pad: 22px; padding: 0 22px 90px; }
     .site-nav { padding-top: 22px; margin-bottom: 48px; }
     .site-nav-home { font-size: 18px; }
     .site-nav-links { gap: 6px 18px; font-size: 14.5px; }
@@ -1962,11 +1983,16 @@ a.row-name:hover { color: var(--sage); }
     left: var(--stage-pad);
     right: var(--stage-pad);
     margin: 0;
-    justify-content: flex-end;
     translate: calc(round(nearest, var(--content-left), 52px) - var(--content-left)) 0;
 }
 
 @media (max-width: 900px) {
-    .site-nav--home { translate: none; justify-content: flex-start; }
+    .site-nav--home { translate: none; }
+}
+
+/* On phones the bar wraps to two rows (name, then links), so the landing
+   stage needs the same room above the hero the inner pages give it. */
+@media (max-width: 560px) {
+    .stage { padding-top: 132px; }
 }
 
