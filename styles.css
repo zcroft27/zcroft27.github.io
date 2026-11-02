@@ -1672,7 +1672,7 @@ body::after {
 .page-h1 {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(2.8rem, 6.4vw, 4.4rem);
+    font-size: clamp(2.3rem, 5vw, 3.3rem);
     line-height: 1;
     letter-spacing: -0.012em;
     margin: 0 0 18px;
@@ -1698,7 +1698,7 @@ body::after {
     color: var(--sage);
 }
 
-.page section + section { margin-top: 64px; }
+.page section + section { margin-top: 34px; }
 
 @media (max-width: 560px) {
     .page { --stage-pad: 22px; padding: 0 22px 90px; }
@@ -1706,7 +1706,7 @@ body::after {
     .site-nav-home { font-size: 18px; }
     .site-nav-links { gap: 6px 18px; font-size: 14.5px; }
     .page-head { margin-bottom: 44px; }
-    .page section + section { margin-top: 52px; }
+    .page section + section { margin-top: 30px; }
 }
 
 /* ---------- About ---------- */
@@ -1821,8 +1821,6 @@ a.row-name:hover { color: var(--sage); }
 
 /* ---------- Resources ---------- */
 /* Plain two-column link list. Real links in the DOM, so Ctrl+F finds them. */
-.page-h1--long { font-size: clamp(2.3rem, 5vw, 3.3rem); }
-
 .res-list {
     columns: 2;
     column-gap: 40px;
