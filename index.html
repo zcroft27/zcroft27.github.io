@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=129">
+    <link rel="stylesheet" href="styles.css?v=134">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Zach Croft</title>
     <script>
@@ -34,7 +34,7 @@
     </script>
 </head>
 <body>
-    <script src="scene.js?v=9"></script>
+    <script src="scene.js?v=12"></script>
     <script src="decor.js?v=49"></script>
     <main class="stage">
         <!-- Same top bar as the inner pages, byte for byte apart from the
@@ -42,7 +42,6 @@
              sits in the stage's top padding (absolute), so the hero and the
              fold don't move either. -->
         <nav class="site-nav site-nav--home" aria-label="Site">
-            <a href="/" class="site-nav-home"><span>Zach Croft</span></a>
             <div class="site-nav-links">
                 <a href="/" class="nav-home-link" aria-current="page">Home</a>
                 <a href="/about">About</a>
@@ -54,7 +53,7 @@
         <div class="intro">
             <div class="hero-top">
                 <div class="portrait reveal">
-                    <img src="photos/me/headshot.png" alt="Zach Croft" width="720" height="720">
+                    <img src="assets/photos/me/headshot.png" alt="Zach Croft" width="720" height="720">
                 </div>
                 <div class="hero-text">
                     <h1 class="reveal" style="--d: 80ms">Zach Croft</h1>
@@ -203,14 +202,14 @@
 
     <script>
     const photos = [
-        { src: "photos/me/cow.png", cap: "Lauterbrunnen, Switzerland" },
-        { src: "photos/switzerland/1.jpg", cap: "Lauterbrunnen, Switzerland" },
-        { src: "photos/italy/1.jpg", cap: "Rome, Italy" },
-        { src: "photos/pacific-northwest/1.jpg", cap: "Vancouver Island" },
-        { src: "photos/climbing/1.jpg", cap: "Bouldering" },
-        { src: "photos/puerto-rico/1.jpg", cap: "San Juan, Puerto Rico" },
-        { src: "photos/south-africa/1.jpg", cap: "South Africa" },
-        { src: "photos/cape-cod/1.jpg", cap: "Cape Cod" }
+        { src: "assets/photos/me/cow.png", cap: "Lauterbrunnen, Switzerland" },
+        { src: "assets/photos/switzerland/1.jpg", cap: "Lauterbrunnen, Switzerland" },
+        { src: "assets/photos/italy/1.jpg", cap: "Rome, Italy" },
+        { src: "assets/photos/pacific-northwest/1.jpg", cap: "Vancouver Island" },
+        { src: "assets/photos/climbing/1.jpg", cap: "Bouldering" },
+        { src: "assets/photos/puerto-rico/1.jpg", cap: "San Juan, Puerto Rico" },
+        { src: "assets/photos/south-africa/1.jpg", cap: "South Africa" },
+        { src: "assets/photos/cape-cod/1.jpg", cap: "Cape Cod" }
     ];
 
     const shots = document.getElementById("shots");

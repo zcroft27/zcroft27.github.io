@@ -93,15 +93,12 @@
         <div class="art art-l-typewriter" style="--left:3.2%; --w:130px; --h:100px" data-depth="0.2096" data-mouse="12" data-mouse-y="7.7">
             <div class="art-i" style="--dur:26s; --dx:9px; --dy:-12px; --rot:2deg; --op:.46"><div class="art-cut art-cut--ink cut-typewriter" style="--tilt:-5deg; --ink:var(--collage-teal)"></div></div>
         </div>
-        <!-- 1901 Pan-American steamship stamp. -->
-        <div class="art art-min760 art-l-stamp" style="--left:10.0%; --w:66px; --h:51px" data-depth="0.1158" data-mouse="11.3" data-mouse-y="5.4" data-float="0.6">
-            <div class="art-i" style="--dur:23s; --dx:7px; --dy:-9px; --rot:-4deg; --op:.62"><div class="art-cut cut-stamp" style="--tilt:8deg"></div></div>
+        <!-- Vinyl record (Jordan Watkins' icon, used as-is). -->
+        <div class="art art-min760 art-l-record" style="--left:9.6%; --w:82px; --h:82px" data-depth="0.1158" data-mouse="11.3" data-mouse-y="5.4" data-float="0.6">
+            <div class="art-i" style="--dur:23s; --dx:7px; --dy:-9px; --rot:-4deg; --op:.5"><div class="art-cut cut-record" style="--tilt:0deg"></div></div>
         </div>
         <div class="art art-l-pine" style="--left:8.4%; --w:88px; --h:118px" data-depth="0.1878" data-mouse="7.8" data-mouse-y="17.0">
             <div class="art-i" style="--dur:27s; --dx:-7px; --dy:10px; --rot:3deg; --op:.55"><div class="art-cut cut-pine" style="--tilt:7deg"></div></div>
-        </div>
-        <div class="art art-min900 art-l-zigzag" style="--left:4.2%; --w:96px; --h:60px" data-depth="0.1369" data-mouse="-12.5" data-mouse-y="6.0" data-float="0.6">
-            <div class="art-i" style="--dur:25s; --dx:8px; --dy:-11px; --rot:4deg; --op:.32"><svg class="art-squig" style="--sw:2.6; --tilt:-3deg"><use href="#sq-zigzag"/></svg></div>
         </div>
         <div class="art art-l-lobster" style="--left:3.4%; --w:74px; --h:126px" data-depth="0.1777" data-mouse="7.6" data-mouse-y="16.4">
             <div class="art-i" style="--dur:24s; --dx:6px; --dy:-13px; --rot:3deg; --op:.62"><div class="art-cut art-cut--ink cut-lobster" style="--tilt:-6deg; --ink:var(--collage-red)"></div></div>
@@ -116,13 +113,10 @@
              jester is an ink-density cutout like the engravings, but it sits on
              its own cut-paper card with red corner indices, since a bare figure
              wouldn't read as a playing card. -->
-        <div class="art art-min760" style="--top:3.5%; --left:86.8%; --w:100px; --h:140px" data-depth="0.1681" data-mouse="11.0" data-mouse-y="11.0">
+        <div class="art art-min760" style="--top:3.5%; --left:85.4%; --w:100px; --h:140px" data-depth="0.1681" data-mouse="11.0" data-mouse-y="11.0">
             <div class="art-i" style="--dur:30s; --dx:-8px; --dy:11px; --rot:-4deg; --op:.46"><div class="art-card" style="--tilt:9deg"><span class="art-card-index">Joker</span><div class="art-card-face cut-joker"></div><span class="art-card-index art-card-index--flip">Joker</span></div></div>
         </div>
-        <div class="art art-min760 art-lower art-lower--sparkle" style="--size:24px; color:var(--collage-mustard)" data-depth="0.0435" data-mouse="-4.2" data-mouse-y="4.2">
-            <div class="art-i" style="--dur:21s; --dx:-5px; --dy:-8px; --rot:8deg; --op:.5"><svg class="art-squig"><use href="#sq-sparkle"/></svg></div>
-        </div>
-        <div class="art art-short--trumpet" style="--left:85.6%; --w:150px; --h:58px" data-depth="0.1712" data-mouse="12.4" data-mouse-y="6.8">
+        <div class="art art-short--trumpet" style="--left:87.6%; --w:150px; --h:58px" data-depth="0.1712" data-mouse="12.4" data-mouse-y="6.8">
             <div class="art-i" style="--dur:28s; --dx:-9px; --dy:9px; --rot:-3deg; --op:.32"><div class="art-cut art-cut--ink cut-trumpet" style="--tilt:-4deg; --ink:var(--collage-mustard)"></div></div>
         </div>
         <!-- Stands in the long gap between the trumpet and the globe, facing in
@@ -130,25 +124,17 @@
              its own inks and paints as a background-image rather than being
              tinted from the palette — the stripes are the whole point of a zebra
              and a flat spot colour would erase them. -->
-        <div class="art" style="--top:44.0%; --left:87.8%; --w:110px; --h:105px" data-depth="0.1956" data-mouse="9.8" data-mouse-y="8.2">
+        <div class="art" style="--top:44.0%; --left:85.4%; --w:110px; --h:105px" data-depth="0.1956" data-mouse="9.8" data-mouse-y="8.2">
             <div class="art-i" style="--dur:29s; --dx:7px; --dy:9px; --rot:-3deg; --op:.55"><div class="art-cut cut-zebra" style="--tilt:-2deg"></div></div>
         </div>
-        <div class="art art-short--globe" style="--left:88.9%; --w:72px; --h:84px" data-depth="0.1418" data-mouse="9.9" data-mouse-y="9.9">
+        <div class="art art-short--globe" style="--left:91.2%; --w:72px; --h:84px" data-depth="0.1418" data-mouse="9.9" data-mouse-y="9.9">
             <div class="art-i" style="--dur:25s; --dx:-6px; --dy:-11px; --rot:4deg; --op:.60"><div class="art-cut art-cut--ink cut-globe" style="--tilt:8deg; --ink:var(--collage-teal)"></div></div>
         </div>
         <!-- Retro computer (Jordan Watkins' icon, used as-is). -->
-        <div class="art art-min760" style="--top:85.0%; --left:88.2%; --w:110px; --h:99px" data-depth="0.1499" data-mouse="10.3" data-mouse-y="10.3">
+        <div class="art art-min760" style="--top:85.0%; --left:85.8%; --w:110px; --h:99px" data-depth="0.1499" data-mouse="10.3" data-mouse-y="10.3">
             <div class="art-i" style="--dur:23s; --dx:-8px; --dy:-12px; --rot:5deg; --op:.5"><div class="art-cut cut-computer" style="--tilt:4deg"></div></div>
         </div>
 
-        <!-- Above the hero, where the old asterisk sat. The only piece over the
-             content column rather than a gutter, so it gets a negative depth: it
-             rises out of frame as you scroll instead of drifting down onto the
-             heading, and doubles as the field's one scroll counter-mover.
-             Kept high enough that the float path clears the kicker. -->
-        <div class="art" style="--top:-1.6%; --left:44.0%; --w:88px; --h:50px" data-depth="-0.05" data-mouse="5" data-mouse-y="3" data-float="0.35">
-            <div class="art-i" style="--dur:27s; --dx:6px; --dy:-10px; --rot:-2deg; --op:.16"><svg class="art-squig" style="--sw:2.4; --tilt:-2deg"><use href="#sq-wave"/></svg></div>
-        </div>
     </div>
 `;
     var me = document.currentScript;

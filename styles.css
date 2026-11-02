@@ -108,7 +108,7 @@ a {
 
 .hero-text .bio strong {
     font-weight: 600;
-    color: var(--ink);
+    color: var(--sage);
 }
 
 .portrait {
@@ -1427,29 +1427,19 @@ body::after {
     .art-min900 { display: block; }
 }
 
-/* Left gutter, spaced evenly top to bottom. Below 900px tall only four pieces
-   show (typewriter, pine, lobster, camera); from 900px the stamp and zigzag
-   join, so the column gets a second set of stops that spreads all six with
-   equal gaps instead of squeezing two more into the old ones. */
+/* Left gutter, spaced evenly top to bottom. Below 760px tall three pieces
+   show (typewriter, pine, lobster); from 760px the record and camera join,
+   so the column gets a second set of stops spreading all five evenly. */
 .art-l-typewriter { --top: 9%; }
-.art-l-stamp      { --top: 26%; }
+.art-l-record     { --top: 25.7%; }
 .art-l-pine       { --top: 31.9%; }
-.art-l-zigzag     { --top: 52.2%; }
 .art-l-lobster    { --top: 56.4%; }
 .art-l-camera     { --top: 78.9%; }
 
-/* 760-899px tall: the stamp joins, so five pieces share the column */
-@media (min-width: 1201px) and (min-height: 760px) and (max-height: 899px) {
-    .art-l-stamp   { --top: 28.2%; }
-    .art-l-pine    { --top: 39.6%; }
-    .art-l-lobster { --top: 60.4%; }
+@media (min-width: 1201px) and (min-height: 760px) {
+    .art-l-pine    { --top: 40.1%; }
+    .art-l-lobster { --top: 59.1%; }
     .art-l-camera  { --top: 79%; }
-}
-
-@media (min-width: 1201px) and (min-height: 900px) {
-    .art-l-pine    { --top: 36%; }
-    .art-l-lobster { --top: 65.6%; }
-    .art-l-camera  { --top: 82.3%; }
 }
 
 /* A custom property is inert until something references it, so naming the files
@@ -1471,12 +1461,19 @@ body::after {
    world: drained to greyscale, warmed toward the cream ink, contrast eased
    off, and the joker card's light paper grain over the top. */
 .art-cut.cut-camera,
-.art-cut.cut-computer {
+.art-cut.cut-computer,
+.art-cut.cut-record {
     filter: grayscale(1) sepia(0.4) contrast(0.78) brightness(0.92);
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.7 1.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
             mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.7 1.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
-.cut-stamp      { --src: url("assets/collage/stamp-cut.png"); }
+
+/* The record keeps its red label (no greyscale), and is lifted a touch so the
+   black disc doesn't sink into the dark field. */
+.art-cut.cut-record {
+    filter: brightness(1.35) contrast(0.85) saturate(0.8);
+}
+.cut-record     { --src: url("assets/collage/icon-record.png"); }
 
 /* ---- Playing card ---------------------------------------------------------
    Cut-paper card stock carrying an ink cutout. The card is the paper, the
@@ -1641,41 +1638,9 @@ body::after {
     .site-nav { margin-bottom: 7px; }
 }
 
-/* Home link: the name takes the same sage underline as the other links on
-   hover, and "Home" also leads the link list (hidden on phones, where the
-   extra item would wrap the row and the name sits right above it). */
-.site-nav-home {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: -0.005em;
-    color: var(--ink);
-}
-
-.site-nav-home span {
-    position: relative;
-}
-
-.site-nav-home span::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -3px;
-    height: 1.5px;
-    border-radius: 2px;
-    background: var(--sage);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.22s ease;
-}
-
-.site-nav-home:hover span::after,
-.site-nav-home:focus-visible span::after { transform: scaleX(1); }
-
-@media (max-width: 560px) {
-    .site-nav-links .nav-home-link { display: none; }
-}
+/* The bar is just the links, held at the right edge where they have always
+   sat ("Home" leads them, so the name no longer needs to be a link). */
+.site-nav-links { margin-left: auto; }
 
 .site-nav-links {
     display: flex;
@@ -1749,7 +1714,6 @@ body::after {
 @media (max-width: 560px) {
     .page { --stage-pad: 22px; padding: 0 22px 90px; }
     .site-nav { padding-top: 22px; margin-bottom: 33px; }
-    .site-nav-home { font-size: 18px; }
     .site-nav-links { gap: 6px 18px; font-size: 14.5px; }
     .page-head { margin-bottom: 44px; }
     .page section + section { margin-top: 30px; }
@@ -2020,9 +1984,9 @@ a.row-name:hover { color: var(--sage); }
     .site-nav--home { translate: none; }
 }
 
-/* On phones the bar wraps to two rows (name, then links), so the landing
-   stage needs the same room above the hero the inner pages give it. */
+/* On phones the landing hero starts where the inner pages' content does,
+   just under the one-row bar. */
 @media (max-width: 560px) {
-    .stage { padding-top: 132px; }
+    .stage { padding-top: 90px; }
 }
 

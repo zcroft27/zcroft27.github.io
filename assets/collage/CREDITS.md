@@ -85,7 +85,7 @@ the paper-keying pipeline rather than flattened to ink density.
 
 ## `chess-knight.png`
 
-- **Subject:** Ornate crowned chess knight (horse head on a pedestal)
+- **Subject:** Ornate crowned vinyl record (horse head on a pedestal)
 - **Source:** User-supplied reference image for this portfolio (site owner)
 - **License:** Provided by the site owner for use on zcroft27.github.io — not a
   scraped public-domain plate
@@ -103,19 +103,10 @@ the paper-keying pipeline rather than flattened to ink density.
   ignored so the printed card edge drops out. On the page it is printed onto a
   CSS card (`.art-card`) rather than floating bare, so it still reads as a card.
 
-## `icon-camera.png`, `icon-computer.png`
+## `icon-camera.png`, `icon-computer.png`, `icon-record.png`
 
-- **Subject:** Hand holding a camera; retro computer
-- **Source:** <https://www.jordanwatkins.xyz/> (`/icon-camera.png`, `/icon-computer.png`)
+- **Subject:** Hand holding a camera; retro computer; vinyl record
+- **Source:** <https://www.jordanwatkins.xyz/> (`/icon-camera.png`, `/icon-computer.png`, `/icon-vinyl.png`)
 - **Creator:** Jordan Watkins
 - **License:** Not stated on the source site. Used as-is at the site owner's
   request; not public domain, so check with Jordan Watkins before wider reuse.
-
-## `stamp-cut.png`
-
-- **Subject:** US 1901 Pan-American Exposition 10c stamp, "Fast Ocean Navigation"
-- **Source:** <https://commons.wikimedia.org/wiki/File:US_stamp_1901_Pan_Am_10c_Fast_Ocean_Navigation.jpg>
-- **Creator / collection:** US Bureau of Engraving and Printing; scan by R. A. Nonenmacher
-- **License:** Public domain (US federal work)
-- **Processing:** scanner white keyed out by flood fill from the edges, which
-  keeps the perforated edge.
