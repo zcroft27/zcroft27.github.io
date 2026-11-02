@@ -1575,9 +1575,12 @@ body::after {
 ::view-transition-old(site-nav-links),
 ::view-transition-new(site-nav-links) { animation: none; }
 
+/* No crossfade: the old and new headings overlapping for a moment read as
+   a blur. The new page simply replaces the old one in a single frame, while
+   the nav and the decor (named below) stay exactly where they are. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-    animation-duration: 0.28s;
+    animation: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1798,10 +1801,13 @@ a.row-name:hover { color: var(--sage); }
 
 .row-text {
     margin: 0;
-    font-size: 16px;
+    font-size: 15.5px;
     line-height: 1.55;
     color: var(--muted);
 }
+
+/* Outside-of-work rows have no dates, so the text runs to the right edge */
+.row--life { grid-template-columns: 136px minmax(0, 1fr); }
 
 .row-when {
     font-size: 14px;
@@ -1818,6 +1824,7 @@ a.row-name:hover { color: var(--sage); }
         align-items: start;
     }
     .row-when { grid-column: 2; text-align: left; }
+    .row--life { grid-template-columns: 104px minmax(0, 1fr); }
     .row-when:empty { display: none; }
     .row .logo-tile { height: 34px; }
     .row .logo-img { height: 15px; }
