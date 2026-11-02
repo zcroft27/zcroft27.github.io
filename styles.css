@@ -107,7 +107,7 @@ a {
 }
 
 .hero-text .bio strong {
-    font-weight: 600;
+    font-weight: inherit;
     color: var(--sage);
 }
 
