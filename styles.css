@@ -1745,7 +1745,9 @@ body::after {
 .row .logo-img--janestreet { height: 23px; }
 .row .logo-img--energynorth { height: 13px; }
 .row .logo-img--generate { height: 20px; }
-.row .logo-img--neu { height: 36px; }
+.logo-tile--neu { gap: 6px; }
+.row .logo-seal { display: block; height: 30px; width: auto; }
+.row .logo-wm { display: block; height: 21px; width: auto; }
 
 /* Linked tiles get the same lift and press as the landing page's tiles */
 a.logo-tile:hover {
@@ -1819,7 +1821,8 @@ a.row-name:hover { color: var(--sage); }
     .row .logo-img--janestreet { height: 19px; }
     .row .logo-img--energynorth { height: 10px; }
     .row .logo-img--generate { height: 16px; }
-    .row .logo-img--neu { height: 31px; }
+    .row .logo-seal { height: 25px; }
+    .row .logo-wm { height: 17px; }
     .row-name { font-size: 15.5px; padding-top: 2px; }
 }
 
