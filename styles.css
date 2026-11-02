@@ -1769,6 +1769,7 @@ body::after {
 .row .logo-img { height: 19px; }
 .row .logo-img--smartleaf { height: 13px; }
 .row .logo-img--janestreet { height: 23px; }
+.row .logo-img--energynorth { height: 13px; }
 
 .row-name {
     font-family: var(--font-display);
@@ -1809,8 +1810,6 @@ a.row-name:hover { color: var(--sage); }
     font-variant-numeric: tabular-nums;
 }
 
-.row-when--now { color: var(--sage); font-weight: 600; }
-
 @media (max-width: 640px) {
     .row {
         grid-template-columns: 104px minmax(0, 1fr);
@@ -1823,6 +1822,7 @@ a.row-name:hover { color: var(--sage); }
     .row .logo-img { height: 15px; }
     .row .logo-img--smartleaf { height: 10px; }
     .row .logo-img--janestreet { height: 19px; }
+    .row .logo-img--energynorth { height: 10px; }
     .row-name { font-size: 15.5px; padding-top: 2px; }
 }
 
