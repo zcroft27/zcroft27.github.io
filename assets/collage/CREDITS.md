@@ -92,3 +92,13 @@ the paper-keying pipeline rather than flattened to ink density.
 - **Processing:** leftmost piece cropped from a three-piece etched collage;
   black surround and parchment backing knocked out so only the ink etching
   remains as an alpha mask for palette tinting
+
+## `joker.png`
+
+- **Subject:** Joker from the "Atlas" playing-card deck — a capering jester with a tambourine
+- **Source:** <https://commons.wikimedia.org/wiki/File:Atlas_deck_joker.jpg>
+- **Creator / collection:** Unknown card designer, circa 1920
+- **License:** Public domain (per Wikimedia Commons)
+- **Processing:** ink-density cutout like the engravings, with a 45px frame
+  ignored so the printed card edge drops out. On the page it is printed onto a
+  CSS card (`.art-card`) rather than floating bare, so it still reads as a card.
