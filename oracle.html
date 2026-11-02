@@ -49,6 +49,12 @@ OpenAPI codegen and a real Postgres harness (integration, fuzz, performance) wer
     <script>
         const markdown = document.getElementById('markdown-script').textContent;
         document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+        // Links in a write-up open in a new tab, so the write-up stays open behind them.
+        document.querySelectorAll('#markdown-content a[href]').forEach(function (a) {
+            if (a.getAttribute('href').charAt(0) === '#') return;
+            a.target = '_blank';
+            a.rel = 'noopener';
+        });
     </script>
 </body>
 </html>
