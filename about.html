@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About · Zach Croft</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=117">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <script>
+        /* Same load gate as the landing page: hold .reveal at opacity 0 until
+           decor.js has painted a frame, so the fade-in is actually seen. */
+        document.documentElement.classList.add("js-wait");
+        setTimeout(function () { document.documentElement.classList.add("js-ready"); }, 2500);
+    </script>
+</head>
+<body>
+    <script src="scene.js?v=6"></script>
+    <script src="decor.js?v=49"></script>
+    <main class="page">
+        <nav class="site-nav" aria-label="Site">
+            <a href="/" class="site-nav-home">Zach Croft</a>
+            <div class="site-nav-links">
+            <a href="/about" aria-current="page">About</a>
+            <a href="/projects">Projects</a>
+            <a href="/travels">Travels</a>
+            <a href="/resources">Resources</a>
+            </div>
+        </nav>
+        <header class="page-head">
+            <div class="hero-top">
+                <div class="portrait reveal">
+                    <img src="photos/me/headshot.png" alt="Zach Croft" width="720" height="720">
+                </div>
+                <div class="hero-text">
+                    <h1 class="page-h1 reveal" style="--d: 70ms">About me</h1>
+                    <p class="about-sub">
+                        Hi! I&#8217;m Zach, a student at Northeastern University studying Computer
+                        Science and Mathematics. I am incoming at Jane Street in NYC, NY. I am a
+                        passionate musician, learner, and computerist.
+                    </p>
+                    <p class="about-sub">
+                        I grew up in a small, rural town in central Massachusetts, and enjoyed riding
+                        bicycles, playing trumpet, and solving puzzles. Ask me about Rubik&#8217;s cubes!
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <section class="reveal" style="--d: 190ms" aria-labelledby="work-h">
+            <h2 class="section-label" id="work-h">Work</h2>
+            <div class="rows">
+                <div class="row">
+                    <a class="logo-tile" style="--tile:#1D3F95" href="https://www.janestreet.com/" target="_blank" rel="noopener"><img src="assets/logos/jane-street-white.svg" alt="Jane Street" class="logo-img logo-img--janestreet" width="181" height="49"></a>
+                    <div>
+                        <p class="row-role">Trading Desk Operations Engineer Intern</p>
+                        <p class="row-org">Jane Street, New York, NY</p>
+                    </div>
+                    <span class="row-when">Incoming</span>
+                </div>
+                <div class="row">
+                    <a class="logo-tile" style="--tile:#DE6C58" href="https://www.klaviyo.com/" target="_blank" rel="noopener"><img src="assets/logos/klaviyo-cream.svg" alt="Klaviyo" class="logo-img" width="581" height="172"></a>
+                    <div>
+                        <p class="row-role">Software Engineer Co-op</p>
+                        <p class="row-org">Klaviyo, Boston, MA</p>
+                    </div>
+                    <span class="row-when">Jul 2026 – Current</span>
+                </div>
+                <div class="row">
+                    <a class="logo-tile" style="--tile:#091630" href="https://www.smartleaf.com/" target="_blank" rel="noopener"><img src="assets/logos/smartleaf.png" alt="Smartleaf" class="logo-img logo-img--smartleaf" width="900" height="125"></a>
+                    <div>
+                        <p class="row-role">Software Development Co-op</p>
+                        <p class="row-org">Smartleaf, Boston, MA</p>
+                    </div>
+                    <span class="row-when">May 2025 – Dec 2025</span>
+                </div>
+                <div class="row">
+                    <a class="logo-tile" style="--tile:#FFFFFF" href="https://haffners.com/" target="_blank" rel="noopener"><img src="assets/logos/energy-north.png" alt="Energy North" class="logo-img logo-img--energynorth" width="500" height="59"></a>
+                    <div>
+                        <p class="row-role">Information Technology Intern</p>
+                        <p class="row-org">Energy North Group, Lawrence, MA</p>
+                    </div>
+                    <span class="row-when">Jun 2024 – Jan 2025</span>
+                </div>
+            </div>
+        </section>
+
+        <section data-reveal aria-labelledby="campus-h">
+            <h2 class="section-label" id="campus-h">On campus</h2>
+            <div class="rows">
+                <div class="row">
+                    <a class="logo-tile" style="--tile:#FFFFFF" href="https://generatenu.com/" target="_blank" rel="noopener"><img src="assets/logos/generate.png" alt="Generate" class="logo-img logo-img--generate" width="597" height="127"></a>
+                    <div>
+                        <p class="row-role">Chief of Software Engineering</p>
+                        <p class="row-org">Generate, previously Tech Lead and Software Engineer</p>
+                    </div>
+                    <span class="row-when">SP25 – Current</span>
+                </div>
+                <div class="row">
+                    <a class="logo-tile logo-tile--neu" style="--tile:#FFFFFF" href="https://www.northeastern.edu/" target="_blank" rel="noopener"><img src="assets/logos/northeastern-seal.png" alt="" class="logo-seal" width="30" height="30"><img src="assets/logos/northeastern-wordmark.svg" alt="Northeastern University" class="logo-wm" width="60" height="21"></a>
+                    <div>
+                        <p class="row-role">Teaching Assistant, CS 3650 Computer Systems</p>
+                        <p class="row-org">Northeastern University</p>
+                    </div>
+                    <span class="row-when">SP25</span>
+                </div>
+                <div class="row">
+                    <a class="logo-tile logo-tile--neu" style="--tile:#FFFFFF" href="https://www.northeastern.edu/" target="_blank" rel="noopener"><img src="assets/logos/northeastern-seal.png" alt="" class="logo-seal" width="30" height="30"><img src="assets/logos/northeastern-wordmark.svg" alt="Northeastern University" class="logo-wm" width="60" height="21"></a>
+                    <div>
+                        <p class="row-role">Accessibility Chair, then Social Media Coordinator</p>
+                        <p class="row-org">Northeastern Math Club</p>
+                    </div>
+                    <span class="row-when">FA23 – FA24</span>
+                </div>
+                <div class="row">
+                    <a class="logo-tile" style="--tile:#000000" href="https://www.northeastern.edu/" target="_blank" rel="noopener"><img src="assets/logos/nuwe.png" alt="NUWE" class="logo-img logo-img--nuwe" width="278" height="113"></a>
+                    <div>
+                        <p class="row-role">Trumpet</p>
+                        <p class="row-org">Northeastern Wind Ensemble</p>
+                    </div>
+                    <span class="row-when">FA23 – Current</span>
+                </div>
+                <div class="row">
+                    <a class="logo-tile" style="--tile:#FFFFFF" href="https://nustagemtc.org/" target="_blank" rel="noopener"><img src="assets/logos/nustage.png" alt="NU Stage Musical Theater Company" class="logo-img logo-img--nustage" width="653" height="166"></a>
+                    <div>
+                        <p class="row-role">Pit Orchestra Trumpet</p>
+                        <p class="row-org">NU Stage Musical Theater Company</p>
+                    </div>
+                    <span class="row-when">FA23</span>
+                </div>
+            </div>
+        </section>
+
+        <section data-reveal aria-labelledby="life-h">
+            <h2 class="section-label" id="life-h">Outside of work</h2>
+            <div class="rows">
+                <div class="row row--life">
+                    <span class="row-name row-name--plain">Music</span>
+                    <p class="row-text">I play trumpet, and I&#8217;ve toured South Africa with an orchestra.</p>
+                </div>
+                <div class="row row--life">
+                    <span class="row-name row-name--plain">Running</span>
+                    <p class="row-text">Ran the 2024 and 2025 Falmouth Road Races and the Cambridge Half Marathon.</p>
+                </div>
+                <div class="row row--life">
+                    <span class="row-name row-name--plain">Italian</span>
+                    <p class="row-text">Working through <a href="easy-italian-step-by-step.pdf" target="_blank">Easy Italian Step-by-Step</a>. <em>In bocca al lupo!</em></p>
+                </div>
+                <div class="row row--life">
+                    <span class="row-name row-name--plain">Puzzles</span>
+                    <p class="row-text">Years of solving Rubik&#8217;s cubes and playing chess.</p>
+                </div>
+                <div class="row row--life">
+                    <span class="row-name row-name--plain">Travel</span>
+                    <p class="row-text">Summers on Cape Cod. Countries so far: South Africa, Mexico, Canada, Italy, Switzerland. <a href="/travels">Photos</a>.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
