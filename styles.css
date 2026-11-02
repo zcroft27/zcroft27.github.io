@@ -1627,12 +1627,40 @@ body::after {
     .site-nav { margin-bottom: 7px; }
 }
 
+/* Home link: the name takes the same sage underline as the other links on
+   hover, and "Home" also leads the link list (hidden on phones, where the
+   extra item would wrap the row and the name sits right above it). */
 .site-nav-home {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 20px;
     letter-spacing: -0.005em;
     color: var(--ink);
+}
+
+.site-nav-home span {
+    position: relative;
+}
+
+.site-nav-home span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 1.5px;
+    border-radius: 2px;
+    background: var(--sage);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+}
+
+.site-nav-home:hover span::after,
+.site-nav-home:focus-visible span::after { transform: scaleX(1); }
+
+@media (max-width: 560px) {
+    .site-nav-links .nav-home-link { display: none; }
 }
 
 .site-nav-links {
