@@ -1571,16 +1571,18 @@ body::after {
 /* The decor layer carries straight on into the next page (decor.js hands the
    float clock and mouse offset across), so the transition shows only the
    live new layer: no frozen snapshot of the old one fading out over it. */
-::view-transition-group(decor),
-::view-transition-new(decor) { animation: none; }
+::view-transition-group(decor) { animation: none; }
 
 /* The new page can paint its first frame before a cutout's image has
-   decoded, which shows as a one-frame blink (most visible on the dark
-   record). The old page's decor snapshot is held over the new layer for a
-   moment so that frame is covered; the pieces sit in identical positions
-   (the float state carries over), so the hand-off itself can't be seen. */
-@keyframes decor-hold { from { opacity: 1; } to { opacity: 1; } }
-::view-transition-old(decor) { animation: decor-hold 0.16s step-end both; }
+   decoded, which shows as a one-frame blink. So for a moment only the old
+   page's decor snapshot is shown, then the live layer takes over in a single
+   frame. The two are never on screen together (stacked, the half-transparent
+   pieces would double up and flash brighter), and the pieces sit in identical
+   positions (the float state carries over), so the swap itself can't be seen. */
+@keyframes decor-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes decor-in  { from { opacity: 0; } to { opacity: 1; } }
+::view-transition-old(decor) { animation: decor-out 0.16s step-end both; }
+::view-transition-new(decor) { animation: decor-in 0.16s step-end both; }
 .site-nav { view-transition-name: site-nav; }
 .site-nav-links { view-transition-name: site-nav-links; }
 
