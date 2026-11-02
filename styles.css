@@ -1500,6 +1500,23 @@ body::after {
     .art-min900 { display: block; }
 }
 
+/* Left gutter, spaced evenly top to bottom. Below 900px tall only four pieces
+   show (typewriter, pine, lobster, camera); from 900px the stamp and zigzag
+   join, so the column gets a second set of stops that spreads all six with
+   equal gaps instead of squeezing two more into the old ones. */
+.art-l-typewriter { --top: 9%; }
+.art-l-stamp      { --top: 26%; }
+.art-l-pine       { --top: 31.9%; }
+.art-l-zigzag     { --top: 52.2%; }
+.art-l-lobster    { --top: 56.4%; }
+.art-l-camera     { --top: 78.9%; }
+
+@media (min-width: 1201px) and (min-height: 900px) {
+    .art-l-pine    { --top: 36%; }
+    .art-l-lobster { --top: 65.6%; }
+    .art-l-camera  { --top: 82.3%; }
+}
+
 /* A custom property is inert until something references it, so naming the files
    here costs nothing — the fetch only happens where --src is read, inside the
    wide-screen query below. */

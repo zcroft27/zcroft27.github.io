@@ -90,24 +90,24 @@
          field rather than on an offset colour shape. -->
     <div class="art-scene" aria-hidden="true">
         <!-- left gutter -->
-        <div class="art" style="--top:9.5%; --left:4.6%; --w:130px; --h:100px" data-depth="0.2096" data-mouse="12" data-mouse-y="7.7">
+        <div class="art art-l-typewriter" style="--left:4.6%; --w:130px; --h:100px" data-depth="0.2096" data-mouse="12" data-mouse-y="7.7">
             <div class="art-i" style="--dur:26s; --dx:9px; --dy:-12px; --rot:2deg; --op:.46"><div class="art-cut art-cut--ink cut-typewriter" style="--tilt:-5deg; --ink:var(--collage-teal)"></div></div>
         </div>
         <!-- 1901 Pan-American steamship stamp. -->
-        <div class="art art-min900" style="--top:26.5%; --left:10.0%; --w:66px; --h:51px" data-depth="0.1158" data-mouse="11.3" data-mouse-y="5.4" data-float="0.6">
+        <div class="art art-min900 art-l-stamp" style="--left:10.0%; --w:66px; --h:51px" data-depth="0.1158" data-mouse="11.3" data-mouse-y="5.4" data-float="0.6">
             <div class="art-i" style="--dur:23s; --dx:7px; --dy:-9px; --rot:-4deg; --op:.62"><div class="art-cut cut-stamp" style="--tilt:8deg"></div></div>
         </div>
-        <div class="art" style="--top:37.0%; --left:6.0%; --w:88px; --h:118px" data-depth="0.1878" data-mouse="7.8" data-mouse-y="17.0">
+        <div class="art art-l-pine" style="--left:6.0%; --w:88px; --h:118px" data-depth="0.1878" data-mouse="7.8" data-mouse-y="17.0">
             <div class="art-i" style="--dur:27s; --dx:-7px; --dy:10px; --rot:3deg; --op:.55"><div class="art-cut cut-pine" style="--tilt:7deg"></div></div>
         </div>
-        <div class="art art-min900" style="--top:55.0%; --left:8.0%; --w:96px; --h:60px" data-depth="0.1369" data-mouse="-12.5" data-mouse-y="6.0" data-float="0.6">
+        <div class="art art-min900 art-l-zigzag" style="--left:8.0%; --w:96px; --h:60px" data-depth="0.1369" data-mouse="-12.5" data-mouse-y="6.0" data-float="0.6">
             <div class="art-i" style="--dur:25s; --dx:8px; --dy:-11px; --rot:4deg; --op:.32"><svg class="art-squig" style="--sw:2.6; --tilt:-3deg"><use href="#sq-zigzag"/></svg></div>
         </div>
-        <div class="art" style="--top:66.0%; --left:4.4%; --w:74px; --h:126px" data-depth="0.1777" data-mouse="7.6" data-mouse-y="16.4">
+        <div class="art art-l-lobster" style="--left:4.4%; --w:74px; --h:126px" data-depth="0.1777" data-mouse="7.6" data-mouse-y="16.4">
             <div class="art-i" style="--dur:24s; --dx:6px; --dy:-13px; --rot:3deg; --op:.62"><div class="art-cut art-cut--ink cut-lobster" style="--tilt:-6deg; --ink:var(--collage-red)"></div></div>
         </div>
         <!-- Hand holding a camera (Jordan Watkins' icon, used as-is). -->
-        <div class="art art-min760" style="--top:85.5%; --left:5.6%; --w:94px; --h:120px" data-depth="0.1104" data-mouse="8.6" data-mouse-y="8.6">
+        <div class="art art-min760 art-l-camera" style="--left:5.6%; --w:94px; --h:120px" data-depth="0.1104" data-mouse="8.6" data-mouse-y="8.6">
             <div class="art-i" style="--dur:22s; --dx:9px; --dy:-12px; --rot:6deg; --op:.5"><div class="art-cut cut-camera" style="--tilt:-6deg"></div></div>
         </div>
 
