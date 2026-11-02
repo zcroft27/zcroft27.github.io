@@ -1714,8 +1714,12 @@ body::after {
     max-width: 560px;
     margin: 0;
     font-size: 17px;
+    line-height: 1.6;
     color: var(--muted);
 }
+
+.about-sub + .about-sub { margin-top: 12px; }
+.hero-text .page-h1 + .about-sub { margin-top: 2px; }
 
 .about-sub a,
 .row-org a,
