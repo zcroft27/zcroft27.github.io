@@ -54,35 +54,8 @@ a {
     color: inherit;
 }
 
-@keyframes fade-up {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.reveal {
-    animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: var(--d, 0ms);
-}
-
-/* On a slow first load the cascade would finish while the page was still
-   blank (fonts/CSS/defer), so by first paint everything sat at the end state.
-   js-wait is stamped inline before paint; decor.js flips js-ready once a frame
-   has committed the starting opacity and the cascade can actually be seen. */
-.js-wait .reveal {
-    animation: none;
-    opacity: 0;
-}
-
-.js-wait.js-ready .reveal {
-    animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: var(--d, 0ms);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .reveal,
-    .js-wait .reveal,
-    .js-wait.js-ready .reveal { animation: none; opacity: 1; }
-}
+/* No load or scroll fade-ins: content is simply there when the page paints.
+   (.reveal / data-reveal attributes are still in the markup but inert.) */
 
 /* ---------- Home ---------- */
 .stage {
@@ -109,9 +82,11 @@ a {
 }
 
 /* Hero portrait + intro text */
+/* Top-aligned rather than centred: the headshot then sits at the same spot on
+   every page that uses this hero, however much text is beside it. */
 .hero-top {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 28px;
     margin-bottom: 20px;
 }
@@ -1401,46 +1376,6 @@ body::after {
     filter: contrast(1.1);
 }
 
-/* Scroll reveal (progressive enhancement — hidden only when JS opts in) */
-.js-reveal [data-reveal] {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.js-reveal [data-reveal].in {
-    opacity: 1;
-    transform: none;
-}
-
-/* Only the lower sheet reveals on scroll; the upper one rides the load sequence
-   because it breaks the fold. It travels a little further than the other reveals
-   so the sheet reads as being dealt onto the stack. */
-.js-reveal .feat-slot[data-reveal] {
-    transform: translateY(26px);
-}
-
-/* The terminal types itself in a line at a time once its card lands, which gives
-   the hand-built panel something of its own to answer the screenshot's colour. */
-.js-reveal .feat-slot[data-reveal] .tl {
-    opacity: 0;
-    transform: translateY(3px);
-    transition: opacity 0.45s ease, transform 0.45s ease;
-    transition-delay: calc(var(--i, 0) * 85ms + 320ms);
-}
-
-.js-reveal .feat-slot[data-reveal].in .tl {
-    opacity: 1;
-    transform: none;
-}
-
-/* decor.js bails before it touches a transform under reduced motion, which
-   leaves every piece at its authored position, so there is no decor animation
-   left here to switch off. */
-@media (prefers-reduced-motion: reduce) {
-    .js-reveal [data-reveal] { opacity: 1; transform: none; transition: none; }
-    .js-reveal .feat-slot[data-reveal] .tl { opacity: 1; transform: none; transition: none; }
-}
 
 /* The first screen is a fixed stack of blocks, so on a laptop-height window the
    featured pair lands just under the fold and goes unnoticed. Give back the
@@ -1635,6 +1570,13 @@ body::after {
 @view-transition { navigation: auto; }
 
 .art-scene { view-transition-name: decor; }
+
+/* The decor layer carries straight on into the next page (decor.js hands the
+   float clock and mouse offset across), so the transition shows only the
+   live new layer: no frozen snapshot of the old one fading out over it. */
+::view-transition-group(decor),
+::view-transition-new(decor) { animation: none; }
+::view-transition-old(decor) { display: none; }
 .site-nav { view-transition-name: site-nav; }
 .site-nav-links { view-transition-name: site-nav-links; }
 
@@ -1684,8 +1626,16 @@ body::after {
     flex-wrap: wrap;
     min-height: 32px;
     padding: 30px 0 0;
-    margin-bottom: 72px;
+    /* Inner pages: the content below the bar starts at exactly the landing
+       hero's top (76px), so the headshot on About lands where it is on the
+       home page and every page's heading starts at the same height. */
+    margin-bottom: 11px;
     line-height: 32px;
+}
+
+/* Matches the landing stage's shorter top padding on laptop-height windows */
+@media (min-width: 561px) and (max-height: 880px) {
+    .site-nav { margin-bottom: 7px; }
 }
 
 .site-nav-home {
@@ -1766,7 +1716,7 @@ body::after {
 
 @media (max-width: 560px) {
     .page { --stage-pad: 22px; padding: 0 22px 90px; }
-    .site-nav { padding-top: 22px; margin-bottom: 48px; }
+    .site-nav { padding-top: 22px; margin-bottom: 33px; }
     .site-nav-home { font-size: 18px; }
     .site-nav-links { gap: 6px 18px; font-size: 14.5px; }
     .page-head { margin-bottom: 44px; }
