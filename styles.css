@@ -101,6 +101,13 @@ a {
     translate: calc(round(nearest, var(--content-left), 52px) - var(--content-left)) 0;
 }
 
+/* The grid snap only makes sense with room either side of the column. On
+   narrow screens it rounds the left edge down to 0 and leaves the right
+   gutter double-width, so the content stays centred within its padding. */
+@media (max-width: 900px) {
+    .intro { translate: none; }
+}
+
 /* Hero portrait + intro text */
 .hero-top {
     display: flex;
@@ -1262,6 +1269,22 @@ a {
     .hero-top { flex-direction: column; align-items: flex-start; gap: 20px; margin-bottom: 24px; }
     .portrait { width: 136px; height: 136px; border-radius: 26px; }
     .hero-text h1 { font-size: clamp(2.6rem, 12vw, 3.4rem); }
+
+    /* Buttons as a tidy two-column block instead of a ragged wrap: the main
+       call to action and the email span the row, the two profiles pair up. */
+    .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .actions .btn {
+        justify-content: center;
+        padding: 12px 14px;
+    }
+
+    .actions .btn-primary,
+    .actions .copy-email { grid-column: 1 / -1; }
 }
 
 /* ================= Vintage-print decor ================= */
