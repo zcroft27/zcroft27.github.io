@@ -919,10 +919,13 @@ a {
 }
 
 /* Project list — clean editorial rows */
+/* No rules between rows (they fight the graph-paper grid); spacing and the
+   hover wash do the separating. Rows are compact enough that the whole list
+   fits on one laptop screen. */
 .proj-list {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid var(--line);
+    gap: 2px;
 }
 
 .proj-list a {
@@ -931,8 +934,8 @@ a {
     grid-template-columns: 34px 1fr auto;
     align-items: center;
     gap: 22px;
-    padding: 22px 12px;
-    border-bottom: 1px solid var(--line);
+    padding: 13px 12px;
+    border-radius: 10px;
     overflow: hidden;
     transition: background 0.25s ease, padding 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1028,16 +1031,6 @@ a {
     color: #eaeae8;
     margin-bottom: 26px;
     font-weight: 400;
-}
-
-.article > p:first-of-type::first-letter {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 3.3em;
-    float: left;
-    line-height: 0.68;
-    padding: 8px 14px 0 0;
-    color: var(--sage);
 }
 
 /* Section headers */
@@ -1946,6 +1939,11 @@ a.row-name:hover { color: var(--sage); }
 
 /* ---------- Projects on the shared shell ---------- */
 .page .proj-list { margin-top: 0; }
+
+/* The list is meant to be taken in at a glance, not scrolled: a tighter head
+   and a short tail keep the whole page inside a laptop-height window. */
+.page--fit { padding-bottom: 32px; }
+.page--fit .page-head { margin-bottom: 26px; }
 
 /* ---------- Landing: top bar ----------
    Lives in .stage's top padding as an overlay, aligned to the same snapped
