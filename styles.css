@@ -1573,7 +1573,14 @@ body::after {
    live new layer: no frozen snapshot of the old one fading out over it. */
 ::view-transition-group(decor),
 ::view-transition-new(decor) { animation: none; }
-::view-transition-old(decor) { display: none; }
+
+/* The new page can paint its first frame before a cutout's image has
+   decoded, which shows as a one-frame blink (most visible on the dark
+   record). The old page's decor snapshot is held over the new layer for a
+   moment so that frame is covered; the pieces sit in identical positions
+   (the float state carries over), so the hand-off itself can't be seen. */
+@keyframes decor-hold { from { opacity: 1; } to { opacity: 1; } }
+::view-transition-old(decor) { animation: decor-hold 0.16s step-end both; }
 .site-nav { view-transition-name: site-nav; }
 .site-nav-links { view-transition-name: site-nav-links; }
 
