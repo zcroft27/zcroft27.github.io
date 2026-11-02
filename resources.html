@@ -3,17 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👨‍💻 Resources</title>
+    <title>Resources · Zach Croft</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=53">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="styles.css?v=135">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <script>
+        /* Same load gate as the landing page: hold .reveal at opacity 0 until
+           decor.js has painted a frame, so the fade-in is actually seen. */
+        document.documentElement.classList.add("js-wait");
+        setTimeout(function () { document.documentElement.classList.add("js-ready"); }, 2500);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 </head>
 <body>
-    <a href="/" class="home-link"><i class="fas fa-arrow-left"></i> Back</a>
-    <div id="markdown-content" class="article"></div>
+    <script src="scene.js?v=12"></script>
+    <script src="decor.js?v=49"></script>
+    <main class="page">
+        <nav class="site-nav" aria-label="Site">
+            <div class="site-nav-links">
+                <a href="/" class="nav-home-link">Home</a>
+            <a href="/about">About</a>
+            <a href="/projects">Projects</a>
+            <a href="/photos">Photos</a>
+            <a href="/resources" aria-current="page">Resources</a>
+            </div>
+        </nav>
+        <header class="page-head">
+            <h1 class="page-h1 reveal" style="--d: 70ms">Resources I don&#8217;t want to lose</h1>
+        </header>
+
+        <div id="res-shelf" class="reveal" style="--d: 190ms"></div>
+
+        <!-- The list lives here as markdown, so adding a link is one line. The
+             script below turns each "## Section" into a heading and its bullets
+             into a two-column list of ordinary links. -->
     <script type="text/markdown" id="markdown-script">
 # Resources I Don't Want to Lose
 ## CS PDFs & Books
@@ -223,62 +249,40 @@
 
 
     </script>
-
-    <script>
-        const markdown = document.getElementById('markdown-script').textContent;
-        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
-    </script>
+        <script>
+        (function () {
+            var md = document.getElementById("markdown-script").textContent;
+            var doc = document.createElement("div");
+            doc.innerHTML = marked.parse(md);
+            var shelf = document.getElementById("res-shelf");
+            var section = null;
+            Array.prototype.forEach.call(doc.children, function (el) {
+                if (el.tagName === "H2") {
+                    section = document.createElement("section");
+                    var h = document.createElement("h2");
+                    h.className = "section-label";
+                    h.textContent = el.textContent.trim();
+                    section.appendChild(h);
+                    shelf.appendChild(section);
+                } else if (el.tagName === "UL" && section) {
+                    el.className = "res-list";
+                    el.querySelectorAll("a").forEach(function (a) {
+                        a.rel = "noopener";
+                        /* the site's domain on a quiet second line under the title */
+                        var host = "";
+                        try { host = new URL(a.getAttribute("href"), location.href).hostname.replace(/^www\./, ""); } catch (e) {}
+                        if (host) {
+                            var small = document.createElement("span");
+                            small.className = "res-host";
+                            small.textContent = host;
+                            a.appendChild(small);
+                        }
+                    });
+                    section.appendChild(el);
+                }
+            });
+        })();
+        </script>
+    </main>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

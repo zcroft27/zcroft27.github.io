@@ -85,7 +85,7 @@ the paper-keying pipeline rather than flattened to ink density.
 
 ## `chess-knight.png`
 
-- **Subject:** Ornate crowned chess knight (horse head on a pedestal)
+- **Subject:** Ornate crowned vinyl record (horse head on a pedestal)
 - **Source:** User-supplied reference image for this portfolio (site owner)
 - **License:** Provided by the site owner for use on zcroft27.github.io — not a
   scraped public-domain plate
@@ -102,3 +102,11 @@ the paper-keying pipeline rather than flattened to ink density.
 - **Processing:** ink-density cutout like the engravings, with a 45px frame
   ignored so the printed card edge drops out. On the page it is printed onto a
   CSS card (`.art-card`) rather than floating bare, so it still reads as a card.
+
+## `icon-camera.png`, `icon-computer.png`, `icon-record.png`
+
+- **Subject:** Hand holding a camera; retro computer; vinyl record
+- **Source:** <https://www.jordanwatkins.xyz/> (`/icon-camera.png`, `/icon-computer.png`, `/icon-vinyl.png`)
+- **Creator:** Jordan Watkins
+- **License:** Not stated on the source site. Used as-is at the site owner's
+  request; not public domain, so check with Jordan Watkins before wider reuse.

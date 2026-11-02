@@ -4,15 +4,15 @@ Drop your images into the matching folder, then they'll appear on the Travels pa
 Each section shows two photos: `1.jpg` and `2.jpg`.
 
 ## Folders (in page order)
-- `photos/italy/1.jpg`, `2.jpg`
-- `photos/switzerland/1.jpg`, `2.jpg`
-- `photos/cape-cod/1.jpg`, `2.jpg`
-- `photos/pacific-northwest/1.jpg`, `2.jpg`
-- `photos/new-york-city/1.jpg`, `2.jpg`
-- `photos/puerto-rico/1.jpg`, `2.jpg`
-- `photos/south-africa/1.jpg`, `2.jpg`
-- `photos/trumpet/1.jpg`, `2.jpg`      (you playing trumpet)
-- `photos/climbing/1.jpg`, `2.jpg`     (you rock climbing)
+- `assets/photos/italy/1.jpg`, `2.jpg`
+- `assets/photos/switzerland/1.jpg`, `2.jpg`
+- `assets/photos/cape-cod/1.jpg`, `2.jpg`
+- `assets/photos/pacific-northwest/1.jpg`, `2.jpg`
+- `assets/photos/new-york-city/1.jpg`, `2.jpg`
+- `assets/photos/puerto-rico/1.jpg`, `2.jpg`
+- `assets/photos/south-africa/1.jpg`, `2.jpg`
+- `assets/photos/trumpet/1.jpg`, `2.jpg`      (you playing trumpet)
+- `assets/photos/climbing/1.jpg`, `2.jpg`     (you rock climbing)
 
 ## Notes
 - Name your two photos `1.jpg` and `2.jpg` and drop them in — no code editing needed.

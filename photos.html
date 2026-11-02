@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos · Zach Croft</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=135">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <script>
+        /* Same load gate as the landing page: hold .reveal at opacity 0 until
+           decor.js has painted a frame, so the fade-in is actually seen. */
+        document.documentElement.classList.add("js-wait");
+        setTimeout(function () { document.documentElement.classList.add("js-ready"); }, 2500);
+    </script>
+</head>
+<body>
+    <script src="scene.js?v=12"></script>
+    <script src="decor.js?v=49"></script>
+    <main class="page">
+        <nav class="site-nav" aria-label="Site">
+            <div class="site-nav-links">
+                <a href="/" class="nav-home-link">Home</a>
+            <a href="/about">About</a>
+            <a href="/projects">Projects</a>
+            <a href="/photos" aria-current="page">Photos</a>
+            <a href="/resources">Resources</a>
+            </div>
+        </nav>
+        <header class="page-head">
+            <h1 class="page-h1 reveal" style="--d: 70ms">Photos</h1>
+        </header>
+
+        <div class="trips" id="trips"></div>
+    </main>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="lb-close" onclick="closeLightbox()">&times;</span>
+        <button class="lb-nav lb-prev" aria-label="Previous photo" onclick="lbNav(event,-1)">&#8249;</button>
+        <img id="lb-img" src="" alt="" onclick="event.stopPropagation()">
+        <button class="lb-nav lb-next" aria-label="Next photo" onclick="lbNav(event,1)">&#8250;</button>
+        <div class="lb-cap" id="lb-cap"></div>
+        <div class="lb-count" id="lb-count"></div>
+    </div>
+
+    <script>
+    const trips = [
+        { id: "italy", name: "Italy", emoji: "🇮🇹", places: "Rome, Florence, San Gimignano", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "switzerland", name: "Switzerland", emoji: "🇨🇭", places: "Zurich, Lucerne, Lauterbrunnen", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "cape-cod", name: "Cape Cod", emoji: "🏖️", places: "Summers on the Cape", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "pacific-northwest", name: "Pacific Northwest", emoji: "🌲", places: "Vancouver, Vancouver Island", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "new-york-city", name: "New York City", emoji: "🗽", places: "NYC", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "puerto-rico", name: "Puerto Rico", emoji: "🌴", places: "San Juan", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "south-africa", name: "South Africa", emoji: "🦓", places: "Orchestra tour", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "trumpet", name: "Trumpet", emoji: "🎺", places: "Music", blurb: "", photos: ["1.jpg", "2.jpg"] },
+        { id: "climbing", name: "Rock climbing", emoji: "🧗", places: "", blurb: "", photos: ["1.jpg", "2.jpg"] }
+    ];
+    let lbGroup = [], lbIndex = 0;
+    function esc(s) {
+        return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+    function photoParts(trip, p) {
+        const file = typeof p === "string" ? p : p.file;
+        const caption = typeof p === "string" ? "" : (p.caption || "");
+        return { src: "assets/photos/" + trip.id + "/" + file, caption: caption };
+    }
+
+    function render() {
+        document.getElementById("trips").innerHTML = trips.map(trip => {
+            const cover = photoParts(trip, trip.photos[0]);
+            const places = trip.places ? '<span class="trip-places">' + esc(trip.places) + '</span>' : "";
+            const blurb = trip.blurb ? '<span class="trip-blurb">' + esc(trip.blurb) + '</span>' : "";
+            return '<button type="button" class="trip-card" '
+                + 'onclick="openLightbox(\'' + esc(trip.id) + '\',0)" aria-label="Open ' + esc(trip.name) + ' photos">'
+                + '<img class="trip-photo" src="' + esc(cover.src) + '" alt="' + esc(trip.name) + '" loading="lazy" decoding="async">'
+                + '<span class="trip-name">' + esc(trip.name) + '<span class="trip-emoji">' + trip.emoji + '</span></span>'
+                + places + blurb
+                + '</button>';
+        }).join("");
+    }
+    function openLightbox(tripId, idx) {
+        const trip = trips.find(t => t.id === tripId);
+        lbGroup = trip.photos.map(p => photoParts(trip, p));
+        lbIndex = idx;
+        showLb();
+        document.getElementById("lightbox").classList.add("open");
+    }
+    function showLb() {
+        const cur = lbGroup[lbIndex];
+        document.getElementById("lb-img").src = cur.src;
+        document.getElementById("lb-cap").textContent = cur.caption || "";
+        const multi = lbGroup.length > 1;
+        document.getElementById("lb-count").textContent = multi ? (lbIndex + 1) + " / " + lbGroup.length : "";
+        document.querySelector(".lb-prev").style.display = multi ? "flex" : "none";
+        document.querySelector(".lb-next").style.display = multi ? "flex" : "none";
+    }
+    function lbNav(e, dir) {
+        e.stopPropagation();
+        const n = lbGroup.length;
+        lbIndex = (lbIndex + dir + n) % n;
+        showLb();
+    }
+    function closeLightbox() {
+        document.getElementById("lightbox").classList.remove("open");
+    }
+    document.addEventListener("keydown", e => {
+        if (!document.getElementById("lightbox").classList.contains("open")) return;
+        if (e.key === "Escape") closeLightbox();
+        else if (e.key === "ArrowLeft") lbNav(e, -1);
+        else if (e.key === "ArrowRight") lbNav(e, 1);
+    });
+
+
+    render();
+    </script>
+</body>
+</html>

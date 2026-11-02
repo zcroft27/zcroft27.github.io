@@ -7,92 +7,102 @@
     var reduce = window.matchMedia &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ---- Scroll reveal (only enhances when IntersectionObserver exists) ---- */
-    var revealEls = document.querySelectorAll("[data-reveal]");
-    if (revealEls.length && "IntersectionObserver" in window) {
-        document.documentElement.classList.add("js-reveal");
-        if (reduce) {
-            // reduced motion: reveal immediately, no transition
-            for (var i = 0; i < revealEls.length; i++) revealEls[i].classList.add("in");
-            document.documentElement.classList.add("js-ready");
-        } else {
-            var io = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("in");
-                        io.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-            for (var j = 0; j < revealEls.length; j++) io.observe(revealEls[j]);
-
-            /* Two frames so the opacity:0 starting style from .js-reveal actually
-               paints before .in flips it — otherwise a slow cold load adds both
-               classes in one turn and the transition has nothing to run from. */
-            var afterPaint = function (fn) {
-                requestAnimationFrame(function () {
-                    requestAnimationFrame(fn);
-                });
-            };
-
-            /* The observer deliberately waits until an element is well inside the
-               viewport, which is right for anything you scroll down to and wrong
-               for anything already on screen when the page opens: the bottom of
-               the first screen would sit at opacity 0 and read as empty space
-               rather than as content continuing below. Anything on screen already
-               is therefore let through on its own, keeping the observer for the
-               parts that are genuinely further down. Runs again after load in
-               case webfonts reflow the column. */
-            var showOnScreen = function () {
-                for (var k = 0; k < revealEls.length; k++) {
-                    (function (el) {
-                        if (el.classList.contains("in")) return;
-                        if (el.getBoundingClientRect().top < window.innerHeight) {
-                            afterPaint(function () {
-                                if (el.classList.contains("in")) return;
-                                el.classList.add("in");
-                                io.unobserve(el);
-                            });
+    /* decor.js now loads right after scene.js at the top of <body>, so the
+       float can be applied before the first paint (see below). The page's
+       content is not parsed yet at that point, so the reveal half waits for it. */
+    function initReveal() {
+        /* ---- Scroll reveal (only enhances when IntersectionObserver exists) ---- */
+        var revealEls = document.querySelectorAll("[data-reveal]");
+        if (revealEls.length && "IntersectionObserver" in window) {
+            document.documentElement.classList.add("js-reveal");
+            if (reduce) {
+                // reduced motion: reveal immediately, no transition
+                for (var i = 0; i < revealEls.length; i++) revealEls[i].classList.add("in");
+                document.documentElement.classList.add("js-ready");
+            } else {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("in");
+                            io.unobserve(entry.target);
                         }
-                    })(revealEls[k]);
-                }
-            };
-
-            /* Hold the CSS .reveal cascade (via js-ready) until fonts have had a
-               brief chance, then release — capped so a slow font CDN cannot leave
-               the hero blank. */
-            var armed = false;
-            var armLoadCascade = function () {
-                if (armed) return;
-                armed = true;
-                afterPaint(function () {
-                    document.documentElement.classList.add("js-ready");
-                    showOnScreen();
-                });
-            };
-            if (document.fonts && document.fonts.ready) {
-                document.fonts.ready.then(armLoadCascade);
-            }
-            setTimeout(armLoadCascade, 140);
-            window.addEventListener("load", function () {
-                afterPaint(showOnScreen);
-            });
-        }
-    } else if (document.documentElement.classList.contains("js-wait")) {
-        /* No data-reveal on this page, but the load cascade still needs releasing. */
-        if (reduce) {
-            document.documentElement.classList.add("js-ready");
-        } else {
-            var release = function () {
-                requestAnimationFrame(function () {
-                    requestAnimationFrame(function () {
-                        document.documentElement.classList.add("js-ready");
                     });
+                }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+                for (var j = 0; j < revealEls.length; j++) io.observe(revealEls[j]);
+
+                /* Two frames so the opacity:0 starting style from .js-reveal actually
+                   paints before .in flips it — otherwise a slow cold load adds both
+                   classes in one turn and the transition has nothing to run from. */
+                var afterPaint = function (fn) {
+                    requestAnimationFrame(function () {
+                        requestAnimationFrame(fn);
+                    });
+                };
+
+                /* The observer deliberately waits until an element is well inside the
+                   viewport, which is right for anything you scroll down to and wrong
+                   for anything already on screen when the page opens: the bottom of
+                   the first screen would sit at opacity 0 and read as empty space
+                   rather than as content continuing below. Anything on screen already
+                   is therefore let through on its own, keeping the observer for the
+                   parts that are genuinely further down. Runs again after load in
+                   case webfonts reflow the column. */
+                var showOnScreen = function () {
+                    for (var k = 0; k < revealEls.length; k++) {
+                        (function (el) {
+                            if (el.classList.contains("in")) return;
+                            if (el.getBoundingClientRect().top < window.innerHeight) {
+                                afterPaint(function () {
+                                    if (el.classList.contains("in")) return;
+                                    el.classList.add("in");
+                                    io.unobserve(el);
+                                });
+                            }
+                        })(revealEls[k]);
+                    }
+                };
+
+                /* Hold the CSS .reveal cascade (via js-ready) until fonts have had a
+                   brief chance, then release — capped so a slow font CDN cannot leave
+                   the hero blank. */
+                var armed = false;
+                var armLoadCascade = function () {
+                    if (armed) return;
+                    armed = true;
+                    afterPaint(function () {
+                        document.documentElement.classList.add("js-ready");
+                        showOnScreen();
+                    });
+                };
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(armLoadCascade);
+                }
+                setTimeout(armLoadCascade, 140);
+                window.addEventListener("load", function () {
+                    afterPaint(showOnScreen);
                 });
-            };
-            if (document.fonts && document.fonts.ready) document.fonts.ready.then(release);
-            setTimeout(release, 140);
+            }
+        } else if (document.documentElement.classList.contains("js-wait")) {
+            /* No data-reveal on this page, but the load cascade still needs releasing. */
+            if (reduce) {
+                document.documentElement.classList.add("js-ready");
+            } else {
+                var release = function () {
+                    requestAnimationFrame(function () {
+                        requestAnimationFrame(function () {
+                            document.documentElement.classList.add("js-ready");
+                        });
+                    });
+                };
+                if (document.fonts && document.fonts.ready) document.fonts.ready.then(release);
+                setTimeout(release, 140);
+            }
         }
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initReveal);
+    } else {
+        initReveal();
     }
 
     /* ---- Ambient float + parallax on the collage pieces ------------------
@@ -172,6 +182,20 @@
     var sy = window.pageYOffset || document.documentElement.scrollTop || 0;
     var mx = 0, my = 0, tmx = 0, tmy = 0;
 
+    /* Every page shares this field, so moving between pages should not restart
+       it. The float clock and the eased mouse offset are handed over in
+       sessionStorage as a page is left and picked up by the next one, which
+       then draws its first frame exactly where the last page's final frame
+       was. Storage can be unavailable (private mode, blocked site data); the
+       field then simply starts fresh, as it always used to. */
+    var KEY = "decor-state";
+    var restored = null;
+    try { restored = JSON.parse(sessionStorage.getItem(KEY) || "null"); } catch (e) {}
+    if (restored) {
+        mx = +restored.mx || 0; my = +restored.my || 0;
+        tmx = +restored.tmx || 0; tmy = +restored.tmy || 0;
+    }
+
     /* The only layout reads in the file. Run at startup and after a resize,
        never inside the frame loop. */
     function measure() {
@@ -244,7 +268,16 @@
        is capped as well, so even a throttled or dropped frame can only advance
        the drift by one plausible frame's worth. */
     var MAX_STEP = 0.05;
-    var clock = 0, prev = 0, rafId = 0, onScreen = true;
+    var clock = restored ? (+restored.clock || 0) : 0, prev = 0, rafId = 0, onScreen = true;
+
+    function save() {
+        try {
+            sessionStorage.setItem(KEY, JSON.stringify({
+                clock: clock, mx: mx, my: my, tmx: tmx, tmy: tmy
+            }));
+        } catch (e) {}
+    }
+    window.addEventListener("pagehide", save);
 
     function tick(now) {
         rafId = requestAnimationFrame(tick);
@@ -309,6 +342,6 @@
     }
 
     measure();
-    apply(0);
+    apply(clock);
     sync();
 })();
