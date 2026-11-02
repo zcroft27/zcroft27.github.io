@@ -94,7 +94,7 @@
             <div class="art-i" style="--dur:26s; --dx:9px; --dy:-12px; --rot:2deg; --op:.46"><div class="art-cut art-cut--ink cut-typewriter" style="--tilt:-5deg; --ink:var(--collage-teal)"></div></div>
         </div>
         <!-- 1901 Pan-American steamship stamp. -->
-        <div class="art art-min900 art-l-stamp" style="--left:10.0%; --w:66px; --h:51px" data-depth="0.1158" data-mouse="11.3" data-mouse-y="5.4" data-float="0.6">
+        <div class="art art-min760 art-l-stamp" style="--left:10.0%; --w:66px; --h:51px" data-depth="0.1158" data-mouse="11.3" data-mouse-y="5.4" data-float="0.6">
             <div class="art-i" style="--dur:23s; --dx:7px; --dy:-9px; --rot:-4deg; --op:.62"><div class="art-cut cut-stamp" style="--tilt:8deg"></div></div>
         </div>
         <div class="art art-l-pine" style="--left:8.4%; --w:88px; --h:118px" data-depth="0.1878" data-mouse="7.8" data-mouse-y="17.0">

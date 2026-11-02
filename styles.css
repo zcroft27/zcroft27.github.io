@@ -1438,6 +1438,14 @@ body::after {
 .art-l-lobster    { --top: 56.4%; }
 .art-l-camera     { --top: 78.9%; }
 
+/* 760-899px tall: the stamp joins, so five pieces share the column */
+@media (min-width: 1201px) and (min-height: 760px) and (max-height: 899px) {
+    .art-l-stamp   { --top: 28.2%; }
+    .art-l-pine    { --top: 39.6%; }
+    .art-l-lobster { --top: 60.4%; }
+    .art-l-camera  { --top: 79%; }
+}
+
 @media (min-width: 1201px) and (min-height: 900px) {
     .art-l-pine    { --top: 36%; }
     .art-l-lobster { --top: 65.6%; }
@@ -1789,6 +1797,7 @@ body::after {
 .row .logo-img--generate { height: 20px; }
 .row .logo-img--nuwe { height: 20px; }
 .row .logo-img--nustage { height: 26px; }
+.row .logo-img--mathclub { height: 36px; }
 .logo-tile--neu { gap: 6px; }
 .row .logo-seal { display: block; height: 30px; width: auto; }
 .row .logo-wm { display: block; height: 21px; width: auto; }
@@ -1871,6 +1880,7 @@ a.row-name:hover { color: var(--sage); }
     .row .logo-img--generate { height: 16px; }
     .row .logo-img--nuwe { height: 16px; }
     .row .logo-img--nustage { height: 21px; }
+    .row .logo-img--mathclub { height: 30px; }
     .row .logo-seal { height: 25px; }
     .row .logo-wm { height: 17px; }
     .row-name { font-size: 15.5px; padding-top: 2px; }

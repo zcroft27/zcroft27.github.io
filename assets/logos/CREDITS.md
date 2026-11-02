@@ -9,6 +9,8 @@ name the organisations Zach has worked with.
 - `northeastern-wordmark.svg` — stacked "Northeastern University" letterforms
   taken from the logo in northeastern.edu's site header, recoloured black.
 - `generate.png` — Generate wordmark, from an image supplied by Zach, cropped.
+- `math-club.png` — Northeastern Math Club logo from the club's Linktree
+  (linktr.ee/mathclubnu), cropped.
 - `nuwe.png` — NUWE logo, from an image supplied by Zach, cropped.
 - `nustage.png` — NU Stage full colour logo from nustagemtc.org, cropped.
 - `energy-north.png` — from the archived energynorthgroup.com site (2024).
