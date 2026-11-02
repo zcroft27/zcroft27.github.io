@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=101">
+    <link rel="stylesheet" href="styles.css?v=103">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <script>
         /* Same load gate as the landing page: hold .reveal at opacity 0 until
@@ -267,7 +267,18 @@
                     shelf.appendChild(section);
                 } else if (el.tagName === "UL" && section) {
                     el.className = "res-list";
-                    el.querySelectorAll("a").forEach(function (a) { a.rel = "noopener"; });
+                    el.querySelectorAll("a").forEach(function (a) {
+                        a.rel = "noopener";
+                        /* the site's domain on a quiet second line under the title */
+                        var host = "";
+                        try { host = new URL(a.getAttribute("href"), location.href).hostname.replace(/^www\./, ""); } catch (e) {}
+                        if (host) {
+                            var small = document.createElement("span");
+                            small.className = "res-host";
+                            small.textContent = host;
+                            a.appendChild(small);
+                        }
+                    });
                     section.appendChild(el);
                 }
             });
