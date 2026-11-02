@@ -1656,7 +1656,10 @@ body::after {
 .site-nav-links a {
     position: relative;
     color: var(--muted);
-    padding-bottom: 3px;
+    /* Bigger hit area, same footprint: the padding is cancelled by an equal
+       negative margin, so the links don't move. */
+    padding: 9px 11px 12px;
+    margin: -9px -11px;
     transition: color 0.15s ease;
 }
 
