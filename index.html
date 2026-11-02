@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=86">
+    <link rel="stylesheet" href="styles.css?v=87">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Zachary Croft</title>
     <script>
@@ -116,8 +116,12 @@
          field rather than on an offset colour shape. -->
     <div class="art-scene" aria-hidden="true">
         <!-- left gutter -->
-        <div class="art" style="--top:9.5%; --left:2.6%; --w:130px; --h:100px" data-depth="0.2096" data-mouse="12" data-mouse-y="7.7">
-            <div class="art-i" style="--dur:26s; --dx:9px; --dy:-12px; --rot:2deg; --op:.46"><div class="art-cut art-cut--ink cut-typewriter" style="--tilt:-5deg; --ink:var(--collage-teal)"></div></div>
+        <!-- A joker. The jester is an ink-density cutout like the engravings,
+             but it sits on its own cut-paper card with red corner indices, since
+             a bare figure wouldn't read as a playing card. Starts a little higher
+             than the typewriter did because the card is taller. -->
+        <div class="art" style="--top:7%; --left:2.6%; --w:100px; --h:140px" data-depth="0.2096" data-mouse="12" data-mouse-y="7.7">
+            <div class="art-i" style="--dur:30s; --dx:9px; --dy:11px; --rot:-4deg; --op:.46"><div class="art-card" style="--tilt:9deg"><span class="art-card-index">Joker</span><div class="art-card-face cut-joker"></div><span class="art-card-index art-card-index--flip">Joker</span></div></div>
         </div>
         <div class="art art-min900" style="--top:25.0%; --left:8.0%; --w:76px; --h:55px; color:var(--collage-mustard)" data-depth="0.1158" data-mouse="11.3" data-mouse-y="5.4" data-float="0.6">
             <div class="art-i" style="--dur:23s; --dx:7px; --dy:-9px; --rot:-4deg; --op:.42"><svg class="art-squig" style="--sw:3; --tilt:4deg"><use href="#sq-arch"/></svg></div>
@@ -136,12 +140,10 @@
         </div>
 
         <!-- right gutter -->
-        <!-- A joker, dealt into the corner the loop squiggle used to hold. The
-             jester is an ink-density cutout like the engravings, but it sits on
-             its own cut-paper card with red corner indices, since a bare figure
-             wouldn't read as a playing card. -->
-        <div class="art art-min760" style="--top:3.5%; --left:86.8%; --w:100px; --h:140px" data-depth="0.1681" data-mouse="11.0" data-mouse-y="11.0">
-            <div class="art-i" style="--dur:30s; --dx:-8px; --dy:11px; --rot:-4deg; --op:.46"><div class="art-card" style="--tilt:9deg"><span class="art-card-index">Joker</span><div class="art-card-face cut-joker"></div><span class="art-card-index art-card-index--flip">Joker</span></div></div>
+        <!-- Top-right corner, where the loop squiggle used to sit. Gated to 760px+
+             like that slot, since the right gutter runs out of room below it. -->
+        <div class="art art-min760" style="--top:5%; --left:87.4%; --w:130px; --h:100px" data-depth="0.1681" data-mouse="11.0" data-mouse-y="11.0">
+            <div class="art-i" style="--dur:26s; --dx:-8px; --dy:-12px; --rot:2deg; --op:.46"><div class="art-cut art-cut--ink cut-typewriter" style="--tilt:-5deg; --ink:var(--collage-teal)"></div></div>
         </div>
         <div class="art art-min760 art-lower art-lower--sparkle" style="--size:24px; color:var(--collage-mustard)" data-depth="0.0435" data-mouse="-4.2" data-mouse-y="4.2">
             <div class="art-i" style="--dur:21s; --dx:-5px; --dy:-8px; --rot:8deg; --op:.5"><svg class="art-squig"><use href="#sq-sparkle"/></svg></div>
