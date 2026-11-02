@@ -102,3 +102,33 @@ the paper-keying pipeline rather than flattened to ink density.
 - **Processing:** ink-density cutout like the engravings, with a 45px frame
   ignored so the printed card edge drops out. On the page it is printed onto a
   CSS card (`.art-card`) rather than floating bare, so it still reads as a card.
+
+## `camera-cut.png`
+
+- **Subject:** Two hands holding a box camera
+- **Source:** <https://commons.wikimedia.org/wiki/File:Hands_holding_box_camera_(1904).jpg>
+- **Creator / collection:** Unknown artist, newspaper advertisement for the Gailey Supply Store, Tacoma, WA, 28 June 1904
+- **License:** Public domain
+- **Processing:** paper-keyed rather than ink-density: only the grey newsprint
+  connected to the image edge is removed (flood fill), so the hands keep their
+  white paper fill inside the ink outlines. The scan's frame rule on the right
+  edge was cropped off first.
+
+## `mac-cut.png`
+
+- **Subject:** Apple Macintosh Plus (1986) with keyboard and mouse
+- **Source:** <https://commons.wikimedia.org/wiki/File:Apple_Macintosh_Plus_white_background_(cropped).jpg>
+- **Creator:** Felix Winkelnkemper
+- **License:** CC BY 2.0 — "Felix Winkelnkemper, CC BY 2.0, via Wikimedia Commons"
+- **Processing:** downscaled, white studio backdrop removed by flood fill from
+  the edges (so the white screen survives), edge pixels un-premultiplied
+  against white.
+
+## `stamp-cut.png`
+
+- **Subject:** US 1901 Pan-American Exposition 10c stamp, "Fast Ocean Navigation"
+- **Source:** <https://commons.wikimedia.org/wiki/File:US_stamp_1901_Pan_Am_10c_Fast_Ocean_Navigation.jpg>
+- **Creator / collection:** US Bureau of Engraving and Printing; scan by R. A. Nonenmacher
+- **License:** Public domain (US federal work)
+- **Processing:** scanner white keyed out by flood fill from the edges, which
+  keeps the perforated edge.

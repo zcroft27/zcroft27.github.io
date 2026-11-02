@@ -3,53 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👨‍💻 About Me</title>
+    <title>About · Zachary Croft</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=53">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="styles.css?v=92">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <script>
+        /* Same load gate as the landing page: hold .reveal at opacity 0 until
+           decor.js has painted a frame, so the fade-in is actually seen. */
+        document.documentElement.classList.add("js-wait");
+        setTimeout(function () { document.documentElement.classList.add("js-ready"); }, 2500);
+    </script>
 </head>
 <body>
-    <a href="/" class="home-link"><i class="fas fa-arrow-left"></i> Back</a>
-    <div id="markdown-content" class="article"></div>
-    <script type="text/markdown" id="markdown-script">
-# About Me
+    <script src="scene.js?v=2"></script>
+    <main class="page">
+        <nav class="site-nav" aria-label="Site">
+            <a href="./" class="site-nav-home">Zachary Croft</a>
+            <div class="site-nav-links">
+            <a href="projects.html">Projects</a>
+            <a href="readme.html" aria-current="page">About</a>
+            <a href="travels.html">Travels</a>
+            <a href="resources.html">Resources</a>
+            </div>
+        </nav>
+        <header class="page-head">
+            <div class="hero-top">
+                <div class="portrait reveal">
+                    <img src="photos/me/headshot.png" alt="Zachary Croft" width="720" height="720">
+                </div>
+                <div class="hero-text">
+                    <p class="kicker reveal">About</p>
+                    <h1 class="page-h1 reveal" style="--d: 70ms">About me</h1>
+                    <p class="about-sub reveal" style="--d: 130ms">
+                        CS at Northeastern, concentrating in systems with a minor in math.
+                        I read <a href="resources.html">a lot</a> about tech and play trumpet.
+                    </p>
+                </div>
+            </div>
+        </header>
 
-- Student at **Northeastern University**
-- **Computer Science** with a concentration in **Systems** and a minor in **Mathematics** 
-- I am passionate about architecting and implementing computer systems, read <a href=https://zachlearns.com/resources.html target="_blank">a lot</a> about tech, and love music.
-         
----
+        <section class="shots-wrap about-shots reveal" style="--d: 190ms" aria-label="Photos">
+            <div class="shots">
+                <div class="shot" style="z-index:6"><div class="shot-lift"><img src="photos/me/cow.png" alt="Lauterbrunnen, Switzerland" loading="lazy"><div class="cap">Lauterbrunnen, Switzerland</div></div></div>
+                <div class="shot" style="z-index:5"><div class="shot-lift"><img src="photos/trumpet/1.jpg" alt="Trumpet" loading="lazy"><div class="cap">Trumpet</div></div></div>
+                <div class="shot" style="z-index:4"><div class="shot-lift"><img src="photos/climbing/1.jpg" alt="Bouldering" loading="lazy"><div class="cap">Bouldering</div></div></div>
+                <div class="shot" style="z-index:3"><div class="shot-lift"><img src="photos/south-africa/1.jpg" alt="South Africa" loading="lazy"><div class="cap">South Africa</div></div></div>
+                <div class="shot" style="z-index:2"><div class="shot-lift"><img src="photos/cape-cod/1.jpg" alt="Cape Cod" loading="lazy"><div class="cap">Cape Cod</div></div></div>
+                <div class="shot" style="z-index:1"><div class="shot-lift"><img src="photos/trumpet/2.jpg" alt="Trumpet" loading="lazy"><div class="cap">Trumpet</div></div></div>
+            </div>
+        </section>
 
-## 🚀 Roles
+        <section class="reveal" style="--d: 240ms" aria-labelledby="work-h">
+            <h2 class="section-label" id="work-h">Work</h2>
+            <div class="rows">
+                <div class="row">
+                    <span class="logo-tile" style="--tile:#1D3F95"><img src="assets/logos/jane-street-white.svg" alt="Jane Street" class="logo-img logo-img--janestreet" width="181" height="49"></span>
+                    <div>
+                        <p class="row-role">Trading Desk Operations Engineer Intern</p>
+                        <p class="row-org">Jane Street, New York City</p>
+                    </div>
+                    <span class="row-when row-when--now">Incoming</span>
+                </div>
+                <div class="row">
+                    <span class="logo-tile" style="--tile:#DE6C58"><img src="assets/logos/klaviyo-cream.svg" alt="Klaviyo" class="logo-img" width="581" height="172"></span>
+                    <div>
+                        <p class="row-role">Software Engineer Co-op</p>
+                        <p class="row-org"><a href="https://www.klaviyo.com/" target="_blank" rel="noopener">Klaviyo</a></p>
+                    </div>
+                    <span class="row-when row-when--now">Now</span>
+                </div>
+                <div class="row">
+                    <span class="logo-tile" style="--tile:#091630"><img src="assets/logos/smartleaf.png" alt="Smartleaf" class="logo-img logo-img--smartleaf" width="900" height="125"></span>
+                    <div>
+                        <p class="row-role">Software Development Co-op</p>
+                        <p class="row-org"><a href="https://www.smartleaf.com/" target="_blank" rel="noopener">Smartleaf</a></p>
+                    </div>
+                    <span class="row-when">May – Dec 2025</span>
+                </div>
+                <div class="row">
+                    <span class="row-mark">Energy North</span>
+                    <div>
+                        <p class="row-role">Information Technology Intern</p>
+                        <p class="row-org"><a href="https://haffners.com/" target="_blank" rel="noopener">Energy North Group</a>, summer 2024 and winter 2024–25</p>
+                    </div>
+                    <span class="row-when">2024 – 25</span>
+                </div>
+            </div>
+        </section>
 
-- **Trading Desk Operations Engineer Intern** (incoming) at <a href="https://www.janestreet.com/" target="_blank">Jane Street</a>, NYC.
-- **Software Engineer Co-op** at <a href="https://www.klaviyo.com/" target="_blank">Klaviyo</a>.
-- **Software Development Co-op** at <a href=https://www.smartleaf.com/ target="_blank">Smartleaf</a> May 2025 - December 2025.
-- **Chief of Software Engineering (FA25, SP26)** in <a href=https://generatenu.com/ target="_blank">Generate</a>. 
-- **Tech Lead (SP25)** and **Software Engineer (FA25)** in <a href=https://generatenu.com/ target="_blank">Generate</a> (Team <a href=https://github.com/GenerateNU/arenius target="_blank">Arenius</a>, Team <a href=https://github.com/GenerateNU/platnm target="_blank">Platnm</a>).
-- **Teaching Assistant (SP25)** for <a href=https://www.coursicle.com/neu/courses/CS/3650/ target="_blank">CS 3650 Computer Systems</a>.
-- **Information Technology Intern** at <a href=https://haffners.com/ target="_blank">Energy North Group</a> June - August 2024 and December 2024 - January 2025.
-- **Accessibility Chair (FA23, SP24)** and **Social Media Coordinator (FA24)** in <a href=https://neu.campuslabs.com/engage/organization/math-club target="_blank">Northeastern Math Club</a>.
+        <section data-reveal aria-labelledby="campus-h">
+            <h2 class="section-label" id="campus-h">On campus</h2>
+            <div class="rows">
+                <div class="row">
+                    <span class="row-mark">Generate</span>
+                    <div>
+                        <p class="row-role">Chief of Software Engineering</p>
+                        <p class="row-org"><a href="https://generatenu.com/" target="_blank" rel="noopener">Generate</a>, Northeastern&#8217;s student-run product studio</p>
+                    </div>
+                    <span class="row-when">FA25 – SP26</span>
+                </div>
+                <div class="row">
+                    <span class="row-mark">Generate</span>
+                    <div>
+                        <p class="row-role">Tech Lead, then Software Engineer</p>
+                        <p class="row-org">Team <a href="https://github.com/GenerateNU/arenius" target="_blank" rel="noopener">Arenius</a> and Team <a href="https://github.com/GenerateNU/platnm" target="_blank" rel="noopener">Platnm</a></p>
+                    </div>
+                    <span class="row-when">SP25 – FA25</span>
+                </div>
+                <div class="row">
+                    <span class="row-mark">CS 3650</span>
+                    <div>
+                        <p class="row-role">Teaching Assistant</p>
+                        <p class="row-org"><a href="https://www.coursicle.com/neu/courses/CS/3650/" target="_blank" rel="noopener">CS 3650 Computer Systems</a></p>
+                    </div>
+                    <span class="row-when">SP25</span>
+                </div>
+                <div class="row">
+                    <span class="row-mark">Math Club</span>
+                    <div>
+                        <p class="row-role">Accessibility Chair, then Social Media Coordinator</p>
+                        <p class="row-org"><a href="https://neu.campuslabs.com/engage/organization/math-club" target="_blank" rel="noopener">Northeastern Math Club</a></p>
+                    </div>
+                    <span class="row-when">FA23 – FA24</span>
+                </div>
+            </div>
+        </section>
 
----
-
-## 🎵 Hobbies & Interests
-
-- **Music:** I play trumpet and have toured **South Africa** with an orchestra.  
-- **Running:** Competed in the **2024 & 2025 Falmouth Road Races** and **Cambridge Half Marathon**, signed up for the 2026 Falmouth Road Race! 
-- **Languages:** Currently learning **Italian** — working through <a href=easy-italian-step-by-step.pdf target="_blank">Easy Italian Step-by-Step</a>. *In bocca al lupo!*  
-- **Puzzles:** Years of solving Rubik's cubes and playing chess.  
-- **Travel:** I enjoy traveling and spending summers in **Cape Cod**.  
-    - *Countries visited so far:* South Africa, Mexico, The Bahamas, Canada, Italy, Switzerland.
-
-    </script>
-
-    <script>
-        const markdown = document.getElementById('markdown-script').textContent;
-        document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
-    </script>
+        <section data-reveal aria-labelledby="life-h">
+            <h2 class="section-label" id="life-h">Outside of work</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-ink" style="--src:url(assets/collage/trumpet-military-f.png); --ink-c:var(--collage-mustard)" aria-hidden="true"></div>
+                    <h3 class="card-title">Music</h3>
+                    <p class="card-text">I play trumpet, and I&#8217;ve toured South Africa with an orchestra.</p>
+                </div>
+                <div class="card">
+                    <svg class="card-squig art-squig" style="--sw:3; --ink-c:var(--collage-sage)" aria-hidden="true"><use href="#sq-wave"/></svg>
+                    <h3 class="card-title">Running</h3>
+                    <p class="card-text">Ran the 2024 and 2025 Falmouth Road Races and the Cambridge Half Marathon. Signed up for Falmouth 2026.</p>
+                </div>
+                <div class="card">
+                    <div class="card-ink" style="--src:url(assets/collage/globe.png); --ink-c:var(--collage-teal)" aria-hidden="true"></div>
+                    <h3 class="card-title">Italian</h3>
+                    <p class="card-text">Working through <a href="easy-italian-step-by-step.pdf" target="_blank">Easy Italian Step-by-Step</a>. <em>In bocca al lupo!</em></p>
+                </div>
+                <div class="card">
+                    <div class="card-ink" style="--src:url(assets/collage/chess-knight.png); --ink-c:var(--collage-cream)" aria-hidden="true"></div>
+                    <h3 class="card-title">Puzzles</h3>
+                    <p class="card-text">Years of solving Rubik&#8217;s cubes and playing chess.</p>
+                </div>
+                <a class="card" href="travels.html">
+                    <div class="card-ink" style="--src:url(assets/collage/lobster.png); --ink-c:var(--collage-red)" aria-hidden="true"></div>
+                    <h3 class="card-title">Travel</h3>
+                    <p class="card-text">Summers on Cape Cod. Countries so far: South Africa, Mexico, the Bahamas, Canada, Italy, Switzerland. <span style="color:var(--ink)">See the photos &rarr;</span></p>
+                </a>
+            </div>
+        </section>
+    </main>
+    <script src="decor.js?v=48" defer></script>
 </body>
 </html>
