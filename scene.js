@@ -139,4 +139,28 @@
 `;
     var me = document.currentScript;
     me.insertAdjacentHTML("beforebegin", html);
+
+    /* Nav feedback: move the underline to the clicked link at once, instead of
+       leaving it on the old page's link until the next page has loaded. */
+    document.addEventListener("click", function (e) {
+        var a = e.target.closest && e.target.closest(".site-nav-links a");
+        if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        var links = a.parentNode.querySelectorAll("a");
+        for (var i = 0; i < links.length; i++) links[i].removeAttribute("aria-current");
+        a.setAttribute("aria-current", "page");
+    });
+
+    /* Where supported (Chrome), fetch a page in the background once a link to
+       it is hovered, so the click lands almost instantly. Prefetch only, not
+       prerender: a prerendered page would start its decor clock early and the
+       floating pieces would no longer pick up where the last page left off. */
+    if (window.HTMLScriptElement && HTMLScriptElement.supports &&
+            HTMLScriptElement.supports("speculationrules")) {
+        var rules = document.createElement("script");
+        rules.type = "speculationrules";
+        rules.textContent = JSON.stringify({
+            prefetch: [{ where: { href_matches: "/*" }, eagerness: "moderate" }]
+        });
+        document.head.appendChild(rules);
+    }
 })();

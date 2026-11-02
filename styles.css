@@ -1638,9 +1638,10 @@ body::after {
     .site-nav { margin-bottom: 7px; }
 }
 
-/* The bar is just the links, held at the right edge where they have always
-   sat ("Home" leads them, so the name no longer needs to be a link). */
-.site-nav-links { margin-left: auto; }
+/* The bar is just the links, centred over the content column ("Home" leads
+   them, so the name no longer needs to be a link). */
+.site-nav { justify-content: center; }
+.site-nav-links { margin: 0 auto; justify-content: center; }
 
 .site-nav-links {
     display: flex;
