@@ -103,6 +103,12 @@ a {
 
 .hero-text .bio {
     margin-bottom: 0;
+    max-width: none;
+}
+
+.hero-text .bio strong {
+    font-weight: 600;
+    color: var(--ink);
 }
 
 .portrait {
@@ -1697,7 +1703,8 @@ body::after {
 .site-nav-links a[aria-current="page"] { color: var(--ink); }
 .site-nav-links a[aria-current="page"]::after { transform: scaleX(1); }
 
-.page-head { margin-bottom: 56px; }
+.page-head { margin-bottom: 36px; }
+.page .hero-top { margin-bottom: 0; }
 .page-head .kicker { margin-bottom: 16px; }
 
 .page-h1 {
