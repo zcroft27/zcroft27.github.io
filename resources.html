@@ -256,7 +256,9 @@
             doc.innerHTML = marked.parse(md);
             var shelf = document.getElementById("res-shelf");
             var section = null;
-            Array.prototype.forEach.call(doc.children, function (el) {
+            /* Walk a fixed copy: lists are moved out of doc as we go, which
+               would otherwise shift the live collection and skip headings. */
+            Array.prototype.slice.call(doc.children).forEach(function (el) {
                 if (el.tagName === "H2") {
                     section = document.createElement("section");
                     var h = document.createElement("h2");
