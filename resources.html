@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=92">
+    <link rel="stylesheet" href="styles.css?v=94">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <script>
         /* Same load gate as the landing page: hold .reveal at opacity 0 until
@@ -19,7 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 </head>
 <body>
-    <script src="scene.js?v=2"></script>
+    <script src="scene.js?v=3"></script>
     <main class="page">
         <nav class="site-nav" aria-label="Site">
             <a href="./" class="site-nav-home">Zachary Croft</a>
@@ -32,23 +32,15 @@
         </nav>
         <header class="page-head">
             <p class="kicker reveal">Resources</p>
-            <h1 class="page-h1 reveal" style="--d: 70ms">Resources I don&#8217;t want to lose</h1>
-            <p class="page-lede reveal" style="--d: 130ms" id="res-lede">Books, PDFs, docs and articles I keep coming back to.</p>
+            <h1 class="page-h1 page-h1--long reveal" style="--d: 70ms">Resources I don&#8217;t want to lose</h1>
+            <p class="page-lede reveal" style="--d: 130ms">Books, PDFs, docs and articles I keep coming back to.</p>
         </header>
 
-        <div class="res-tools reveal" style="--d: 190ms">
-            <label class="res-search">
-                <i class="fas fa-search" aria-hidden="true"></i>
-                <input type="search" id="res-q" placeholder="Search titles and sites" autocomplete="off" aria-label="Search resources">
-            </label>
-            <div class="res-chips" id="res-chips" role="group" aria-label="Filter by section"></div>
-        </div>
+        <div id="res-shelf" class="reveal" style="--d: 190ms"></div>
 
-        <div id="res-shelf" class="reveal" style="--d: 240ms"></div>
-        <p class="res-empty" id="res-empty" hidden>Nothing matches that. Try a shorter search.</p>
-
-        <!-- The list itself lives here as markdown, so adding a link is still one
-             line. The script below reads it and builds the shelf. -->
+        <!-- The list lives here as markdown, so adding a link is one line. The
+             script below turns each "## Section" into a heading and its bullets
+             into a two-column list of ordinary links. -->
     <script type="text/markdown" id="markdown-script">
 # Resources I Don't Want to Lose
 ## CS PDFs & Books
@@ -263,95 +255,21 @@
             var md = document.getElementById("markdown-script").textContent;
             var doc = document.createElement("div");
             doc.innerHTML = marked.parse(md);
-
-            /* markdown -> [{ name, items: [{ title, href }] }] */
-            var groups = [], cur = null;
+            var shelf = document.getElementById("res-shelf");
+            var section = null;
             Array.prototype.forEach.call(doc.children, function (el) {
                 if (el.tagName === "H2") {
-                    cur = { name: el.textContent.trim(), items: [] };
-                    groups.push(cur);
-                } else if (el.tagName === "UL" && cur) {
-                    el.querySelectorAll("li a").forEach(function (a) {
-                        cur.items.push({ title: a.textContent.trim(), href: a.getAttribute("href") });
-                    });
+                    section = document.createElement("section");
+                    var h = document.createElement("h2");
+                    h.className = "section-label";
+                    h.textContent = el.textContent.trim();
+                    section.appendChild(h);
+                    shelf.appendChild(section);
+                } else if (el.tagName === "UL" && section) {
+                    el.className = "res-list";
+                    el.querySelectorAll("a").forEach(function (a) { a.rel = "noopener"; });
+                    section.appendChild(el);
                 }
-            });
-
-            function host(href) {
-                try { return new URL(href, location.href).hostname.replace(/^www\./, ""); }
-                catch (e) { return ""; }
-            }
-            function kind(item) {
-                var h = item.href.toLowerCase(), t = item.title.toLowerCase();
-                if (/\.pdf($|[?#])/.test(h) || /\/raw\/.*\.pdf/.test(h) || /\bpdfs?\b/.test(t)) return ["pdf", "fas fa-file-pdf", "PDF"];
-                if (/github\.com/.test(h)) return ["repo", "fab fa-github", "GitHub"];
-                if (/\bbook\b|guide/.test(t)) return ["book", "fas fa-book", "Book"];
-                return ["link", "fas fa-link", "Link"];
-            }
-            function esc(s) {
-                return String(s).replace(/[&<>"]/g, function (c) {
-                    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
-                });
-            }
-
-            var total = groups.reduce(function (n, g) { return n + g.items.length; }, 0);
-            document.getElementById("res-lede").textContent =
-                "Books, PDFs, docs and articles I keep coming back to. " + total + " so far.";
-
-            var shelf = document.getElementById("res-shelf");
-            shelf.innerHTML = groups.map(function (g, gi) {
-                return '<section class="res-group" data-g="' + gi + '">'
-                    + '<h2 class="section-label">' + esc(g.name) + '</h2>'
-                    + '<ul class="res-list">' + g.items.map(function (it) {
-                        var k = kind(it);
-                        return '<li class="res-item" data-s="' + esc((it.title + " " + host(it.href)).toLowerCase()) + '">'
-                            + '<a href="' + esc(it.href) + '" target="_blank" rel="noopener">'
-                            + '<span class="res-type res-type--' + k[0] + '" title="' + k[2] + '"><i class="' + k[1] + '" aria-hidden="true"></i></span>'
-                            + '<span class="res-title">' + esc(it.title) + '</span>'
-                            + '<span class="res-host">' + esc(host(it.href)) + '</span>'
-                            + '</a></li>';
-                    }).join("") + '</ul></section>';
-            }).join("");
-
-            var chips = document.getElementById("res-chips");
-            chips.innerHTML = '<button class="res-chip" type="button" data-g="all" aria-pressed="true">All<span>' + total + '</span></button>'
-                + groups.map(function (g, gi) {
-                    return '<button class="res-chip" type="button" data-g="' + gi + '" aria-pressed="false">'
-                        + esc(g.name) + '<span>' + g.items.length + '</span></button>';
-                }).join("");
-
-            var active = "all", q = "";
-            var input = document.getElementById("res-q");
-            var empty = document.getElementById("res-empty");
-
-            function apply() {
-                var shown = 0;
-                shelf.querySelectorAll(".res-group").forEach(function (sec) {
-                    var inGroup = active === "all" || sec.getAttribute("data-g") === active;
-                    var any = 0;
-                    sec.querySelectorAll(".res-item").forEach(function (li) {
-                        var ok = inGroup && (!q || li.getAttribute("data-s").indexOf(q) !== -1);
-                        li.hidden = !ok;
-                        if (ok) any++;
-                    });
-                    sec.hidden = !any;
-                    shown += any;
-                });
-                empty.hidden = shown !== 0;
-            }
-
-            chips.addEventListener("click", function (e) {
-                var b = e.target.closest(".res-chip");
-                if (!b) return;
-                active = b.getAttribute("data-g");
-                chips.querySelectorAll(".res-chip").forEach(function (c) {
-                    c.setAttribute("aria-pressed", c === b ? "true" : "false");
-                });
-                apply();
-            });
-            input.addEventListener("input", function () {
-                q = input.value.trim().toLowerCase();
-                apply();
             });
         })();
         </script>

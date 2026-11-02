@@ -1379,9 +1379,6 @@ body::after {
     width: 100%;
     height: 100%;
     opacity: var(--op, 0.4);
-    /* Depth of field: near pieces stay sharp, mid ones get ~0.5px, far ones
-       ~2px, so the field reads as layered rather than flat. */
-    filter: blur(var(--blur, 0px));
 }
 
 /* Static off-axis tilt lives on the innermost node so it survives the composed
@@ -1528,8 +1525,19 @@ body::after {
 .cut-zebra      { --src: url("assets/collage/zebra.png"); }
 .cut-knight     { --src: url("assets/collage/chess-knight.png"); }
 .cut-joker      { --src: url("assets/collage/joker.png"); }
-.cut-camera     { --src: url("assets/collage/camera-cut.png"); }
-.cut-mac        { --src: url("assets/collage/mac-cut.png"); }
+.cut-camera     { --src: url("assets/collage/icon-camera.png"); }
+.cut-computer   { --src: url("assets/collage/icon-computer.png"); }
+
+/* The camera and computer are crisp photo-style icons, so on their own they
+   read louder than the engravings. Knock them back into the same print
+   world: drained to greyscale, warmed toward the cream ink, contrast eased
+   off, and the joker card's light paper grain over the top. */
+.art-cut.cut-camera,
+.art-cut.cut-computer {
+    filter: grayscale(1) sepia(0.4) contrast(0.78) brightness(0.92);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.7 1.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.7 1.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
 .cut-stamp      { --src: url("assets/collage/stamp-cut.png"); }
 
 /* ---- Playing card ---------------------------------------------------------
@@ -1718,25 +1726,16 @@ body::after {
     color: var(--muted);
 }
 
-/* Section heading: a small kicker with a hairline running out to the edge */
+/* Section heading: a small kicker. No rule after it; hairlines fight the
+   graph-paper grid behind the page. */
 .section-label {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 0 0 20px;
+    margin: 0 0 14px;
     font-family: var(--font-label);
     font-size: 12.5px;
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--sage);
-}
-
-.section-label::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--line);
 }
 
 .page section + section { margin-top: 64px; }
@@ -1751,61 +1750,33 @@ body::after {
 }
 
 /* ---------- About ---------- */
-/* Opens like Halli's about page: a large first-person paragraph in the
-   display face, then the detail below. Company names carry their logo
-   tiles inline, the way Matt Rothenberg's intro does. */
-.about-lede {
-    max-width: 700px;
-    margin: 0 0 22px;
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(1.4rem, 2.6vw, 1.85rem);
-    line-height: 1.42;
-    color: var(--ink);
-}
-
-.about-lede a {
-    border-bottom: 1px solid var(--line-strong);
-    transition: border-color 0.2s ease;
-}
-
-.about-lede a:hover { border-color: var(--ink); }
-
 .about-sub {
-    max-width: 640px;
+    max-width: 560px;
     margin: 0;
     font-size: 17px;
     color: var(--muted);
 }
 
-/* Inline logo chip: a miniature of the landing page's brand tile */
-.chip-logo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 1.25em;
-    padding: 0 0.32em;
-    margin: 0 0.12em;
-    border-radius: 0.24em;
-    background: var(--tile);
-    vertical-align: -0.2em;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+.about-sub a,
+.row-org a,
+.row-text a {
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-strong);
+    transition: border-color 0.2s ease;
 }
 
-.chip-logo img { display: block; height: 0.68em; width: auto; }
-.chip-logo--js img { height: 0.78em; }
-.chip-logo--sl img { height: 0.5em; }
+.about-sub a:hover,
+.row-org a:hover,
+.row-text a:hover { border-color: var(--ink); }
 
-/* Work and campus rows */
-.rows { border-top: 1px solid var(--line); }
-
+/* Rows: a mark column (logo tile, or the org's name in the display face),
+   the role, and the dates. Spacing does the separating, not rules. */
 .row {
     display: grid;
     grid-template-columns: 136px minmax(0, 1fr) auto;
     align-items: center;
     gap: 22px;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--line);
+    padding: 12px 0;
 }
 
 .row .logo-tile { height: 40px; }
@@ -1813,24 +1784,16 @@ body::after {
 .row .logo-img--smartleaf { height: 13px; }
 .row .logo-img--janestreet { height: 23px; }
 
-/* Orgs without a logo get a paper tile with their name set in the display
-   face, so the column still reads as a stack of tiles. */
-.row-mark {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    padding: 0 10px;
-    border-radius: 9px;
-    border: 1px solid var(--line-strong);
-    background: var(--fill);
+.row-name {
     font-family: var(--font-display);
-    font-size: 14.5px;
+    font-size: 17px;
     font-weight: 700;
-    text-align: center;
-    line-height: 1.05;
+    line-height: 1.2;
     color: var(--ink);
+    transition: color 0.18s ease;
 }
+
+a.row-name:hover { color: var(--sage); }
 
 .row-role {
     margin: 0;
@@ -1845,12 +1808,12 @@ body::after {
     color: var(--muted);
 }
 
-.row-org a {
-    color: var(--ink);
-    border-bottom: 1px solid var(--line-strong);
+.row-text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--muted);
 }
-
-.row-org a:hover { border-color: var(--ink); }
 
 .row-when {
     font-size: 14px;
@@ -1862,351 +1825,145 @@ body::after {
 
 .row-when--now { color: var(--sage); font-weight: 600; }
 
-/* Outside-of-work cards, each led by one of the collage engravings */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 14px;
-}
-
-.card {
-    position: relative;
-    padding: 20px 20px 22px;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    background: var(--fill);
-    transition: border-color 0.2s ease, translate 0.2s ease, background 0.2s ease;
-}
-
-a.card:hover,
-.card:hover {
-    translate: 0 -2px;
-    border-color: var(--line-strong);
-    background: var(--fill-hover);
-}
-
-.card-ink {
-    width: 64px;
-    height: 54px;
-    margin-bottom: 14px;
-    background-color: var(--ink-c, var(--collage-cream));
-    -webkit-mask: var(--src) left center / contain no-repeat;
-            mask: var(--src) left center / contain no-repeat;
-    opacity: 0.85;
-}
-
-.card-squig {
-    display: block;
-    width: 64px;
-    height: 54px;
-    margin-bottom: 14px;
-    color: var(--ink-c, var(--collage-cream));
-    opacity: 0.85;
-}
-
-.card-title {
-    margin: 0 0 6px;
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--ink);
-}
-
-.card-text {
-    margin: 0;
-    font-size: 15.5px;
-    line-height: 1.55;
-    color: var(--muted);
-}
-
-.card-text a {
-    color: var(--ink);
-    border-bottom: 1px solid var(--line-strong);
-}
-
 @media (max-width: 640px) {
     .row {
-        grid-template-columns: 112px minmax(0, 1fr);
-        gap: 6px 16px;
+        grid-template-columns: 104px minmax(0, 1fr);
+        gap: 4px 16px;
         align-items: start;
     }
     .row-when { grid-column: 2; text-align: left; }
-    .row .logo-tile, .row-mark { height: 36px; }
-    .row .logo-img { height: 16px; }
-    .row .logo-img--smartleaf { height: 11px; }
-    .row .logo-img--janestreet { height: 20px; }
-    .row-mark { font-size: 13px; }
+    .row-when:empty { display: none; }
+    .row .logo-tile { height: 34px; }
+    .row .logo-img { height: 15px; }
+    .row .logo-img--smartleaf { height: 10px; }
+    .row .logo-img--janestreet { height: 19px; }
+    .row-name { font-size: 15.5px; padding-top: 2px; }
 }
 
 /* ---------- Resources ---------- */
-.res-tools {
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 0;
-    margin: -14px 0 28px;
-    background: linear-gradient(var(--bg) 78%, transparent);
-}
-
-.res-search {
-    position: relative;
-    flex: 1 1 260px;
-    max-width: 340px;
-}
-
-.res-search i {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    translate: 0 -50%;
-    font-size: 13px;
-    color: var(--faint);
-    pointer-events: none;
-}
-
-.res-search input {
-    width: 100%;
-    height: 42px;
-    padding: 0 16px 0 38px;
-    border-radius: 999px;
-    border: 1px solid var(--line-strong);
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--ink);
-    font: inherit;
-    font-size: 15px;
-    outline: none;
-    transition: border-color 0.18s ease, background 0.18s ease;
-}
-
-.res-search input::placeholder { color: var(--faint); }
-.res-search input:focus { border-color: var(--sage); background: var(--fill); }
-
-.res-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-
-.res-chip {
-    height: 34px;
-    padding: 0 14px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: transparent;
-    color: var(--muted);
-    font: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-}
-
-.res-chip span {
-    margin-left: 6px;
-    font-weight: 500;
-    color: var(--faint);
-    font-variant-numeric: tabular-nums;
-}
-
-.res-chip:hover { color: var(--ink); border-color: var(--line-strong); }
-
-.res-chip[aria-pressed="true"] {
-    color: #1c1e1b;
-    background: var(--sage);
-    border-color: var(--sage);
-}
-
-.res-chip[aria-pressed="true"] span { color: rgba(28, 30, 27, 0.6); }
-
-.res-group[hidden] { display: none; }
+/* Plain two-column link list. Real links in the DOM, so Ctrl+F finds them. */
+.page-h1--long { font-size: clamp(2.3rem, 5vw, 3.3rem); }
 
 .res-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 28px;
+    columns: 2;
+    column-gap: 40px;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.res-item a {
-    display: grid;
-    grid-template-columns: 30px minmax(0, 1fr);
-    align-items: start;
-    gap: 2px 10px;
-    padding: 11px 0;
-    border-bottom: 1px solid var(--line);
-    transition: border-color 0.18s ease;
+.res-list li {
+    break-inside: avoid;
+    padding: 5px 0;
 }
 
-.res-item[hidden] { display: none; }
-
-.res-type {
-    grid-row: span 2;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    background: var(--fill);
-    color: var(--faint);
-    font-size: 13px;
-    transition: color 0.18s ease, background 0.18s ease;
-}
-
-.res-type--pdf { color: var(--collage-red); }
-.res-type--repo { color: var(--ink); }
-
-.res-title {
+.res-list a {
     font-size: 15.5px;
-    font-weight: 500;
-    line-height: 1.35;
+    line-height: 1.4;
     color: #d9d9d7;
-    transition: color 0.18s ease;
+    border-bottom: 1px solid transparent;
+    transition: color 0.18s ease, border-color 0.18s ease;
 }
 
-.res-host {
-    font-size: 12.5px;
-    color: var(--faint);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.res-item a:hover { border-color: var(--line-strong); }
-.res-item a:hover .res-title { color: var(--ink); }
-.res-item a:hover .res-type { background: var(--fill-hover); color: var(--ink); }
-.res-item a:hover .res-type--pdf { color: var(--collage-red); }
-
-.res-empty {
-    padding: 40px 0;
-    color: var(--muted);
-    font-size: 16px;
+.res-list a:hover {
+    color: var(--ink);
+    border-color: var(--line-strong);
 }
 
 @media (max-width: 700px) {
-    .res-list { grid-template-columns: 1fr; }
-    .res-search { max-width: none; }
+    .res-list { columns: 1; }
 }
 
 /* ---------- Travels ---------- */
-/* Each trip is a little stack of prints: the cover photo on top, the next
-   one fanned out behind it like the landing page's photo strip. */
 .trips {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 44px 26px;
+    align-items: start;
+    gap: 40px 26px;
 }
 
 .trip-card {
     display: block;
     width: 100%;
-    cursor: pointer;
-    background: none;
-    border: 0;
     padding: 0;
-    text-align: left;
+    border: 0;
+    background: none;
     color: inherit;
     font: inherit;
+    text-align: left;
+    cursor: pointer;
 }
 
-.trip-stack {
-    position: relative;
+.trip-photo {
     display: block;
-    aspect-ratio: 4 / 5;
-    margin-bottom: 16px;
-}
-
-.trip-stack img {
-    position: absolute;
-    inset: 0;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 4 / 5;
+    margin-bottom: 14px;
     object-fit: cover;
     border-radius: 14px;
     border: 1px solid var(--line-strong);
-    box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.8);
-    transition: rotate 0.35s cubic-bezier(0.34, 1.4, 0.64, 1), translate 0.35s cubic-bezier(0.34, 1.4, 0.64, 1), filter 0.3s ease;
+    background: var(--fill);
+    transition: translate 0.2s ease, border-color 0.2s ease;
 }
 
-.trip-stack .trip-back {
-    rotate: 4deg;
-    translate: 6px 4px;
-    filter: brightness(0.6) grayscale(0.3);
-}
-
-.trip-stack .trip-front { rotate: -1.5deg; }
-
-.trip-card:hover .trip-back,
-.trip-card:focus-visible .trip-back {
-    rotate: 9deg;
-    translate: 22px 2px;
-    filter: brightness(0.8) grayscale(0.1);
-}
-
-.trip-card:hover .trip-front,
-.trip-card:focus-visible .trip-front {
-    rotate: -3deg;
-    translate: -6px -4px;
-}
-
+.trip-card:hover .trip-photo { translate: 0 -3px; border-color: rgba(255, 255, 255, 0.3); }
 .trip-card:focus-visible { outline: none; }
-.trip-card:focus-visible .trip-front { outline: 2px solid var(--ink); outline-offset: 3px; }
-
-.trip-count {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;
-    z-index: 2;
-    padding: 3px 9px;
-    border-radius: 999px;
-    background: rgba(20, 20, 22, 0.72);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ink);
-    rotate: -1.5deg;
-}
+.trip-card:focus-visible .trip-photo { outline: 2px solid var(--ink); outline-offset: 3px; }
 
 .trip-name {
     display: block;
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 700;
-    color: var(--ink);
     line-height: 1.15;
+    color: var(--ink);
 }
 
 .trip-name .trip-emoji { font-size: 0.8em; margin-left: 4px; }
 
 .trip-places {
     display: block;
-    margin-top: 4px;
+    margin-top: 3px;
     font-size: 14.5px;
     color: var(--muted);
 }
 
 .trip-blurb {
     display: block;
-    margin-top: 6px;
+    margin-top: 4px;
     font-size: 14px;
-    font-style: italic;
     color: var(--faint);
 }
 
 @media (max-width: 900px) {
-    .trips { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 20px; }
+    .trips { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 20px; }
 }
 
 @media (max-width: 480px) {
-    .trips { grid-template-columns: 1fr; gap: 40px; }
-    .trip-stack { aspect-ratio: 5 / 4; }
+    .trips { grid-template-columns: 1fr; }
+    .trip-photo { aspect-ratio: 5 / 4; }
 }
 
 /* ---------- Projects on the shared shell ---------- */
 .page .proj-list { margin-top: 0; }
+
+/* ---------- Landing: top bar ----------
+   Lives in .stage's top padding as an overlay, aligned to the same snapped
+   column edge as .intro, so it adds no height above the fold. */
+.site-nav--home {
+    --content-left: calc((100vw - min(860px, 100vw)) / 2 + var(--stage-pad));
+    position: absolute;
+    top: 0;
+    left: var(--stage-pad);
+    right: var(--stage-pad);
+    margin: 0;
+    justify-content: flex-end;
+    translate: calc(round(nearest, var(--content-left), 52px) - var(--content-left)) 0;
+}
+
+@media (max-width: 900px) {
+    .site-nav--home { translate: none; justify-content: flex-start; }
+}
 
 /* ---------- Landing: section cards ----------
    Replaces the row of small text links. Same footprint budget as before

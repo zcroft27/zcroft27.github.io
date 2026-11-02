@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=92">
+    <link rel="stylesheet" href="styles.css?v=94">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <script>
         /* Same load gate as the landing page: hold .reveal at opacity 0 until
@@ -18,7 +18,7 @@
     </script>
 </head>
 <body>
-    <script src="scene.js?v=2"></script>
+    <script src="scene.js?v=3"></script>
     <main class="page">
         <nav class="site-nav" aria-label="Site">
             <a href="./" class="site-nav-home">Zachary Croft</a>
@@ -30,9 +30,9 @@
             </div>
         </nav>
         <header class="page-head">
-            <p class="kicker reveal">Film &amp; feet</p>
+            <p class="kicker reveal">Photos</p>
             <h1 class="page-h1 reveal" style="--d: 70ms">Travels</h1>
-            <p class="page-lede reveal" style="--d: 130ms">A few favorite shots. Tap a stack to flip through it.</p>
+            <p class="page-lede reveal" style="--d: 130ms">A few favorite shots from trips and things I do.</p>
         </header>
 
         <div class="trips" id="trips"></div>
@@ -69,19 +69,14 @@
         return { src: "photos/" + trip.id + "/" + file, caption: caption };
     }
 
-    /* Each trip is a small stack of prints: its first photo on top and the
-       second fanned out behind, opening into the lightbox on click. */
     function render() {
-        document.getElementById("trips").innerHTML = trips.map((trip, i) => {
-            const pics = trip.photos.map(p => photoParts(trip, p));
-            const back = pics[1] ? '<img class="trip-back" src="' + esc(pics[1].src) + '" alt="" loading="lazy">' : "";
-            const front = '<img class="trip-front" src="' + esc(pics[0].src) + '" alt="' + esc(trip.name) + '" loading="lazy">';
-            const count = pics.length > 1 ? '<span class="trip-count">' + pics.length + ' photos</span>' : "";
+        document.getElementById("trips").innerHTML = trips.map(trip => {
+            const cover = photoParts(trip, trip.photos[0]);
             const places = trip.places ? '<span class="trip-places">' + esc(trip.places) + '</span>' : "";
             const blurb = trip.blurb ? '<span class="trip-blurb">' + esc(trip.blurb) + '</span>' : "";
-            return '<button type="button" class="trip-card" data-reveal style="transition-delay:' + (i % 3) * 70 + 'ms" '
+            return '<button type="button" class="trip-card" '
                 + 'onclick="openLightbox(\'' + esc(trip.id) + '\',0)" aria-label="Open ' + esc(trip.name) + ' photos">'
-                + '<span class="trip-stack">' + back + front + count + '</span>'
+                + '<img class="trip-photo" src="' + esc(cover.src) + '" alt="' + esc(trip.name) + '" loading="lazy" decoding="async">'
                 + '<span class="trip-name">' + esc(trip.name) + '<span class="trip-emoji">' + trip.emoji + '</span></span>'
                 + places + blurb
                 + '</button>';

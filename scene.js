@@ -93,22 +93,22 @@
         <div class="art" style="--top:9.5%; --left:2.6%; --w:130px; --h:100px" data-depth="0.2096" data-mouse="12" data-mouse-y="7.7">
             <div class="art-i" style="--dur:26s; --dx:9px; --dy:-12px; --rot:2deg; --op:.46"><div class="art-cut art-cut--ink cut-typewriter" style="--tilt:-5deg; --ink:var(--collage-teal)"></div></div>
         </div>
-        <!-- 1901 Pan-American steamship stamp. Mid-distance, so a touch of blur. -->
+        <!-- 1901 Pan-American steamship stamp. -->
         <div class="art art-min900" style="--top:26.5%; --left:8.2%; --w:66px; --h:51px" data-depth="0.1158" data-mouse="11.3" data-mouse-y="5.4" data-float="0.6">
-            <div class="art-i" style="--dur:23s; --dx:7px; --dy:-9px; --rot:-4deg; --op:.62; --blur:0.6px"><div class="art-cut cut-stamp" style="--tilt:8deg"></div></div>
+            <div class="art-i" style="--dur:23s; --dx:7px; --dy:-9px; --rot:-4deg; --op:.62"><div class="art-cut cut-stamp" style="--tilt:8deg"></div></div>
         </div>
         <div class="art" style="--top:37.0%; --left:4.1%; --w:88px; --h:118px" data-depth="0.1878" data-mouse="7.8" data-mouse-y="17.0">
             <div class="art-i" style="--dur:27s; --dx:-7px; --dy:10px; --rot:3deg; --op:.55"><div class="art-cut cut-pine" style="--tilt:7deg"></div></div>
         </div>
         <div class="art art-min900" style="--top:55.0%; --left:6.2%; --w:96px; --h:60px" data-depth="0.1369" data-mouse="-12.5" data-mouse-y="6.0" data-float="0.6">
-            <div class="art-i" style="--dur:25s; --dx:8px; --dy:-11px; --rot:4deg; --op:.32; --blur:2px"><svg class="art-squig" style="--sw:2.6; --tilt:-3deg"><use href="#sq-zigzag"/></svg></div>
+            <div class="art-i" style="--dur:25s; --dx:8px; --dy:-11px; --rot:4deg; --op:.32"><svg class="art-squig" style="--sw:2.6; --tilt:-3deg"><use href="#sq-zigzag"/></svg></div>
         </div>
         <div class="art" style="--top:67.0%; --left:1.4%; --w:74px; --h:126px" data-depth="0.1777" data-mouse="7.6" data-mouse-y="16.4">
             <div class="art-i" style="--dur:24s; --dx:6px; --dy:-13px; --rot:3deg; --op:.62"><div class="art-cut art-cut--ink cut-lobster" style="--tilt:-6deg; --ink:var(--collage-red)"></div></div>
         </div>
-        <!-- Hands holding a box camera, from a 1904 newspaper ad. Near: sharp. -->
-        <div class="art art-min760" style="--top:85.0%; --left:2.2%; --w:128px; --h:73px" data-depth="0.1104" data-mouse="8.6" data-mouse-y="8.6">
-            <div class="art-i" style="--dur:22s; --dx:9px; --dy:-12px; --rot:6deg; --op:.62"><div class="art-cut cut-camera" style="--tilt:-7deg"></div></div>
+        <!-- Hand holding a camera (Jordan Watkins' icon, used as-is). -->
+        <div class="art art-min760" style="--top:82.0%; --left:2.4%; --w:94px; --h:120px" data-depth="0.1104" data-mouse="8.6" data-mouse-y="8.6">
+            <div class="art-i" style="--dur:22s; --dx:9px; --dy:-12px; --rot:6deg; --op:.5"><div class="art-cut cut-camera" style="--tilt:-6deg"></div></div>
         </div>
 
         <!-- right gutter -->
@@ -123,7 +123,7 @@
             <div class="art-i" style="--dur:21s; --dx:-5px; --dy:-8px; --rot:8deg; --op:.5"><svg class="art-squig"><use href="#sq-sparkle"/></svg></div>
         </div>
         <div class="art art-short--trumpet" style="--left:85.6%; --w:150px; --h:58px" data-depth="0.1712" data-mouse="12.4" data-mouse-y="6.8">
-            <div class="art-i" style="--dur:28s; --dx:-9px; --dy:9px; --rot:-3deg; --op:.32; --blur:0.6px"><div class="art-cut art-cut--ink cut-trumpet" style="--tilt:-4deg; --ink:var(--collage-mustard)"></div></div>
+            <div class="art-i" style="--dur:28s; --dx:-9px; --dy:9px; --rot:-3deg; --op:.32"><div class="art-cut art-cut--ink cut-trumpet" style="--tilt:-4deg; --ink:var(--collage-mustard)"></div></div>
         </div>
         <!-- Stands in the long gap between the trumpet and the globe, facing in
              towards the column. A hand-coloured plate, so like the pine it keeps
@@ -134,11 +134,11 @@
             <div class="art-i" style="--dur:29s; --dx:7px; --dy:9px; --rot:-3deg; --op:.55"><div class="art-cut cut-zebra" style="--tilt:-2deg"></div></div>
         </div>
         <div class="art art-short--globe" style="--left:88.9%; --w:72px; --h:84px" data-depth="0.1418" data-mouse="9.9" data-mouse-y="9.9">
-            <div class="art-i" style="--dur:25s; --dx:-6px; --dy:-11px; --rot:4deg; --op:.60; --blur:1.4px"><div class="art-cut art-cut--ink cut-globe" style="--tilt:8deg; --ink:var(--collage-teal)"></div></div>
+            <div class="art-i" style="--dur:25s; --dx:-6px; --dy:-11px; --rot:4deg; --op:.60"><div class="art-cut art-cut--ink cut-globe" style="--tilt:8deg; --ink:var(--collage-teal)"></div></div>
         </div>
-        <!-- Macintosh Plus. Near: sharp. -->
-        <div class="art art-min760" style="--top:77.0%; --left:88.4%; --w:106px; --h:95px" data-depth="0.1499" data-mouse="10.3" data-mouse-y="10.3">
-            <div class="art-i" style="--dur:23s; --dx:-8px; --dy:-12px; --rot:5deg; --op:.6"><div class="art-cut cut-mac" style="--tilt:4deg"></div></div>
+        <!-- Retro computer (Jordan Watkins' icon, used as-is). -->
+        <div class="art art-min760" style="--top:77.0%; --left:88.4%; --w:110px; --h:99px" data-depth="0.1499" data-mouse="10.3" data-mouse-y="10.3">
+            <div class="art-i" style="--dur:23s; --dx:-8px; --dy:-12px; --rot:5deg; --op:.5"><div class="art-cut cut-computer" style="--tilt:4deg"></div></div>
         </div>
 
         <!-- Above the hero, where the old asterisk sat. The only piece over the

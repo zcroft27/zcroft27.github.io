@@ -103,26 +103,13 @@ the paper-keying pipeline rather than flattened to ink density.
   ignored so the printed card edge drops out. On the page it is printed onto a
   CSS card (`.art-card`) rather than floating bare, so it still reads as a card.
 
-## `camera-cut.png`
+## `icon-camera.png`, `icon-computer.png`
 
-- **Subject:** Two hands holding a box camera
-- **Source:** <https://commons.wikimedia.org/wiki/File:Hands_holding_box_camera_(1904).jpg>
-- **Creator / collection:** Unknown artist, newspaper advertisement for the Gailey Supply Store, Tacoma, WA, 28 June 1904
-- **License:** Public domain
-- **Processing:** paper-keyed rather than ink-density: only the grey newsprint
-  connected to the image edge is removed (flood fill), so the hands keep their
-  white paper fill inside the ink outlines. The scan's frame rule on the right
-  edge was cropped off first.
-
-## `mac-cut.png`
-
-- **Subject:** Apple Macintosh Plus (1986) with keyboard and mouse
-- **Source:** <https://commons.wikimedia.org/wiki/File:Apple_Macintosh_Plus_white_background_(cropped).jpg>
-- **Creator:** Felix Winkelnkemper
-- **License:** CC BY 2.0 — "Felix Winkelnkemper, CC BY 2.0, via Wikimedia Commons"
-- **Processing:** downscaled, white studio backdrop removed by flood fill from
-  the edges (so the white screen survives), edge pixels un-premultiplied
-  against white.
+- **Subject:** Hand holding a camera; retro computer
+- **Source:** <https://www.jordanwatkins.xyz/> (`/icon-camera.png`, `/icon-computer.png`)
+- **Creator:** Jordan Watkins
+- **License:** Not stated on the source site. Used as-is at the site owner's
+  request; not public domain, so check with Jordan Watkins before wider reuse.
 
 ## `stamp-cut.png`
 
