@@ -1753,7 +1753,7 @@ body::after {
 .row .logo-img--energynorth { height: 13px; }
 .row .logo-img--generate { height: 20px; }
 .row .logo-img--nuwe { height: 20px; }
-.row .logo-img--nustage { height: 30px; }
+.row .logo-img--nustage { height: 26px; }
 .logo-tile--neu { gap: 6px; }
 .row .logo-seal { display: block; height: 30px; width: auto; }
 .row .logo-wm { display: block; height: 21px; width: auto; }
@@ -1835,7 +1835,7 @@ a.row-name:hover { color: var(--sage); }
     .row .logo-img--energynorth { height: 10px; }
     .row .logo-img--generate { height: 16px; }
     .row .logo-img--nuwe { height: 16px; }
-    .row .logo-img--nustage { height: 25px; }
+    .row .logo-img--nustage { height: 21px; }
     .row .logo-seal { height: 25px; }
     .row .logo-wm { height: 17px; }
     .row-name { font-size: 15.5px; padding-top: 2px; }
