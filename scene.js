@@ -88,7 +88,7 @@
     <!-- Collage scene. Each cluster pairs a cutout with a squiggle nearby: the
          cutouts now carry their own colour, so they sit straight on the dark
          field rather than on an offset colour shape. -->
-    <div class="art-scene" aria-hidden="true">
+    <div class="art-scene" aria-hidden="true"><div class="art-field">
         <!-- left gutter -->
         <div class="art art-l-typewriter" style="--left:3.2%; --w:130px; --h:100px" data-depth="0.2096" data-mouse="12" data-mouse-y="7.7">
             <div class="art-i" style="--dur:26s; --dx:9px; --dy:-12px; --rot:2deg; --op:.46"><div class="art-cut art-cut--ink cut-typewriter" style="--tilt:-5deg; --ink:var(--collage-teal)"></div></div>
@@ -135,7 +135,7 @@
             <div class="art-i" style="--dur:23s; --dx:-8px; --dy:-12px; --rot:5deg; --op:.5"><div class="art-cut cut-computer" style="--tilt:4deg"></div></div>
         </div>
 
-    </div>
+    </div></div>
 `;
     var me = document.currentScript;
     me.insertAdjacentHTML("beforebegin", html);
