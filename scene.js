@@ -94,7 +94,7 @@
             <div class="art-i" style="--dur:26s; --dx:9px; --dy:-12px; --rot:2deg; --op:.46"><div class="art-cut art-cut--ink cut-typewriter" style="--tilt:-5deg; --ink:var(--collage-teal)"></div></div>
         </div>
         <!-- Vinyl record (Jordan Watkins' icon, used as-is). -->
-        <div class="art art-min760 art-l-record" style="--left:9.6%; --w:82px; --h:82px" data-depth="0.1158" data-mouse="11.3" data-mouse-y="5.4" data-float="0.6">
+        <div class="art art-l-record" style="--left:9.6%; --w:82px; --h:82px" data-depth="0.1158" data-mouse="11.3" data-mouse-y="5.4" data-float="0.6">
             <div class="art-i" style="--dur:23s; --dx:7px; --dy:-9px; --rot:-4deg; --op:.5"><div class="art-cut cut-record" style="--tilt:0deg"></div></div>
         </div>
         <div class="art art-l-pine" style="--left:8.4%; --w:88px; --h:118px" data-depth="0.1878" data-mouse="7.8" data-mouse-y="17.0">
@@ -104,7 +104,7 @@
             <div class="art-i" style="--dur:24s; --dx:6px; --dy:-13px; --rot:3deg; --op:.62"><div class="art-cut art-cut--ink cut-lobster" style="--tilt:-6deg; --ink:var(--collage-red)"></div></div>
         </div>
         <!-- Hand holding a camera (Jordan Watkins' icon, used as-is). -->
-        <div class="art art-min760 art-l-camera" style="--left:8.2%; --w:94px; --h:120px" data-depth="0.1104" data-mouse="8.6" data-mouse-y="8.6">
+        <div class="art art-l-camera" style="--left:8.2%; --w:94px; --h:120px" data-depth="0.1104" data-mouse="8.6" data-mouse-y="8.6">
             <div class="art-i" style="--dur:22s; --dx:9px; --dy:-12px; --rot:6deg; --op:.5"><div class="art-cut cut-camera" style="--tilt:-6deg"></div></div>
         </div>
 
@@ -113,10 +113,10 @@
              jester is an ink-density cutout like the engravings, but it sits on
              its own cut-paper card with red corner indices, since a bare figure
              wouldn't read as a playing card. -->
-        <div class="art art-min760" style="--top:3.5%; --left:85.4%; --w:100px; --h:140px" data-depth="0.1681" data-mouse="11.0" data-mouse-y="11.0">
+        <div class="art art-r-joker" style="--left:85.4%; --w:100px; --h:140px" data-depth="0.1681" data-mouse="11.0" data-mouse-y="11.0">
             <div class="art-i" style="--dur:30s; --dx:-8px; --dy:11px; --rot:-4deg; --op:.46"><div class="art-card" style="--tilt:9deg"><span class="art-card-index">Joker</span><div class="art-card-face cut-joker"></div><span class="art-card-index art-card-index--flip">Joker</span></div></div>
         </div>
-        <div class="art art-short--trumpet" style="--left:87.6%; --w:150px; --h:58px" data-depth="0.1712" data-mouse="12.4" data-mouse-y="6.8">
+        <div class="art art-r-trumpet" style="--left:87.6%; --w:150px; --h:58px" data-depth="0.1712" data-mouse="12.4" data-mouse-y="6.8">
             <div class="art-i" style="--dur:28s; --dx:-9px; --dy:9px; --rot:-3deg; --op:.32"><div class="art-cut art-cut--ink cut-trumpet" style="--tilt:-4deg; --ink:var(--collage-mustard)"></div></div>
         </div>
         <!-- Stands in the long gap between the trumpet and the globe, facing in
@@ -124,19 +124,23 @@
              its own inks and paints as a background-image rather than being
              tinted from the palette — the stripes are the whole point of a zebra
              and a flat spot colour would erase them. -->
-        <div class="art" style="--top:44.0%; --left:85.4%; --w:110px; --h:105px" data-depth="0.1956" data-mouse="9.8" data-mouse-y="8.2">
+        <div class="art art-r-zebra" style="--left:85.4%; --w:110px; --h:105px" data-depth="0.1956" data-mouse="9.8" data-mouse-y="8.2">
             <div class="art-i" style="--dur:29s; --dx:7px; --dy:9px; --rot:-3deg; --op:.55"><div class="art-cut cut-zebra" style="--tilt:-2deg"></div></div>
         </div>
-        <div class="art art-short--globe" style="--left:91.2%; --w:72px; --h:84px" data-depth="0.1418" data-mouse="9.9" data-mouse-y="9.9">
+        <div class="art art-r-globe" style="--left:91.2%; --w:72px; --h:84px" data-depth="0.1418" data-mouse="9.9" data-mouse-y="9.9">
             <div class="art-i" style="--dur:25s; --dx:-6px; --dy:-11px; --rot:4deg; --op:.60"><div class="art-cut art-cut--ink cut-globe" style="--tilt:8deg; --ink:var(--collage-teal)"></div></div>
         </div>
         <!-- Retro computer (Jordan Watkins' icon, used as-is). -->
-        <div class="art art-min760" style="--top:85.0%; --left:85.8%; --w:110px; --h:99px" data-depth="0.1499" data-mouse="10.3" data-mouse-y="10.3">
+        <div class="art art-r-computer" style="--left:85.8%; --w:110px; --h:99px" data-depth="0.1499" data-mouse="10.3" data-mouse-y="10.3">
             <div class="art-i" style="--dur:23s; --dx:-8px; --dy:-12px; --rot:5deg; --op:.5"><div class="art-cut cut-computer" style="--tilt:4deg"></div></div>
         </div>
 
     </div></div>
 `;
+    /* TEMPORARY comparison switch for short windows: ?decor=a or ?decor=b. */
+    var pick = /[?&]decor=([ab])\b/.exec(location.search);
+    if (pick) document.documentElement.setAttribute("data-decor", pick[1]);
+
     var me = document.currentScript;
     me.insertAdjacentHTML("beforebegin", html);
 

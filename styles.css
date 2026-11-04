@@ -1412,8 +1412,12 @@ body:has(.page--fit) .art-scene { overflow: clip; }
 
 /* Every piece always shows. The field is never shorter than 860px (see
    .art-field), so one set of positions works at every window height. */
-.art-short--trumpet { --top: 30%; }
-.art-short--globe { --top: 64%; }
+/* Right gutter */
+.art-r-joker    { --top: 3.5%; }
+.art-r-trumpet  { --top: 30%; }
+.art-r-zebra    { --top: 44%; }
+.art-r-globe    { --top: 64%; }
+.art-r-computer { --top: 85%; }
 
 /* Left gutter, five pieces spaced evenly top to bottom. */
 .art-l-typewriter { --top: 9%; }
@@ -1421,6 +1425,37 @@ body:has(.page--fit) .art-scene { overflow: clip; }
 .art-l-pine       { --top: 40.1%; }
 .art-l-lobster    { --top: 59.1%; }
 .art-l-camera     { --top: 79%; }
+
+/* TEMPORARY: two layouts for short windows (under 860px tall) to compare,
+   chosen with ?decor=a or ?decor=b. Both fit the field to the window so
+   everything sits above the fold.
+   A: drop the typewriter and globe, spread the remaining eight evenly.
+   B: keep all ten, packed tighter. */
+@media (min-width: 1201px) and (max-height: 859px) {
+    html[data-decor] .art-field { height: 100vh; }
+
+    html[data-decor="a"] .art-l-typewriter,
+    html[data-decor="a"] .art-r-globe { display: none; }
+    html[data-decor="a"] .art-l-record    { --top: 4%; }
+    html[data-decor="a"] .art-l-pine      { --top: 25%; }
+    html[data-decor="a"] .art-l-lobster   { --top: 51.6%; }
+    html[data-decor="a"] .art-l-camera    { --top: 79.4%; }
+    html[data-decor="a"] .art-r-joker     { --top: 3.5%; }
+    html[data-decor="a"] .art-r-trumpet   { --top: 36%; }
+    html[data-decor="a"] .art-r-zebra     { --top: 55.6%; }
+    html[data-decor="a"] .art-r-computer  { --top: 82.7%; }
+
+    html[data-decor="b"] .art-l-typewriter { --top: 3.4%; }
+    html[data-decor="b"] .art-l-record     { --top: 21.3%; }
+    html[data-decor="b"] .art-l-pine       { --top: 36.3%; }
+    html[data-decor="b"] .art-l-lobster    { --top: 56.9%; }
+    html[data-decor="b"] .art-l-camera     { --top: 78.8%; }
+    html[data-decor="b"] .art-r-joker      { --top: 3.4%; }
+    html[data-decor="b"] .art-r-trumpet    { --top: 30%; }
+    html[data-decor="b"] .art-r-zebra      { --top: 43.8%; }
+    html[data-decor="b"] .art-r-globe      { --top: 64.8%; }
+    html[data-decor="b"] .art-r-computer   { --top: 82.7%; }
+}
 
 /* A custom property is inert until something references it, so naming the files
    here costs nothing — the fetch only happens where --src is read, inside the
