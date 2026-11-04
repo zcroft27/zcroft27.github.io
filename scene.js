@@ -137,10 +137,6 @@
 
     </div></div>
 `;
-    /* TEMPORARY comparison switch for short windows: ?decor=a or ?decor=b. */
-    var pick = /[?&]decor=([ab])\b/.exec(location.search);
-    if (pick) document.documentElement.setAttribute("data-decor", pick[1]);
-
     var me = document.currentScript;
     me.insertAdjacentHTML("beforebegin", html);
 
